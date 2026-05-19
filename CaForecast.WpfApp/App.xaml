@@ -1,9 +1,7 @@
-﻿<Application x:Class="CaForecast.WpfApp.App"
+<Application x:Class="CaForecast.WpfApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:CaForecast.WpfApp"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:CaForecast.WpfApp">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>

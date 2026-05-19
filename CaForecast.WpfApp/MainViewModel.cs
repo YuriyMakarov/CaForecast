@@ -1,187 +1,214 @@
-﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
+using System.IO;
+using System.Text;
+using System.Text.Json;
+using System.Windows;
 using CaForecast.Core;
-using CaForecast.Data;
+using CaForecast.Data.Models;
+using CaForecast.Data.Services;
+using CaForecast.WpfApp.ViewModels;
 using Microsoft.Win32;
 using OxyPlot;
 using OxyPlot.Axes;
-using OxyPlot.Legends;
 using OxyPlot.Series;
 
 namespace CaForecast.WpfApp;
 
-public class MainViewModel : INotifyPropertyChanged
+public sealed class MainViewModel : ViewModelBase
 {
-    private readonly CsvImportService _csvImportService = new();
-    private readonly MoexIssService _moexIssService = new();
-    private readonly CsvExportService _csvExportService = new();
-    private readonly ReturnCalculator _returnCalculator = new();
-    private readonly ThreeColorEncoder _encoder = new();
-    private readonly CaRuleTrainer _trainer = new();
-    private readonly CaForecaster _forecaster = new();
-    private readonly MetricsService _metricsService = new();
+    private readonly HistoricalMetricCsvImportService _csvImportService;
+    private readonly DirectionQueryService _directionQueryService;
+    private readonly PredictionResultService _predictionResultService;
+    private readonly StoredSeriesManagementService _storedSeriesManagementService;
+    private readonly SalesForecastService _forecastService = new();
 
-    private CsvImportedData? _sourceData;
-    private CsvImportedData? _loadedData;
-    private ForecastResult? _bestResult;
-    private List<DateTime?> _bestDates = new();
-
-    private string _selectedFilePath = "Данные не загружены";
-    private bool _isApiInputsVisible;
-    private string _secIdText = "SBER";
-    private string _boardIdText = "TQBR";
-    private string _fromDateText = DateTime.Today.AddYears(-1).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-    private string _tillDateText = DateTime.Today.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-    private string _trainPercentText = "70";
-    private string _kText = "0.002";
-    private string _alphaText = "1.0";
-    private string _maxMemoryMText = "8";
-    private string _maxPlotPointsText = "3000";
-    private string _statusMessage = "Загрузите CSV или MOEX ISS.";
-    private PlotModel _plotModel = BuildEmptyPlotModel();
-    private bool _isInternalUpdate;
+    private readonly SemaphoreSlim _calculationGate = new(1, 1);
+    private CancellationTokenSource? _recalculationCts;
+    private bool _suppressAutoRefresh;
     private bool _isBusy;
-    private readonly CancellationTokenSource _shutdownCts = new();
+    private string _selectedFilePath = "Файл не выбран";
+    private string _statusMessage = "Загрузите CSV с историей продаж, лидов или договоров.";
+    private DirectionItemViewModel? _selectedDirection;
+    private string _directionNameOverride = string.Empty;
+    private int _memoryDepthM = 4;
+    private double _thresholdK = 0.015;
+    private double _smoothingAlpha = 1.0;
+    private double _trainRatioPercent = 80;
+    private int _maxMemoryDepthForSearch = 12;
+    private ForecastScenarioResult? _lastScenario;
+    private PlotModel _plotModel = BuildEmptyPlotModel("Полный ряд");
+    private PlotModel _forecastFocusPlotModel = BuildEmptyPlotModel("Фокус на прогнозе");
+    private string _selectedPlotMode = "Полный ряд";
+    private string _maeText = "-";
+    private string _mseText = "-";
+    private string _rmseText = "-";
+    private string _mapeText = "-";
+    private string _fallbackText = "-";
+    private DateTime? _periodFrom;
+    private DateTime? _periodTo;
+    private DateTime? _availablePeriodFrom;
+    private DateTime? _availablePeriodTo;
 
-    public MainViewModel()
+    public MainViewModel(
+        HistoricalMetricCsvImportService csvImportService,
+        DirectionQueryService directionQueryService,
+        PredictionResultService predictionResultService,
+        StoredSeriesManagementService storedSeriesManagementService)
     {
-        LoadCsvCommand = new RelayCommand(LoadCsv, () => !_isBusy);
-        ShowMoexInputsCommand = new RelayCommand(() => IsApiInputsVisible = true);
-        HideMoexInputsCommand = new RelayCommand(() => IsApiInputsVisible = false);
-        LoadMoexCommand = new RelayCommand(() => _ = LoadMoexAsync(), () => !_isBusy);
-        RunCommand = new RelayCommand(() => _ = RunAsync(showErrors: true), () => _loadedData is not null && !_isBusy);
-        ExportResultsCommand = new RelayCommand(ExportResults, () => _bestResult is not null && !_isBusy);
+        _csvImportService = csvImportService;
+        _directionQueryService = directionQueryService;
+        _predictionResultService = predictionResultService;
+        _storedSeriesManagementService = storedSeriesManagementService;
+
+        ImportCsvCommand = new AsyncRelayCommand(ImportCsvAsync, () => !IsBusy);
+        FindBestMemoryCommand = new AsyncRelayCommand(FindBestMemoryAsync, () => !IsBusy && SelectedDirection is not null);
+        DeleteSelectedDirectionCommand = new AsyncRelayCommand(DeleteSelectedDirectionAsync, () => !IsBusy && SelectedDirection is not null);
+        DeleteAllDirectionsCommand = new AsyncRelayCommand(DeleteAllDirectionsAsync, () => !IsBusy && Directions.Count > 0);
+        ExportForecastCommand = new RelayCommand(ExportForecast, () => _lastScenario is not null && !IsBusy);
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
+    public AsyncRelayCommand ImportCsvCommand { get; }
 
-    public RelayCommand LoadCsvCommand { get; }
+    public AsyncRelayCommand FindBestMemoryCommand { get; }
 
-    public RelayCommand ShowMoexInputsCommand { get; }
+    public AsyncRelayCommand DeleteSelectedDirectionCommand { get; }
 
-    public RelayCommand HideMoexInputsCommand { get; }
+    public AsyncRelayCommand DeleteAllDirectionsCommand { get; }
 
-    public RelayCommand LoadMoexCommand { get; }
+    public RelayCommand ExportForecastCommand { get; }
 
-    public RelayCommand RunCommand { get; }
+    public ObservableCollection<DirectionItemViewModel> Directions { get; } = [];
 
-    public RelayCommand ExportResultsCommand { get; }
+    public ObservableCollection<MemoryCandidateRowViewModel> MemoryCandidates { get; } = [];
 
-    public ObservableCollection<MemoryErrorRow> ErrorRows { get; } = new();
+    public ObservableCollection<ForecastPointRowViewModel> ForecastRows { get; } = [];
 
-    public ObservableCollection<BestMemoryErrorRow> BestRows { get; } = new();
+    public IReadOnlyList<string> PlotModes { get; } = ["Полный ряд", "Фокус на прогнозе"];
 
     public string SelectedFilePath
     {
         get => _selectedFilePath;
-        set => SetField(ref _selectedFilePath, value);
+        set => SetProperty(ref _selectedFilePath, value);
     }
 
-    public bool IsApiInputsVisible
+    public string DirectionNameOverride
     {
-        get => _isApiInputsVisible;
-        set => SetField(ref _isApiInputsVisible, value);
+        get => _directionNameOverride;
+        set => SetProperty(ref _directionNameOverride, value);
     }
 
-    public string SecIdText
+    public DirectionItemViewModel? SelectedDirection
     {
-        get => _secIdText;
-        set => SetField(ref _secIdText, value);
-    }
-
-    public string BoardIdText
-    {
-        get => _boardIdText;
-        set => SetField(ref _boardIdText, value);
-    }
-
-    public string FromDateText
-    {
-        get => _fromDateText;
+        get => _selectedDirection;
         set
         {
-            if (SetField(ref _fromDateText, value))
+            if (SetProperty(ref _selectedDirection, value))
             {
-                AutoRefresh();
+                RaiseCommandStates();
+                _ = LoadSelectedDirectionRangeAsync();
             }
         }
     }
 
-    public string TillDateText
+    public int MemoryDepthM
     {
-        get => _tillDateText;
+        get => _memoryDepthM;
         set
         {
-            if (SetField(ref _tillDateText, value))
+            if (SetProperty(ref _memoryDepthM, value))
             {
-                AutoRefresh();
+                ScheduleRecalculation();
             }
         }
     }
 
-    public string TrainPercentText
+    public double ThresholdK
     {
-        get => _trainPercentText;
+        get => _thresholdK;
         set
         {
-            if (SetField(ref _trainPercentText, value))
+            if (SetProperty(ref _thresholdK, value))
             {
-                AutoRefresh();
+                ScheduleRecalculation();
             }
         }
     }
 
-    public string KText
+    public double SmoothingAlpha
     {
-        get => _kText;
+        get => _smoothingAlpha;
         set
         {
-            if (SetField(ref _kText, value))
+            if (SetProperty(ref _smoothingAlpha, value))
             {
-                AutoRefresh();
+                ScheduleRecalculation();
             }
         }
     }
 
-    public string AlphaText
+    public double TrainRatioPercent
     {
-        get => _alphaText;
+        get => _trainRatioPercent;
         set
         {
-            if (SetField(ref _alphaText, value))
+            if (SetProperty(ref _trainRatioPercent, value))
             {
-                AutoRefresh();
+                ScheduleRecalculation();
             }
         }
     }
 
-    public string MaxMemoryMText
+    public int MaxMemoryDepthForSearch
     {
-        get => _maxMemoryMText;
+        get => _maxMemoryDepthForSearch;
+        set => SetProperty(ref _maxMemoryDepthForSearch, value);
+    }
+
+    public DateTime? AvailablePeriodFrom
+    {
+        get => _availablePeriodFrom;
+        private set => SetProperty(ref _availablePeriodFrom, value);
+    }
+
+    public DateTime? AvailablePeriodTo
+    {
+        get => _availablePeriodTo;
+        private set => SetProperty(ref _availablePeriodTo, value);
+    }
+
+    public DateTime? PeriodFrom
+    {
+        get => _periodFrom;
         set
         {
-            if (SetField(ref _maxMemoryMText, value))
+            if (SetProperty(ref _periodFrom, value))
             {
-                AutoRefresh();
+                ScheduleRecalculation();
             }
         }
     }
 
-    public string MaxPlotPointsText
+    public DateTime? PeriodTo
     {
-        get => _maxPlotPointsText;
+        get => _periodTo;
         set
         {
-            if (SetField(ref _maxPlotPointsText, value))
+            if (SetProperty(ref _periodTo, value))
             {
-                AutoRefresh();
+                ScheduleRecalculation();
+            }
+        }
+    }
+
+    public string SelectedPlotMode
+    {
+        get => _selectedPlotMode;
+        set
+        {
+            if (SetProperty(ref _selectedPlotMode, value))
+            {
+                RaisePropertyChanged(nameof(CurrentPlotModel));
             }
         }
     }
@@ -189,29 +216,97 @@ public class MainViewModel : INotifyPropertyChanged
     public string StatusMessage
     {
         get => _statusMessage;
-        set => SetField(ref _statusMessage, value);
+        set => SetProperty(ref _statusMessage, value);
     }
 
     public bool IsBusy
     {
         get => _isBusy;
-        private set => SetField(ref _isBusy, value);
+        private set
+        {
+            if (SetProperty(ref _isBusy, value))
+            {
+                RaiseCommandStates();
+            }
+        }
     }
 
     public PlotModel PlotModel
     {
         get => _plotModel;
-        set => SetField(ref _plotModel, value);
+        private set
+        {
+            if (SetProperty(ref _plotModel, value))
+            {
+                RaisePropertyChanged(nameof(CurrentPlotModel));
+            }
+        }
     }
 
-    public IPlotController LockedPlotController { get; } = BuildLockedPlotController();
-
-    public void CancelBackgroundOperations()
+    public PlotModel ForecastFocusPlotModel
     {
-        _shutdownCts.Cancel();
+        get => _forecastFocusPlotModel;
+        private set
+        {
+            if (SetProperty(ref _forecastFocusPlotModel, value))
+            {
+                RaisePropertyChanged(nameof(CurrentPlotModel));
+            }
+        }
     }
 
-    private void LoadCsv()
+    public PlotModel CurrentPlotModel => SelectedPlotMode == "Фокус на прогнозе"
+        ? ForecastFocusPlotModel
+        : PlotModel;
+
+    public string MaeText
+    {
+        get => _maeText;
+        private set => SetProperty(ref _maeText, value);
+    }
+
+    public string MseText
+    {
+        get => _mseText;
+        private set => SetProperty(ref _mseText, value);
+    }
+
+    public string RmseText
+    {
+        get => _rmseText;
+        private set => SetProperty(ref _rmseText, value);
+    }
+
+    public string MapeText
+    {
+        get => _mapeText;
+        private set => SetProperty(ref _mapeText, value);
+    }
+
+    public string FallbackText
+    {
+        get => _fallbackText;
+        private set => SetProperty(ref _fallbackText, value);
+    }
+
+    public async Task InitializeAsync(CancellationToken cancellationToken = default)
+    {
+        await LoadDirectionsAsync(cancellationToken, selectFirstIfMissing: true);
+        if (Directions.Count == 0)
+        {
+            ResetViewState();
+            return;
+        }
+
+        StatusMessage = $"Загружено сохраненных наборов: {Directions.Count}.";
+    }
+
+    public void CancelPendingWork()
+    {
+        _recalculationCts?.Cancel();
+    }
+
+    private async Task ImportCsvAsync()
     {
         var dialog = new OpenFileDialog
         {
@@ -225,431 +320,387 @@ public class MainViewModel : INotifyPropertyChanged
 
         try
         {
-            _sourceData = _csvImportService.Import(dialog.FileName, new CsvSettings());
+            IsBusy = true;
+            StatusMessage = "Импорт CSV в SQLite...";
+
+            var importResult = await _csvImportService.ImportAsync(
+                dialog.FileName,
+                new CsvImportOptions
+                {
+                    DirectionNameOverride = string.IsNullOrWhiteSpace(DirectionNameOverride) ? null : DirectionNameOverride,
+                    ReplaceExistingSeries = false
+                });
+
             SelectedFilePath = dialog.FileName;
-            IsApiInputsVisible = false;
-            InitializeDateRangeFromData(_sourceData);
-            if (!TryApplyDateFilter(showErrors: true))
-            {
-                return;
-            }
-
-            _ = RunAsync(showErrors: true);
+            await LoadDirectionsAsync(CancellationToken.None, selectFirstIfMissing: false);
+            SelectedDirection = Directions.FirstOrDefault(x => x.Id == importResult.DirectionId);
+            StatusMessage = $"Импорт завершен: {importResult.DirectionName}. Загружено {importResult.ImportedRows}, пропущено {importResult.SkippedRows}.";
         }
-        catch (Exception ex)
+        catch (Exception exception)
         {
-            StatusMessage = $"Ошибка загрузки CSV: {ex.Message}";
+            StatusMessage = $"Ошибка импорта CSV: {exception.Message}";
+        }
+        finally
+        {
+            IsBusy = false;
         }
     }
 
-    private async Task LoadMoexAsync()
+    private async Task LoadDirectionsAsync(CancellationToken cancellationToken, bool selectFirstIfMissing)
     {
-        if (_isBusy)
+        var directions = await _directionQueryService.GetDirectionsAsync(cancellationToken);
+
+        _suppressAutoRefresh = true;
+        try
+        {
+            Directions.Clear();
+            foreach (var direction in directions)
+            {
+                Directions.Add(new DirectionItemViewModel
+                {
+                    Id = direction.Id,
+                    Name = direction.Name
+                });
+            }
+
+            if (SelectedDirection is null && Directions.Count > 0 && selectFirstIfMissing)
+            {
+                SelectedDirection = Directions[0];
+            }
+            else if (SelectedDirection is not null)
+            {
+                SelectedDirection = Directions.FirstOrDefault(x => x.Id == SelectedDirection.Id);
+
+                if (SelectedDirection is null)
+                {
+                    ResetViewState();
+                }
+            }
+        }
+        finally
+        {
+            _suppressAutoRefresh = false;
+            RaiseCommandStates();
+        }
+    }
+
+    private async Task DeleteSelectedDirectionAsync()
+    {
+        if (SelectedDirection is null)
         {
             return;
         }
 
-        SetBusy(true);
+        var direction = SelectedDirection;
+        var confirmation = MessageBox.Show(
+            $"Удалить сохраненный набор «{direction.Name}» вместе с историей и сохраненными результатами прогноза?",
+            "Удаление набора",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+
+        if (confirmation != MessageBoxResult.Yes)
+        {
+            return;
+        }
+
         try
         {
-            if (!TryParseDate(FromDateText, out var fromDate))
-            {
-                throw new InvalidOperationException("Дата \"С\" должна быть в формате yyyy-MM-dd.");
-            }
+            IsBusy = true;
+            StatusMessage = $"Удаление набора «{direction.Name}»...";
 
-            if (!TryParseDate(TillDateText, out var tillDate))
-            {
-                throw new InvalidOperationException("Дата \"По\" должна быть в формате yyyy-MM-dd.");
-            }
+            CancelPendingWork();
+            await _storedSeriesManagementService.DeleteDirectionAsync(direction.Id, CancellationToken.None);
 
-            var secId = (SecIdText ?? string.Empty).Trim().ToUpperInvariant();
-            var boardId = (BoardIdText ?? string.Empty).Trim().ToUpperInvariant();
-            if (string.IsNullOrWhiteSpace(secId))
-            {
-                throw new InvalidOperationException("Укажите тикер бумаги (например, SBER).");
-            }
+            ResetViewState();
+            await LoadDirectionsAsync(CancellationToken.None, selectFirstIfMissing: true);
 
-            if (string.IsNullOrWhiteSpace(boardId))
-            {
-                throw new InvalidOperationException("Укажите режим торгов (например, TQBR).");
-            }
+            StatusMessage = Directions.Count == 0
+                ? "Сохраненный набор удален. База сохраненных рядов пуста."
+                : $"Сохраненный набор «{direction.Name}» удален. Осталось наборов: {Directions.Count}.";
+        }
+        catch (Exception exception)
+        {
+            StatusMessage = $"Ошибка удаления набора: {exception.Message}";
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
 
-            StatusMessage = "Загрузка MOEX ISS...";
-            var importedData = await Task.Run(
-                () => _moexIssService.ImportDailyHistory(secId, fromDate, tillDate, boardId),
-                _shutdownCts.Token);
+    private async Task DeleteAllDirectionsAsync()
+    {
+        if (Directions.Count == 0)
+        {
+            return;
+        }
 
-            if (_shutdownCts.IsCancellationRequested)
+        var confirmation = MessageBox.Show(
+            "Удалить все сохраненные наборы, историю метрик и сохраненные результаты прогнозов?",
+            "Полная очистка",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+
+        if (confirmation != MessageBoxResult.Yes)
+        {
+            return;
+        }
+
+        try
+        {
+            IsBusy = true;
+            StatusMessage = "Удаление всех сохраненных наборов...";
+
+            CancelPendingWork();
+            await _storedSeriesManagementService.DeleteAllDirectionsAsync(CancellationToken.None);
+
+            ResetViewState();
+            await LoadDirectionsAsync(CancellationToken.None, selectFirstIfMissing: false);
+            StatusMessage = "Все сохраненные наборы удалены.";
+        }
+        catch (Exception exception)
+        {
+            StatusMessage = $"Ошибка полной очистки: {exception.Message}";
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    private async Task LoadSelectedDirectionRangeAsync()
+    {
+        if (SelectedDirection is null)
+        {
+            ResetViewState();
+            return;
+        }
+
+        try
+        {
+            _suppressAutoRefresh = true;
+            var series = await _directionQueryService.GetSeriesAsync(SelectedDirection.Id, CancellationToken.None);
+            if (series.Count == 0)
             {
+                AvailablePeriodFrom = null;
+                AvailablePeriodTo = null;
+                PeriodFrom = null;
+                PeriodTo = null;
                 return;
             }
 
-            _sourceData = importedData;
-            SelectedFilePath = $"MOEX ISS: {boardId}/{secId}";
-            IsApiInputsVisible = false;
-            if (!TryApplyDateFilter(showErrors: true))
+            var minDate = series[0].Date.ToDateTime(TimeOnly.MinValue);
+            var maxDate = series[^1].Date.ToDateTime(TimeOnly.MinValue);
+
+            AvailablePeriodFrom = minDate;
+            AvailablePeriodTo = maxDate;
+
+            if (PeriodFrom is null || PeriodFrom < minDate || PeriodFrom > maxDate)
             {
-                return;
+                PeriodFrom = minDate;
             }
 
-            await RunAsync(showErrors: true, manageBusy: false);
+            if (PeriodTo is null || PeriodTo < minDate || PeriodTo > maxDate)
+            {
+                PeriodTo = maxDate;
+            }
+
+            if (PeriodFrom > PeriodTo)
+            {
+                PeriodFrom = minDate;
+                PeriodTo = maxDate;
+            }
+        }
+        catch (Exception exception)
+        {
+            StatusMessage = $"Ошибка чтения диапазона дат: {exception.Message}";
+        }
+        finally
+        {
+            _suppressAutoRefresh = false;
+        }
+
+        ScheduleRecalculation();
+    }
+
+    private void ScheduleRecalculation()
+    {
+        if (_suppressAutoRefresh || SelectedDirection is null)
+        {
+            return;
+        }
+
+        _recalculationCts?.Cancel();
+        _recalculationCts?.Dispose();
+        _recalculationCts = new CancellationTokenSource();
+        var token = _recalculationCts.Token;
+
+        _ = ScheduleRecalculationAsync(token);
+    }
+
+    private async Task ScheduleRecalculationAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            await Task.Delay(350, cancellationToken);
+            await RecalculateAsync(cancellationToken);
         }
         catch (OperationCanceledException)
         {
-            StatusMessage = "Операция отменена.";
-        }
-        catch (Exception ex)
-        {
-            StatusMessage = $"Ошибка загрузки MOEX ISS: {ex.Message}";
-        }
-        finally
-        {
-            SetBusy(false);
         }
     }
 
-    private async Task RunAsync(bool showErrors, bool manageBusy = true)
+    private async Task RecalculateAsync(CancellationToken cancellationToken)
     {
-        if (_isBusy && manageBusy)
+        if (SelectedDirection is null)
         {
             return;
         }
 
-        if (manageBusy)
-        {
-            SetBusy(true);
-        }
-
-        if (!TryApplyDateFilter(showErrors: true))
-        {
-            if (manageBusy)
-            {
-                SetBusy(false);
-            }
-
-            return;
-        }
-
-        if (_loadedData is null)
-        {
-            if (showErrors)
-            {
-                StatusMessage = "Сначала загрузите данные.";
-            }
-
-            if (manageBusy)
-            {
-                SetBusy(false);
-            }
-
-            return;
-        }
-
+        await _calculationGate.WaitAsync(cancellationToken);
         try
         {
-            if (!TryParseDouble(TrainPercentText, out var trainPercent) || trainPercent <= 0 || trainPercent >= 100)
+            IsBusy = true;
+            StatusMessage = "Пересчет модели...";
+
+            var series = await _directionQueryService.GetSeriesAsync(SelectedDirection.Id, cancellationToken);
+            var filteredSeries = series;
+            if (filteredSeries.Count < 6)
             {
-                throw new InvalidOperationException("Параметр \"Доля выборки, %\" должен быть в диапазоне (0, 100).");
+                throw new InvalidOperationException("На выбранном временном промежутке недостаточно исторических данных.");
             }
 
-            if (!TryParseDouble(KText, out var k) || k < 0)
+            var maxAllowedMemoryDepth = GetMaxAllowedMemoryDepth(filteredSeries.Count);
+            if (MemoryDepthM > maxAllowedMemoryDepth)
             {
-                throw new InvalidOperationException("k должен быть неотрицательным.");
-            }
-
-            if (!TryParseDouble(AlphaText, out var alpha) || alpha < 0)
-            {
-                throw new InvalidOperationException("alpha должен быть неотрицательным.");
-            }
-
-            if (!int.TryParse(MaxMemoryMText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var maxMemoryM) ||
-                maxMemoryM < 1)
-            {
-                throw new InvalidOperationException("MaxMemoryM должен быть целым числом >= 1.");
-            }
-
-            if (!int.TryParse(MaxPlotPointsText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var maxPlotPoints) ||
-                maxPlotPoints < 100)
-            {
-                throw new InvalidOperationException("MaxPlotPoints должен быть целым числом >= 100.");
-            }
-
-            var loadedData = _loadedData;
-            var computed = await Task.Run(
-                () => ComputeForecast(loadedData, trainPercent, k, alpha, maxMemoryM, maxPlotPoints, _shutdownCts.Token),
-                _shutdownCts.Token);
-
-            if (_shutdownCts.IsCancellationRequested)
-            {
+                StatusMessage = $"Для выбранного периода глубина памяти m должна быть не больше {maxAllowedMemoryDepth}. Уменьшите m или расширьте диапазон дат.";
                 return;
             }
 
-            _bestResult = computed.BestResult;
-            ErrorRows.Clear();
-            foreach (var row in computed.ErrorRows)
+            var values = filteredSeries.Select(x => x.Value).ToArray();
+            var periods = filteredSeries.Select(x => (DateOnly?)x.Date).ToArray();
+            var parameters = new ForecastingParameters
             {
-                ErrorRows.Add(row);
-            }
+                MemoryDepthM = MemoryDepthM,
+                ThresholdK = ThresholdK,
+                SmoothingAlpha = SmoothingAlpha,
+                TrainRatio = TrainRatioPercent / 100.0
+            };
 
-            BestRows.Clear();
-            BestRows.Add(computed.BestRow);
-            _bestDates = computed.BestDates;
-            PlotModel = computed.PlotModel;
+            var scenario = await Task.Run(() => _forecastService.BuildForecast(values, periods, parameters, cancellationToken), cancellationToken);
+            _lastScenario = scenario;
 
-            StatusMessage =
-                $"Расчет обновлен. Лучшее m = {computed.BestResult.Memory}, MAE = {FormatPercent(computed.BestMaePercent)}, MSE = {FormatPercent(computed.BestMsePercent)}, RMSE = {FormatPercent(computed.BestRmsePercent)}, MAPE = {computed.BestResult.MapePercent:F2}%.";
-            ExportResultsCommand.RaiseCanExecuteChanged();
+            UpdateMetrics(scenario);
+            UpdateForecastRows(scenario);
+            PlotModel = BuildFullPlotModel(SelectedDirection.Name, periods, values, scenario);
+            ForecastFocusPlotModel = BuildForecastFocusPlotModel(SelectedDirection.Name, periods, values, scenario);
+
+            await _predictionResultService.SaveAsync(
+                new ExperimentLogEntry
+                {
+                    DirectionId = SelectedDirection.Id,
+                    MemoryDepthM = scenario.Parameters.MemoryDepthM,
+                    ThresholdK = scenario.Parameters.ThresholdK,
+                    SmoothingAlpha = scenario.Parameters.SmoothingAlpha,
+                    Mae = scenario.Metrics.Mae,
+                    Rmse = scenario.Metrics.Rmse,
+                    Mape = scenario.Metrics.Mape,
+                    PredictedValuesJson = JsonSerializer.Serialize(scenario.PredictedValues)
+                },
+                cancellationToken);
+
+            StatusMessage = $"Расчет завершен для направления «{SelectedDirection.Name}» на периоде {periods[0]:yyyy-MM-dd} - {periods[^1]:yyyy-MM-dd}.";
+            var completionMessage = $"Расчет завершен для направления «{SelectedDirection.Name}» на периоде {periods[0]:yyyy-MM-dd} - {periods[^1]:yyyy-MM-dd}.";
+            StatusMessage = scenario.ForecastPoints.Count <= 1
+                ? $"{completionMessage} Предупреждение: прогнозная часть содержит только 1 точку, поэтому линия прогноза может быть почти не видна. Расширьте диапазон дат или уменьшите обучающую выборку."
+                : completionMessage;
+            ExportForecastCommand.RaiseCanExecuteChanged();
         }
         catch (OperationCanceledException)
         {
-            StatusMessage = "Операция отменена.";
         }
-        catch (Exception ex)
+        catch (Exception exception)
         {
-            if (showErrors)
-            {
-                StatusMessage = $"Ошибка расчета: {ex.Message}";
-            }
+            StatusMessage = $"Ошибка расчета: {exception.Message}";
         }
         finally
         {
-            if (manageBusy)
-            {
-                SetBusy(false);
-            }
+            IsBusy = false;
+            _calculationGate.Release();
         }
     }
 
-    private void AutoRefresh()
+    private async Task FindBestMemoryAsync()
     {
-        if (_isInternalUpdate || _sourceData is null || _isBusy)
+        if (SelectedDirection is null)
         {
             return;
         }
 
-        _ = RunAsync(showErrors: false);
-    }
-
-    private bool TryApplyDateFilter(bool showErrors)
-    {
-        if (_sourceData is null)
-        {
-            return false;
-        }
-
-        var sourcePrices = _sourceData.ClosePrices;
-        var sourceDates = _sourceData.Dates;
-        if (sourcePrices.Count != sourceDates.Count)
-        {
-            if (showErrors)
-            {
-                StatusMessage = "Ошибка данных: количество дат не совпадает с количеством цен.";
-            }
-
-            return false;
-        }
-
-        if (!TryParseDate(FromDateText, out var fromDate) || !TryParseDate(TillDateText, out var tillDate))
-        {
-            if (showErrors)
-            {
-                StatusMessage = "Укажите диапазон дат в формате yyyy-MM-dd.";
-            }
-
-            return false;
-        }
-
-        if (tillDate < fromDate)
-        {
-            if (showErrors)
-            {
-                StatusMessage = "Дата \"По\" должна быть не раньше даты \"С\".";
-            }
-
-            return false;
-        }
-
-        var filteredPrices = new List<double>(sourcePrices.Count);
-        var filteredDates = new List<DateTime?>(sourceDates.Count);
-        var hasDateValues = sourceDates.Any(d => d.HasValue);
-
-        if (hasDateValues)
-        {
-            for (var i = 0; i < sourcePrices.Count; i++)
-            {
-                var date = sourceDates[i];
-                if (!date.HasValue)
-                {
-                    continue;
-                }
-
-                if (date.Value.Date < fromDate.Date || date.Value.Date > tillDate.Date)
-                {
-                    continue;
-                }
-
-                filteredPrices.Add(sourcePrices[i]);
-                filteredDates.Add(date.Value.Date);
-            }
-        }
-        else
-        {
-            filteredPrices.AddRange(sourcePrices);
-            filteredDates.AddRange(sourceDates);
-        }
-
-        if (filteredPrices.Count < 2)
-        {
-            ResetCalculatedState();
-            if (showErrors)
-            {
-                StatusMessage = "После фильтрации по датам осталось меньше двух цен.";
-            }
-
-            return false;
-        }
-
-        _loadedData = new CsvImportedData
-        {
-            ClosePrices = filteredPrices,
-            Dates = filteredDates
-        };
-
-        RunCommand.RaiseCanExecuteChanged();
-        return true;
-    }
-
-    private RunComputationResult ComputeForecast(
-        CsvImportedData loadedData,
-        double trainPercent,
-        double k,
-        double alpha,
-        int maxMemoryM,
-        int maxPlotPoints,
-        CancellationToken cancellationToken)
-    {
-        var prices = loadedData.ClosePrices;
-        var returns = _returnCalculator.CalculateLogReturns(prices);
-        var encodedStates = _encoder.Encode(returns, k);
-
-        var trainReturnsCount = (int)Math.Round(returns.Count * (trainPercent / 100.0), MidpointRounding.AwayFromZero);
-        trainReturnsCount = Math.Max(2, Math.Min(trainReturnsCount, returns.Count - 1));
-
-        var errorRows = new List<MemoryErrorRow>();
-        ForecastResult? bestResult = null;
-        for (var m = 1; m <= maxMemoryM; m++)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            if (m >= trainReturnsCount)
-            {
-                break;
-            }
-
-            var result = _forecaster.Forecast(
-                prices,
-                returns,
-                encodedStates,
-                trainReturnsCount,
-                m,
-                alpha,
-                _trainer,
-                _metricsService);
-
-            errorRows.Add(new MemoryErrorRow
-            {
-                Memory = result.Memory,
-                Mae = result.Mae,
-                Mse = result.Mse,
-                Rmse = result.Rmse,
-                Mape = result.MapePercent / 100.0
-            });
-
-            if (bestResult is null || result.Rmse < bestResult.Rmse)
-            {
-                bestResult = result;
-            }
-        }
-
-        if (bestResult is null)
-        {
-            throw new InvalidOperationException("Не удалось построить модель. Проверьте параметры \"Доля выборки, %\" и \"max(m)\".");
-        }
-
-        var bestMaePercent = CalculateRelativePercent(bestResult.Mae, bestResult.ActualPrices);
-        var bestMsePercent = CalculateRelativeSquaredPercent(bestResult.Mse, bestResult.ActualPrices);
-        var bestRmsePercent = CalculateRelativePercent(bestResult.Rmse, bestResult.ActualPrices);
-        var bestRow = new BestMemoryErrorRow
-        {
-            Memory = bestResult.Memory,
-            MaePercent = bestMaePercent,
-            MsePercent = bestMsePercent,
-            RmsePercent = bestRmsePercent,
-            MapePercent = bestResult.MapePercent
-        };
-
-        var bestDates = BuildBestDates(loadedData.Dates, bestResult.TrainReturnsCount, bestResult.ActualPrices.Count);
-        var plotModel = BuildPlot(bestResult, loadedData.ClosePrices, loadedData.Dates, maxPlotPoints);
-
-        return new RunComputationResult
-        {
-            BestResult = bestResult,
-            ErrorRows = errorRows,
-            BestRow = bestRow,
-            BestDates = bestDates,
-            PlotModel = plotModel,
-            BestMaePercent = bestMaePercent,
-            BestMsePercent = bestMsePercent,
-            BestRmsePercent = bestRmsePercent
-        };
-    }
-
-    private void ResetCalculatedState()
-    {
-        _bestResult = null;
-        _bestDates = new List<DateTime?>();
-        ErrorRows.Clear();
-        BestRows.Clear();
-        PlotModel = BuildEmptyPlotModel();
-        ExportResultsCommand.RaiseCanExecuteChanged();
-    }
-
-    private void InitializeDateRangeFromData(CsvImportedData data)
-    {
-        var dateBounds = data.Dates
-            .Where(d => d.HasValue)
-            .Select(d => d!.Value.Date)
-            .OrderBy(d => d)
-            .ToArray();
-
-        if (dateBounds.Length == 0)
-        {
-            return;
-        }
-
-        _isInternalUpdate = true;
         try
         {
-            FromDateText = dateBounds.First().ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-            TillDateText = dateBounds.Last().ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+            IsBusy = true;
+            StatusMessage = "Подбор оптимальной глубины памяти...";
+
+            var series = await _directionQueryService.GetSeriesAsync(SelectedDirection.Id, CancellationToken.None);
+            var filteredSeries = series;
+            if (filteredSeries.Count < 6)
+            {
+                throw new InvalidOperationException("На выбранном временном промежутке недостаточно наблюдений.");
+            }
+
+            var values = filteredSeries.Select(x => x.Value).ToArray();
+            var periods = filteredSeries.Select(x => (DateOnly?)x.Date).ToArray();
+            var maxAllowedMemoryDepth = GetMaxAllowedMemoryDepth(filteredSeries.Count);
+            var maxMemoryDepthForSearch = Math.Min(MaxMemoryDepthForSearch, maxAllowedMemoryDepth);
+            var optimization = await Task.Run(
+                () => _forecastService.FindBestMemoryDepth(
+                    values,
+                    periods,
+                    ThresholdK,
+                    SmoothingAlpha,
+                    TrainRatioPercent / 100.0,
+                    1,
+                    maxMemoryDepthForSearch,
+                    CancellationToken.None));
+
+            MemoryCandidates.Clear();
+            foreach (var candidate in optimization.Candidates)
+            {
+                MemoryCandidates.Add(new MemoryCandidateRowViewModel
+                {
+                    MemoryDepthM = candidate.MemoryDepthM,
+                    Mae = candidate.Metrics.Mae,
+                    Mse = candidate.Metrics.Mse,
+                    Rmse = candidate.Metrics.Rmse,
+                    Mape = candidate.Metrics.Mape
+                });
+            }
+
+            MemoryDepthM = optimization.BestMemoryDepthM;
+            StatusMessage = $"Подбор завершен. Лучшее m = {optimization.BestMemoryDepthM}, RMSE = {optimization.BestScenario.Metrics.Rmse:F4}.";
+        }
+        catch (Exception exception)
+        {
+            StatusMessage = $"Ошибка подбора m: {exception.Message}";
         }
         finally
         {
-            _isInternalUpdate = false;
+            IsBusy = false;
         }
     }
 
-    private void ExportResults()
+    private void ExportForecast()
     {
-        if (_bestResult is null)
+        if (_lastScenario is null || SelectedDirection is null)
         {
-            StatusMessage = "Нет результатов для экспорта.";
             return;
         }
 
         var dialog = new SaveFileDialog
         {
             Filter = "CSV-файлы (*.csv)|*.csv",
-            FileName = "результаты_прогноза.csv"
+            FileName = $"forecast_{SanitizeFileName(SelectedDirection.Name)}.csv"
         };
 
         if (dialog.ShowDialog() != true)
@@ -657,380 +708,274 @@ public class MainViewModel : INotifyPropertyChanged
             return;
         }
 
+        var builder = new StringBuilder();
+        builder.AppendLine("direction;memory_depth_m;threshold_k;smoothing_alpha;mae;mse;rmse;mape;fallback_usage_count");
+        builder.AppendLine(string.Join(
+            ';',
+            EscapeCsv(SelectedDirection.Name),
+            _lastScenario.Parameters.MemoryDepthM.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.Parameters.ThresholdK.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.Parameters.SmoothingAlpha.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.Metrics.Mae.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.Metrics.Mse.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.Metrics.Rmse.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.Metrics.Mape.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.FallbackUsageCount.ToString(CultureInfo.InvariantCulture)));
+
+        builder.AppendLine();
+        builder.AppendLine("period;actual_value;predicted_value");
+        foreach (var point in _lastScenario.ForecastPoints)
+        {
+            builder.AppendLine(string.Join(
+                ';',
+                point.Period?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? string.Empty,
+                point.ActualValue.ToString(CultureInfo.InvariantCulture),
+                point.PredictedValue.ToString(CultureInfo.InvariantCulture)));
+        }
+
+        File.WriteAllText(dialog.FileName, builder.ToString(), Encoding.UTF8);
+        StatusMessage = $"Результаты выгружены в {dialog.FileName}.";
+    }
+
+    private void UpdateMetrics(ForecastScenarioResult scenario)
+    {
+        MaeText = scenario.Metrics.Mae.ToString("F4", CultureInfo.InvariantCulture);
+        MseText = scenario.Metrics.Mse.ToString("F4", CultureInfo.InvariantCulture);
+        RmseText = scenario.Metrics.Rmse.ToString("F4", CultureInfo.InvariantCulture);
+        MapeText = $"{scenario.Metrics.Mape:F2}%";
+        FallbackText = scenario.FallbackUsageCount.ToString(CultureInfo.InvariantCulture);
+    }
+
+    private void UpdateForecastRows(ForecastScenarioResult scenario)
+    {
+        ForecastRows.Clear();
+        foreach (var point in scenario.ForecastPoints)
+        {
+            ForecastRows.Add(new ForecastPointRowViewModel
+            {
+                Period = point.Period?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? "-",
+                ActualValue = point.ActualValue,
+                PredictedValue = point.PredictedValue
+            });
+        }
+    }
+
+    private List<(DateOnly Date, double Value)> ApplyPeriodFilter(IReadOnlyList<(DateOnly Date, double Value)> series)
+    {
+        var fromDate = PeriodFrom?.Date;
+        var toDate = PeriodTo?.Date;
+
+        if (fromDate.HasValue && toDate.HasValue && fromDate > toDate)
+        {
+            throw new InvalidOperationException("Начало периода не может быть позже конца периода.");
+        }
+
+        return series
+            .Where(item =>
+                (!fromDate.HasValue || item.Date.ToDateTime(TimeOnly.MinValue).Date >= fromDate.Value) &&
+                (!toDate.HasValue || item.Date.ToDateTime(TimeOnly.MinValue).Date <= toDate.Value))
+            .ToList();
+    }
+
+    private static int GetMaxAllowedMemoryDepth(int observationCount)
+    {
+        return Math.Max(1, observationCount - 3);
+    }
+
+    private void ResetViewState()
+    {
+        _suppressAutoRefresh = true;
         try
         {
-            var metricRows = ErrorRows.Select(row => new MemoryMetricCsvRow
-            {
-                Memory = row.Memory,
-                Mae = row.Mae,
-                Mse = row.Mse,
-                Rmse = row.Rmse,
-                Mape = row.Mape
-            }).ToArray();
-
-            var forecastRows = _bestResult.ActualPrices
-                .Select((actualPrice, i) => new ForecastPointCsvRow
-                {
-                    Date = i < _bestDates.Count ? _bestDates[i] : null,
-                    ActualPrice = actualPrice,
-                    PredictedPrice = _bestResult.PredictedPrices[i]
-                })
-                .ToArray();
-
-            _csvExportService.ExportCombined(dialog.FileName, metricRows, forecastRows, _bestResult.Memory);
-            StatusMessage = $"Результаты экспортированы: {dialog.FileName}";
+            AvailablePeriodFrom = null;
+            AvailablePeriodTo = null;
+            PeriodFrom = null;
+            PeriodTo = null;
+            _lastScenario = null;
+            MemoryCandidates.Clear();
+            ForecastRows.Clear();
+            PlotModel = BuildEmptyPlotModel("Полный ряд");
+            ForecastFocusPlotModel = BuildEmptyPlotModel("Фокус на прогнозе");
+            MaeText = "-";
+            MseText = "-";
+            RmseText = "-";
+            MapeText = "-";
+            FallbackText = "-";
         }
-        catch (Exception ex)
+        finally
         {
-            StatusMessage = $"Ошибка экспорта: {ex.Message}";
+            _suppressAutoRefresh = false;
+            ExportForecastCommand.RaiseCanExecuteChanged();
         }
     }
 
-    private static bool TryParseDouble(string text, out double value)
+    private static PlotModel BuildEmptyPlotModel(string title)
     {
-        if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+        var model = new PlotModel { Title = title };
+        model.Axes.Add(new DateTimeAxis { Position = AxisPosition.Bottom, Title = "Период", IsZoomEnabled = true, IsPanEnabled = true });
+        model.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "Значение", IsZoomEnabled = true, IsPanEnabled = true });
+        foreach (var axis in model.Axes)
         {
-            return true;
+            axis.IsZoomEnabled = false;
+            axis.IsPanEnabled = false;
         }
 
-        return double.TryParse(text, NumberStyles.Float, CultureInfo.CurrentCulture, out value);
-    }
-
-    private static bool TryParseDate(string text, out DateTime value)
-    {
-        if (DateTime.TryParseExact(text, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out value))
-        {
-            return true;
-        }
-
-        return DateTime.TryParse(text, CultureInfo.CurrentCulture, DateTimeStyles.None, out value);
-    }
-
-    private static double CalculateRelativePercent(double metricValue, IReadOnlyList<double> actualPrices)
-    {
-        if (actualPrices.Count == 0)
-        {
-            return double.NaN;
-        }
-
-        var meanAbsActual = actualPrices.Select(Math.Abs).Average();
-        if (meanAbsActual < 1e-12)
-        {
-            return double.NaN;
-        }
-
-        return (metricValue / meanAbsActual) * 100.0;
-    }
-
-    private static double CalculateRelativeSquaredPercent(double metricValue, IReadOnlyList<double> actualPrices)
-    {
-        if (actualPrices.Count == 0)
-        {
-            return double.NaN;
-        }
-
-        var meanSquareActual = actualPrices.Select(v => v * v).Average();
-        if (meanSquareActual < 1e-12)
-        {
-            return double.NaN;
-        }
-
-        return (metricValue / meanSquareActual) * 100.0;
-    }
-
-    private static string FormatPercent(double value)
-    {
-        return double.IsNaN(value) || double.IsInfinity(value) ? "н/д" : $"{value:F2}%";
-    }
-
-    private void SetBusy(bool value)
-    {
-        if (IsBusy == value)
-        {
-            return;
-        }
-
-        IsBusy = value;
-        LoadCsvCommand.RaiseCanExecuteChanged();
-        LoadMoexCommand.RaiseCanExecuteChanged();
-        RunCommand.RaiseCanExecuteChanged();
-        ExportResultsCommand.RaiseCanExecuteChanged();
-    }
-
-    private static List<DateTime?> BuildBestDates(IReadOnlyList<DateTime?> allDates, int trainReturnsCount, int forecastCount)
-    {
-        var result = new List<DateTime?>(forecastCount);
-        for (var i = 0; i < forecastCount; i++)
-        {
-            var dateIndex = trainReturnsCount + 1 + i;
-            result.Add(dateIndex >= 0 && dateIndex < allDates.Count ? allDates[dateIndex] : null);
-        }
-
-        return result;
-    }
-
-    private static PlotModel BuildEmptyPlotModel()
-    {
-        var model = new PlotModel { Title = "Прогноз цены" };
-        model.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "Дата" });
-        model.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "Цена" });
         return model;
     }
 
-    private static PlotModel BuildPlot(
-        ForecastResult bestResult,
-        IReadOnlyList<double> allPrices,
-        IReadOnlyList<DateTime?> allCsvDates,
-        int maxPlotPoints)
+    private static PlotModel BuildFullPlotModel(
+        string directionName,
+        IReadOnlyList<DateOnly?> periods,
+        IReadOnlyList<double> actualSeries,
+        ForecastScenarioResult scenario)
     {
-        var model = new PlotModel
+        return BuildPlotModel(
+            $"Полный ряд: {directionName}",
+            periods,
+            actualSeries,
+            scenario.ForecastPoints.Select(x => (x.Period, x.PredictedValue)).ToList());
+    }
+
+    private static PlotModel BuildForecastFocusPlotModel(
+        string directionName,
+        IReadOnlyList<DateOnly?> periods,
+        IReadOnlyList<double> actualSeries,
+        ForecastScenarioResult scenario)
+    {
+        var forecastStartIndex = Math.Max(0, scenario.TrainingObservationCount - 1);
+        var actualTailStartIndex = Math.Max(0, forecastStartIndex - 1);
+
+        var focusPeriods = periods.Skip(actualTailStartIndex).ToArray();
+        var focusActualSeries = actualSeries.Skip(actualTailStartIndex).ToArray();
+        var predictedPoints = scenario.ForecastPoints.Select(x => (x.Period, x.PredictedValue)).ToList();
+
+        var model = BuildPlotModel(
+            $"Фокус на прогнозе: {directionName}",
+            focusPeriods,
+            focusActualSeries,
+            predictedPoints);
+
+        var forecastStart = predictedPoints.FirstOrDefault(x => x.Period is not null).Period;
+        var forecastEnd = predictedPoints.LastOrDefault(x => x.Period is not null).Period;
+
+        if (forecastStart is not null && forecastEnd is not null)
         {
-            Title = $"Прогноз цены (лучшее m = {bestResult.Memory})",
-            IsLegendVisible = true
-        };
-        model.Legends.Add(new Legend
-        {
-            LegendPosition = LegendPosition.RightTop,
-            LegendPlacement = LegendPlacement.Outside
-        });
-
-        var csvDateBounds = allCsvDates
-            .Where(d => d.HasValue)
-            .Select(d => d!.Value)
-            .OrderBy(d => d)
-            .ToArray();
-
-        var hasCsvDates = csvDateBounds.Length > 0;
-        var useDateAxis = hasCsvDates;
-
-        var yValues = allPrices
-            .Concat(bestResult.PredictedPrices)
-            .Where(v => !double.IsNaN(v) && !double.IsInfinity(v))
-            .ToArray();
-
-        if (yValues.Length == 0)
-        {
-            return BuildEmptyPlotModel();
-        }
-
-        var minY = yValues.Min();
-        var maxY = yValues.Max();
-        if (Math.Abs(maxY - minY) < 1e-12)
-        {
-            var delta = Math.Abs(minY) > 1e-12 ? Math.Abs(minY) * 0.01 : 1.0;
-            minY -= delta;
-            maxY += delta;
-        }
-
-        if (useDateAxis)
-        {
-            var minDate = csvDateBounds.First();
-            var maxDate = csvDateBounds.Last();
-            if (maxDate <= minDate)
+            var dateAxis = model.Axes.OfType<DateTimeAxis>().FirstOrDefault();
+            if (dateAxis is not null)
             {
-                maxDate = minDate.AddDays(1);
+                var min = ToAxisValue(forecastStart.Value);
+                var max = ToAxisValue(forecastEnd.Value);
+                if (max <= min)
+                {
+                    max = min + 1;
+                }
+
+                dateAxis.Minimum = min;
+                dateAxis.Maximum = max;
             }
-
-            var totalDays = Math.Max(1.0, (maxDate - minDate).TotalDays);
-            var majorStepDays = Math.Max(1.0, Math.Ceiling(totalDays / 8.0));
-
-            model.Axes.Add(new DateTimeAxis
-            {
-                Position = AxisPosition.Bottom,
-                Title = "Дата",
-                StringFormat = "yyyy-MM-dd",
-                IntervalType = DateTimeIntervalType.Days,
-                MinorIntervalType = DateTimeIntervalType.Days,
-                MajorStep = majorStepDays,
-                MinorStep = Math.Max(1.0, Math.Floor(majorStepDays / 2.0)),
-                Angle = 45,
-                MinimumPadding = 0,
-                MaximumPadding = 0,
-                Minimum = DateTimeAxis.ToDouble(minDate),
-                Maximum = DateTimeAxis.ToDouble(maxDate),
-                AbsoluteMinimum = DateTimeAxis.ToDouble(minDate),
-                AbsoluteMaximum = DateTimeAxis.ToDouble(maxDate),
-                IsPanEnabled = false,
-                IsZoomEnabled = false
-            });
         }
-        else
+
+        return model;
+    }
+
+    private static PlotModel BuildPlotModel(
+        string title,
+        IReadOnlyList<DateOnly?> periods,
+        IReadOnlyList<double> actualSeries,
+        IReadOnlyList<(DateOnly? Period, double PredictedValue)> predictedPoints)
+    {
+        var plotModel = new PlotModel
         {
-            var maxX = Math.Max(1, bestResult.ActualPrices.Count - 1);
-            model.Axes.Add(new LinearAxis
-            {
-                Position = AxisPosition.Bottom,
-                Title = "Дата",
-                MinimumPadding = 0,
-                MaximumPadding = 0,
-                Minimum = 0,
-                Maximum = maxX,
-                AbsoluteMinimum = 0,
-                AbsoluteMaximum = maxX,
-                IsPanEnabled = false,
-                IsZoomEnabled = false
-            });
-        }
+            Title = title
+        };
 
-        model.Axes.Add(new LinearAxis
+        plotModel.Axes.Add(new DateTimeAxis
+        {
+            Position = AxisPosition.Bottom,
+            Title = "Период",
+            StringFormat = "dd.MM.yyyy",
+            Angle = 35,
+            IsZoomEnabled = true,
+            IsPanEnabled = true
+        });
+        plotModel.Axes.Add(new LinearAxis
         {
             Position = AxisPosition.Left,
-            Title = "Цена",
-            MinimumPadding = 0,
-            MaximumPadding = 0,
-            Minimum = minY,
-            Maximum = maxY,
-            AbsoluteMinimum = minY,
-            AbsoluteMaximum = maxY,
-            IsPanEnabled = false,
-            IsZoomEnabled = false
+            Title = "Значение метрики",
+            IsZoomEnabled = true,
+            IsPanEnabled = true
         });
 
-        var actualSeries = new LineSeries { Title = "Изначальная цена", StrokeThickness = 2 };
-        var predictedSeries = new LineSeries { Title = "Прогнозная цена", StrokeThickness = 2 };
-        var actualPlotIndices = BuildPlotIndices(allPrices.Count, maxPlotPoints);
-        var forecastStartIndex = bestResult.TrainReturnsCount + 1;
-        var predictedPlotIndices = BuildPlotIndices(bestResult.PredictedPrices.Count, maxPlotPoints);
-
-        foreach (var i in actualPlotIndices)
+        foreach (var axis in plotModel.Axes)
         {
-            if (i < 0 || i >= allPrices.Count)
-            {
-                continue;
-            }
-
-            if (double.IsNaN(allPrices[i]) || double.IsInfinity(allPrices[i]))
-            {
-                continue;
-            }
-
-            var x = (double)i;
-            if (useDateAxis)
-            {
-                DateTime pointDate;
-                if (i < allCsvDates.Count && allCsvDates[i].HasValue)
-                {
-                    pointDate = allCsvDates[i]!.Value;
-                }
-                else
-                {
-                    var minDate = csvDateBounds.First();
-                    var maxDate = csvDateBounds.Last();
-                    var totalDays = Math.Max(1.0, (maxDate - minDate).TotalDays);
-                    var ratio = allPrices.Count > 1
-                        ? (double)i / (allPrices.Count - 1)
-                        : 0.0;
-                    pointDate = minDate.AddDays(totalDays * ratio);
-                }
-
-                x = DateTimeAxis.ToDouble(pointDate);
-            }
-
-            actualSeries.Points.Add(new DataPoint(x, allPrices[i]));
+            axis.IsZoomEnabled = false;
+            axis.IsPanEnabled = false;
         }
 
-        foreach (var localIndex in predictedPlotIndices)
+        var actualSeriesLine = new LineSeries
         {
-            if (localIndex < 0 || localIndex >= bestResult.PredictedPrices.Count)
+            Title = "Фактические значения",
+            StrokeThickness = 2
+        };
+
+        for (var index = 0; index < actualSeries.Count; index++)
+        {
+            if (index >= periods.Count || periods[index] is null)
             {
                 continue;
             }
 
-            var predictedPrice = bestResult.PredictedPrices[localIndex];
-            if (double.IsNaN(predictedPrice) || double.IsInfinity(predictedPrice))
-            {
-                continue;
-            }
-
-            var globalIndex = forecastStartIndex + localIndex;
-            var x = (double)globalIndex;
-            if (useDateAxis)
-            {
-                DateTime pointDate;
-                if (globalIndex < allCsvDates.Count && allCsvDates[globalIndex].HasValue)
-                {
-                    pointDate = allCsvDates[globalIndex]!.Value;
-                }
-                else
-                {
-                    var minDate = csvDateBounds.First();
-                    var maxDate = csvDateBounds.Last();
-                    var totalDays = Math.Max(1.0, (maxDate - minDate).TotalDays);
-                    var ratio = allPrices.Count > 1
-                        ? (double)Math.Min(globalIndex, allPrices.Count - 1) / (allPrices.Count - 1)
-                        : 0.0;
-                    pointDate = minDate.AddDays(totalDays * ratio);
-                }
-
-                x = DateTimeAxis.ToDouble(pointDate);
-            }
-
-            predictedSeries.Points.Add(new DataPoint(x, predictedPrice));
+            actualSeriesLine.Points.Add(new DataPoint(ToAxisValue(periods[index]!.Value), actualSeries[index]));
         }
 
-        model.Series.Add(actualSeries);
-        model.Series.Add(predictedSeries);
-        return model;
+        var forecastSeriesLine = new LineSeries
+        {
+            Title = "Прогнозные значения",
+            StrokeThickness = 2,
+            Color = OxyColors.IndianRed
+        };
+
+        foreach (var point in predictedPoints)
+        {
+            if (point.Period is null)
+            {
+                continue;
+            }
+
+            forecastSeriesLine.Points.Add(new DataPoint(ToAxisValue(point.Period.Value), point.PredictedValue));
+        }
+
+        plotModel.Series.Add(actualSeriesLine);
+        plotModel.Series.Add(forecastSeriesLine);
+        return plotModel;
     }
 
-    private static IPlotController BuildLockedPlotController()
+    private void RaiseCommandStates()
     {
-        var controller = new PlotController();
-        controller.UnbindAll();
-        return controller;
+        ImportCsvCommand.RaiseCanExecuteChanged();
+        FindBestMemoryCommand.RaiseCanExecuteChanged();
+        DeleteSelectedDirectionCommand.RaiseCanExecuteChanged();
+        DeleteAllDirectionsCommand.RaiseCanExecuteChanged();
+        ExportForecastCommand.RaiseCanExecuteChanged();
     }
 
-    private static IReadOnlyList<int> BuildPlotIndices(int totalCount, int maxPoints)
+    private static double ToAxisValue(DateOnly date)
     {
-        if (totalCount <= 0)
-        {
-            return Array.Empty<int>();
-        }
-
-        if (totalCount <= maxPoints || maxPoints < 2)
-        {
-            return Enumerable.Range(0, totalCount).ToArray();
-        }
-
-        var result = new List<int>(maxPoints);
-        var step = (double)(totalCount - 1) / (maxPoints - 1);
-        var previous = -1;
-
-        for (var i = 0; i < maxPoints; i++)
-        {
-            var index = (int)Math.Round(i * step, MidpointRounding.AwayFromZero);
-            if (index >= totalCount)
-            {
-                index = totalCount - 1;
-            }
-
-            if (index == previous)
-            {
-                continue;
-            }
-
-            result.Add(index);
-            previous = index;
-        }
-
-        if (result[^1] != totalCount - 1)
-        {
-            result.Add(totalCount - 1);
-        }
-
-        return result;
+        return DateTimeAxis.ToDouble(date.ToDateTime(TimeOnly.MinValue));
     }
 
-    private bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    private static string EscapeCsv(string value)
     {
-        if (EqualityComparer<T>.Default.Equals(field, value))
+        return value.Contains(';') ? $"\"{value}\"" : value;
+    }
+
+    private static string SanitizeFileName(string value)
+    {
+        foreach (var invalidChar in Path.GetInvalidFileNameChars())
         {
-            return false;
+            value = value.Replace(invalidChar, '_');
         }
 
-        field = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        return true;
+        return value;
     }
 }
-

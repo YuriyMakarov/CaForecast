@@ -1,8 +1,8 @@
-namespace CaForecast.WpfApp;
+namespace CaForecast.WpfApp.ViewModels;
 
-public class MemoryErrorRow
+public sealed class MemoryCandidateRowViewModel
 {
-    public int Memory { get; init; }
+    public int MemoryDepthM { get; init; }
 
     public double Mae { get; init; }
 

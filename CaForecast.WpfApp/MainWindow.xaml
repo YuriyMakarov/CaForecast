@@ -5,242 +5,251 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="Прогноз на основе трехцветного КА"
-        Height="900"
-        Width="1280"
-        MinHeight="700"
-        MinWidth="1024">
+        Title="Академия ТОП Краснодар | Прогноз коммерческих метрик"
+        Height="980"
+        Width="1520"
+        MinHeight="820"
+        MinWidth="1240"
+        Background="#FFF8F4ED">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Window.Resources>
-    <Grid Margin="12">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <Grid Margin="18">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="360" />
+            <ColumnDefinition Width="18" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0"
-                Padding="12"
-                BorderBrush="#DDDDDD"
-                BorderThickness="1"
-                CornerRadius="8">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+        <Border Grid.Column="0"
+                Padding="20"
+                Background="#FFF0E7D8"
+                CornerRadius="18">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Text="Панель управления"
+                               FontSize="24"
+                               FontWeight="SemiBold"
+                               Foreground="#FF49301D" />
 
-                <DockPanel Grid.Row="0"
-                           LastChildFill="True">
-                    <Button Content="Загрузить CSV"
-                            Command="{Binding LoadCsvCommand}"
-                            Width="130"
-                            Margin="0,0,8,0"
-                            DockPanel.Dock="Left" />
-                    <Button Content="Новый API запрос"
-                            Command="{Binding ShowMoexInputsCommand}"
-                            Width="150"
-                            Margin="0,0,8,0"
-                            DockPanel.Dock="Left" />
-                    <TextBlock Text="{Binding SelectedFilePath}"
-                               VerticalAlignment="Center"
-                               TextTrimming="CharacterEllipsis"
-                               MinWidth="200" />
-                </DockPanel>
+                    <Button Height="40"
+                            Margin="0,18,0,0"
+                            Content="Импорт"
+                            Command="{Binding ImportCsvCommand}" />
+                    <TextBlock Margin="0,8,0,0"
+                               Text="{Binding SelectedFilePath}"
+                               TextWrapping="Wrap"
+                               Foreground="#FF7A624F" />
 
-                <WrapPanel Grid.Row="1"
-                           Margin="0,10,0,0"
-                           ItemHeight="28">
-                    <TextBlock Text="С:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="110"
-                             Margin="0,0,16,0"
-                             Text="{Binding FromDateText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <TextBlock Margin="0,18,0,6"
+                               Text="Направление/метрика"
+                               FontWeight="SemiBold" />
+                    <ComboBox ItemsSource="{Binding Directions}"
+                              SelectedItem="{Binding SelectedDirection}"
+                              DisplayMemberPath="Name"
+                              Height="34" />
+                    <UniformGrid Margin="0,10,0,0"
+                                 Columns="2">
+                        <Button Height="34"
+                                Margin="0,0,6,0"
+                                Content="Удалить выбранное"
+                                Command="{Binding DeleteSelectedDirectionCommand}" />
+                        <Button Height="34"
+                                Margin="6,0,0,0"
+                                Content="Очистить всё"
+                                Command="{Binding DeleteAllDirectionsCommand}" />
+                    </UniformGrid>
 
-                    <TextBlock Text="По:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="110"
-                             Margin="0,0,16,0"
-                             Text="{Binding TillDateText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <TextBlock Margin="0,18,0,6"
+                               Text="Режим графика"
+                               FontWeight="SemiBold" />
+                    <ComboBox ItemsSource="{Binding PlotModes}"
+                              SelectedItem="{Binding SelectedPlotMode}"
+                              Height="34" />
 
-                    <TextBlock Text="Доля выборки, %:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="90"
-                             Margin="0,0,16,0"
-                             Text="{Binding TrainPercentText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <TextBlock Margin="0,18,0,0"
+                               Text="Глубина памяти m"
+                               FontWeight="SemiBold" />
+                    <Slider Minimum="1"
+                            Maximum="20"
+                            TickFrequency="1"
+                            IsSnapToTickEnabled="True"
+                            Value="{Binding MemoryDepthM}"
+                            Margin="0,8,0,0" />
+                    <TextBlock Text="{Binding MemoryDepthM}" />
 
-                    <TextBlock Text="k:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="90"
-                             Margin="0,0,16,0"
-                             Text="{Binding KText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <TextBlock Margin="0,16,0,0"
+                               Text="Порог дискретизации k"
+                               FontWeight="SemiBold" />
+                    <Slider Minimum="0"
+                            Maximum="0.15"
+                            TickFrequency="0.005"
+                            Value="{Binding ThresholdK}"
+                            Margin="0,8,0,0" />
+                    <TextBlock Text="{Binding ThresholdK, StringFormat=F4}" />
 
-                    <TextBlock Text="max(m):"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="90"
-                             Margin="0,0,16,0"
-                             Text="{Binding MaxMemoryMText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <TextBlock Margin="0,16,0,0"
+                               Text="Лапласовское сглаживание alpha"
+                               FontWeight="SemiBold" />
+                    <Slider Minimum="0"
+                            Maximum="10"
+                            TickFrequency="0.25"
+                            Value="{Binding SmoothingAlpha}"
+                            Margin="0,8,0,0" />
+                    <TextBlock Text="{Binding SmoothingAlpha, StringFormat=F2}" />
 
-                    <TextBlock Text="Макс. точек графика:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="110"
-                             Text="{Binding MaxPlotPointsText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
-                </WrapPanel>
+                    <TextBlock Margin="0,16,0,0"
+                               Text="Обучающая выборка, %"
+                               FontWeight="SemiBold" />
+                    <Slider Minimum="55"
+                            Maximum="95"
+                            TickFrequency="1"
+                            IsSnapToTickEnabled="True"
+                            Value="{Binding TrainRatioPercent}"
+                            Margin="0,8,0,0" />
+                    <TextBlock Text="{Binding TrainRatioPercent, StringFormat=F0}" />
 
-                <WrapPanel Grid.Row="2"
-                           Margin="0,10,0,0"
-                           ItemHeight="28"
-                           Visibility="{Binding IsApiInputsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-                    <TextBlock Text="Тикер:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="90"
-                             Margin="0,0,16,0"
-                             Text="{Binding SecIdText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <TextBlock Margin="0,16,0,0"
+                               Text="Максимум m для автоподбора"
+                               FontWeight="SemiBold" />
+                    <Slider Minimum="2"
+                            Maximum="25"
+                            TickFrequency="1"
+                            IsSnapToTickEnabled="True"
+                            Value="{Binding MaxMemoryDepthForSearch}"
+                            Margin="0,8,0,0" />
+                    <TextBlock Text="{Binding MaxMemoryDepthForSearch}" />
 
-                    <TextBlock Text="Режим торгов:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="90"
-                             Margin="0,0,16,0"
-                             Text="{Binding BoardIdText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <StackPanel Margin="0,22,0,0">
+                        <Button Margin="0,10,0,0"
+                                Height="38"
+                                HorizontalAlignment="Stretch"
+                                Content="Подобрать лучшее m"
+                                Command="{Binding FindBestMemoryCommand}" />
+                        <Button Margin="0,10,0,0"
+                                Height="38"
+                                HorizontalAlignment="Stretch"
+                                Content="Экспорт результата в CSV"
+                                Command="{Binding ExportForecastCommand}" />
+                    </StackPanel>
 
-                    <Button Content="Загрузить MOEX ISS"
-                            Command="{Binding LoadMoexCommand}"
-                            Width="150"
-                            Margin="0,0,8,0" />
-                    <Button Content="Скрыть"
-                            Command="{Binding HideMoexInputsCommand}"
-                            Width="90" />
-                </WrapPanel>
-            </Grid>
+                    <Border Margin="0,24,0,0"
+                            Padding="14"
+                            CornerRadius="14"
+                            Background="#FFF8F1E7">
+                        <StackPanel>
+                            <TextBlock Text="Метрики модели"
+                                       FontWeight="SemiBold"
+                                       FontSize="16" />
+                            <TextBlock Margin="0,12,0,0" Text="{Binding MaeText, StringFormat=MAE: {0}}" />
+                            <TextBlock Text="{Binding MseText, StringFormat=MSE: {0}}" />
+                            <TextBlock Text="{Binding RmseText, StringFormat=RMSE: {0}}" />
+                            <TextBlock Text="{Binding MapeText, StringFormat=MAPE: {0}}" />
+                            <TextBlock Text="{Binding FallbackText, StringFormat=Fallback: {0}}" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
         </Border>
 
-        <Grid Grid.Row="1"
-              Margin="0,12,0,12">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" MinWidth="420" />
-                <ColumnDefinition Width="12" />
-                <ColumnDefinition Width="3*" MinWidth="420" />
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Column="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="12" />
+                <RowDefinition Height="4.2*" />
+                <RowDefinition Height="18" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="18" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Border Grid.Column="0"
-                    Grid.Row="0"
-                    BorderBrush="#DDDDDD"
-                    BorderThickness="1"
-                    CornerRadius="8"
-                    Padding="8">
+            <Border Grid.Row="0"
+                    Padding="16"
+                    Background="White"
+                    CornerRadius="18">
                 <DockPanel>
-                    <TextBlock Text="Таблица ошибок по m"
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="{Binding SelectedPlotMode, StringFormat=График: {0}}"
+                               FontSize="22"
                                FontWeight="SemiBold"
-                               DockPanel.Dock="Top"
-                               Margin="0,0,0,8" />
-                    <DataGrid ItemsSource="{Binding ErrorRows}"
-                              AutoGenerateColumns="False"
-                              IsReadOnly="True"
-                              CanUserAddRows="False"
-                              ColumnWidth="Auto"
-                              HorizontalScrollBarVisibility="Auto"
-                              VerticalScrollBarVisibility="Auto">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="m" Binding="{Binding Memory}" />
-                            <DataGridTextColumn Header="MAE" Binding="{Binding Mae}" />
-                            <DataGridTextColumn Header="MSE" Binding="{Binding Mse}" />
-                            <DataGridTextColumn Header="RMSE" Binding="{Binding Rmse}" />
-                            <DataGridTextColumn Header="MAPE" Binding="{Binding Mape}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                               Foreground="#FF49301D"
+                               Margin="0,0,0,10" />
+                    <oxy:PlotView Model="{Binding CurrentPlotModel}" />
                 </DockPanel>
             </Border>
 
-            <Border Grid.Column="0"
-                    Grid.Row="2"
-                    BorderBrush="#DDDDDD"
-                    BorderThickness="1"
-                    CornerRadius="8"
-                    Padding="8">
-                <DockPanel>
-                    <TextBlock Text="Итоговая таблица (лучшее m)"
-                               FontWeight="SemiBold"
-                               DockPanel.Dock="Top"
-                               Margin="0,0,0,8" />
-                    <DataGrid ItemsSource="{Binding BestRows}"
-                              AutoGenerateColumns="False"
-                              IsReadOnly="True"
-                              CanUserAddRows="False"
-                              ColumnWidth="Auto"
-                              HorizontalScrollBarVisibility="Auto"
-                              VerticalScrollBarVisibility="Auto"
-                              Height="72">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="m*" Binding="{Binding Memory}" />
-                            <DataGridTextColumn Header="MAE, %" Binding="{Binding MaePercent}" />
-                            <DataGridTextColumn Header="MSE, %" Binding="{Binding MsePercent}" />
-                            <DataGridTextColumn Header="RMSE, %" Binding="{Binding RmsePercent}" />
-                            <DataGridTextColumn Header="MAPE, %" Binding="{Binding MapePercent}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </DockPanel>
-            </Border>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="18" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="2"
-                    Grid.Row="0"
-                    Grid.RowSpan="3"
-                    BorderBrush="#DDDDDD"
-                    BorderThickness="1"
-                    CornerRadius="8"
-                    Padding="8">
+                <Border Grid.Column="0"
+                        Padding="14"
+                        Background="White"
+                        CornerRadius="18">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top"
+                                   Text="Факт / прогноз по периодам"
+                                   FontWeight="SemiBold"
+                                   FontSize="18"
+                                   Margin="0,0,0,10" />
+                        <DataGrid ItemsSource="{Binding ForecastRows}"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Период" Binding="{Binding Period}" />
+                                <DataGridTextColumn Header="Факт" Binding="{Binding ActualValue, StringFormat=F2}" />
+                                <DataGridTextColumn Header="Прогноз" Binding="{Binding PredictedValue, StringFormat=F2}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </Border>
+
+                <Border Grid.Column="2"
+                        Padding="14"
+                        Background="White"
+                        CornerRadius="18">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top"
+                                   Text="Сравнение конфигураций по m"
+                                   FontWeight="SemiBold"
+                                   FontSize="18"
+                                   Margin="0,0,0,10" />
+                        <DataGrid ItemsSource="{Binding MemoryCandidates}"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="m" Binding="{Binding MemoryDepthM}" />
+                                <DataGridTextColumn Header="MAE" Binding="{Binding Mae, StringFormat=F4}" />
+                                <DataGridTextColumn Header="MSE" Binding="{Binding Mse, StringFormat=F4}" />
+                                <DataGridTextColumn Header="RMSE" Binding="{Binding Rmse, StringFormat=F4}" />
+                                <DataGridTextColumn Header="MAPE, %" Binding="{Binding Mape, StringFormat=F2}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </Border>
+            </Grid>
+
+            <Border Grid.Row="4"
+                    Padding="14"
+                    Background="#FFEBDCC7"
+                    CornerRadius="18">
                 <DockPanel>
-                    <TextBlock Text="График: фактическая и прогнозная цена"
-                               FontWeight="SemiBold"
-                               DockPanel.Dock="Top"
-                               Margin="0,0,0,8" />
-                    <oxy:PlotView Model="{Binding PlotModel}"
-                                  Controller="{Binding LockedPlotController}" />
+                    <TextBlock Text="{Binding StatusMessage}"
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap"
+                               Foreground="#FF5D432E" />
+                    <ProgressBar Width="180"
+                                 Height="14"
+                                 Margin="14,0,0,0"
+                                 VerticalAlignment="Center"
+                                 IsIndeterminate="True"
+                                 Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" />
                 </DockPanel>
             </Border>
         </Grid>
-
-        <DockPanel Grid.Row="2">
-            <TextBlock Text="{Binding StatusMessage}"
-                       VerticalAlignment="Center"
-                       DockPanel.Dock="Left" />
-            <ProgressBar Width="220"
-                         Height="14"
-                         Margin="12,0,0,0"
-                         VerticalAlignment="Center"
-                         IsIndeterminate="True"
-                         Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"
-                         DockPanel.Dock="Left" />
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right"
-                        DockPanel.Dock="Right">
-                <Button Content="Экспорт результатов"
-                        Width="160"
-                        Command="{Binding ExportResultsCommand}" />
-            </StackPanel>
-        </DockPanel>
     </Grid>
 </Window>
 
