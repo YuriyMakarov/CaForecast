@@ -1,0 +1,79 @@
+<Window x:Class="CaForecast.WpfApp.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CaForecast.WpfApp"
+        Title="Вход в CRM"
+        Height="430"
+        Width="520"
+        MinHeight="430"
+        MinWidth="520"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#FFF6F3EC">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Window.Resources>
+
+    <Grid Margin="42">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="28" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="CRM образовательных услуг"
+                       FontSize="26"
+                       FontWeight="SemiBold"
+                       Foreground="#FF2E3328" />
+            <TextBlock Margin="0,8,0,0"
+                       Text="Вход для сотрудников"
+                       FontSize="15"
+                       Foreground="#FF69705F" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="Логин"
+                       FontWeight="SemiBold"
+                       Foreground="#FF2E3328" />
+            <TextBox Margin="0,7,0,0"
+                     Height="38"
+                     Padding="10,7"
+                     Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="4">
+            <TextBlock Text="Пароль"
+                       FontWeight="SemiBold"
+                       Foreground="#FF2E3328" />
+            <PasswordBox Margin="0,7,0,0"
+                         Height="38"
+                         Padding="10,7"
+                         local:PasswordBoxBinding.BoundPassword="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+
+        <Grid Grid.Row="6">
+            <Button Height="40"
+                    Content="Войти"
+                    Command="{Binding LoginCommand}" />
+            <ProgressBar Width="120"
+                         Height="12"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Center"
+                         Margin="0,0,14,0"
+                         IsIndeterminate="True"
+                         Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" />
+        </Grid>
+
+        <TextBlock Grid.Row="8"
+                   Text="{Binding ErrorMessage}"
+                   TextWrapping="Wrap"
+                   Foreground="#FFB42318" />
+    </Grid>
+</Window>

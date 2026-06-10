@@ -1,0 +1,92 @@
+BEGIN;
+
+CREATE TABLE roles (
+    role_id SERIAL PRIMARY KEY,
+    role_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    full_name VARCHAR(150) NOT NULL,
+    login VARCHAR(50) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role_id INTEGER NOT NULL REFERENCES roles(role_id),
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE specialties (
+    specialty_id SERIAL PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    code VARCHAR(30) NOT NULL UNIQUE,
+    duration_months_9_grade INTEGER NOT NULL DEFAULT 46 CHECK (duration_months_9_grade > 0),
+    duration_months_11_grade INTEGER NOT NULL DEFAULT 34 CHECK (duration_months_11_grade > 0),
+    price_per_month NUMERIC(10,2) NOT NULL CHECK (price_per_month >= 0),
+    education_form VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE applicants (
+    applicant_id SERIAL PRIMARY KEY,
+    full_name VARCHAR(150) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    email VARCHAR(254),
+    birth_date DATE,
+    education_level VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE applications (
+    application_id SERIAL PRIMARY KEY,
+    applicant_id INTEGER NOT NULL REFERENCES applicants(applicant_id) ON DELETE CASCADE,
+    specialty_id INTEGER NOT NULL REFERENCES specialties(specialty_id),
+    manager_id INTEGER NOT NULL REFERENCES users(user_id),
+    application_status VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE contracts (
+    contract_id SERIAL PRIMARY KEY,
+    application_id INTEGER NOT NULL UNIQUE REFERENCES applications(application_id) ON DELETE CASCADE,
+    manager_id INTEGER NOT NULL REFERENCES users(user_id),
+    contract_number VARCHAR(50) NOT NULL UNIQUE,
+    signed_date DATE NOT NULL,
+    total_amount NUMERIC(10,2) NOT NULL CHECK (total_amount >= 0),
+    duration_months INTEGER NOT NULL CHECK (duration_months IN (34, 46)),
+    current_course INTEGER NOT NULL DEFAULT 1 CHECK (current_course > 0),
+    study_status VARCHAR(50) NOT NULL DEFAULT 'Учится'
+);
+
+CREATE TABLE payments (
+    payment_id SERIAL PRIMARY KEY,
+    contract_id INTEGER NOT NULL REFERENCES contracts(contract_id) ON DELETE CASCADE,
+    amount NUMERIC(10,2) NOT NULL CHECK (amount > 0),
+    payment_date DATE NOT NULL
+);
+
+CREATE TABLE prediction_results (
+    prediction_result_id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(user_id),
+    target_metric VARCHAR(50) NOT NULL CHECK (target_metric IN ('applications', 'contracts')),
+    mape_error NUMERIC(10,2) CHECK (mape_error >= 0),
+    forecast_data JSONB NOT NULL,
+    automaton_model_params JSONB NOT NULL,
+    calculated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_users_role_id ON users(role_id);
+CREATE INDEX idx_applicants_phone ON applicants(phone);
+CREATE INDEX idx_applicants_email ON applicants(email);
+CREATE INDEX idx_applications_status ON applications(application_status);
+CREATE INDEX idx_applications_applicant_id ON applications(applicant_id);
+CREATE INDEX idx_applications_specialty_id ON applications(specialty_id);
+CREATE INDEX idx_applications_manager_id ON applications(manager_id);
+CREATE INDEX idx_applications_created_at ON applications(created_at);
+CREATE INDEX idx_contracts_signed_date ON contracts(signed_date);
+CREATE INDEX idx_contracts_manager_id ON contracts(manager_id);
+CREATE INDEX idx_payments_contract_id ON payments(contract_id);
+CREATE INDEX idx_payments_payment_date ON payments(payment_date);
+CREATE INDEX idx_prediction_results_user_id ON prediction_results(user_id);
+CREATE INDEX idx_prediction_results_target_metric ON prediction_results(target_metric);
+CREATE INDEX idx_prediction_results_calculated_at ON prediction_results(calculated_at);
+
+COMMIT;

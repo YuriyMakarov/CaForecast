@@ -1,0 +1,46 @@
+<Window x:Class="CaForecast.WpfApp.DirectorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CRM | Аналитика директора"
+        Height="820"
+        Width="1280"
+        MinHeight="720"
+        MinWidth="1080"
+        WindowStartupLocation="CenterScreen"
+        Background="#FFF5F4F0">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="18" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel>
+            <StackPanel>
+                <TextBlock Text="Аналитика директора"
+                           FontSize="26"
+                           FontWeight="SemiBold"
+                           Foreground="#FF263126" />
+                <TextBlock Margin="0,6,0,0"
+                           Text="{Binding FullName, StringFormat=Пользователь: {0}}"
+                           Foreground="#FF657061" />
+            </StackPanel>
+            <TextBlock DockPanel.Dock="Right"
+                       Text="{Binding RoleName}"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontWeight="SemiBold"
+                       Foreground="#FF657061" />
+        </DockPanel>
+
+        <Border Grid.Row="2"
+                Padding="20"
+                Background="White"
+                BorderBrush="#FFE2E0D8"
+                BorderThickness="1">
+            <TextBlock Text="Статистика, графики и запуск прогноза будут добавлены на шаге 4."
+                       FontSize="16"
+                       Foreground="#FF596356" />
+        </Border>
+    </Grid>
+</Window>

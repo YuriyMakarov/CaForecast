@@ -6,9 +6,15 @@ public sealed class PredictionResult
 
     public int SettingId { get; set; }
 
-    public int DirectionId { get; set; }
+    public int? DirectionId { get; set; }
+
+    public int? SpecialtyId { get; set; }
 
     public DateTime CalculatedAt { get; set; } = DateTime.UtcNow;
+
+    public DateOnly? PeriodFrom { get; set; }
+
+    public DateOnly? PeriodTo { get; set; }
 
     public double Mae { get; set; }
 
@@ -21,4 +27,6 @@ public sealed class PredictionResult
     public ModelSetting? Setting { get; set; }
 
     public CourseDirection? Direction { get; set; }
+
+    public Specialty? Specialty { get; set; }
 }

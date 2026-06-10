@@ -9,10 +9,10 @@ public sealed class AcademyTopDbContextFactory : IDesignTimeDbContextFactory<Aca
     {
         var connectionString =
             Environment.GetEnvironmentVariable("CAFORECAST_CONNECTION")
-            ?? "Data Source=ca_forecast.db";
+            ?? "Host=localhost;Port=5432;Database=ca_forecast;Username=postgres;Password=postgres";
 
         var optionsBuilder = new DbContextOptionsBuilder<AcademyTopDbContext>();
-        optionsBuilder.UseSqlite(connectionString);
+        optionsBuilder.UseNpgsql(connectionString);
         return new AcademyTopDbContext(optionsBuilder.Options);
     }
 }
