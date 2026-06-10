@@ -1,220 +1,411 @@
-﻿ПРИЛОЖЕНИЕ А
+===== CaForecast.sln =====
 
-(обязательное)
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaForecast.Core", "CaForecast.Core\CaForecast.Core.csproj", "{40EB62DC-6FC5-4D46-B363-154AE2B96F52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaForecast.Data", "CaForecast.Data\CaForecast.Data.csproj", "{D80A278F-CC64-4E21-A64F-3A8ABDF3A4F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaForecast.WpfApp", "CaForecast.WpfApp\CaForecast.WpfApp.csproj", "{911D291E-304B-42BC-B16C-8DB02862606A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40EB62DC-6FC5-4D46-B363-154AE2B96F52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40EB62DC-6FC5-4D46-B363-154AE2B96F52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40EB62DC-6FC5-4D46-B363-154AE2B96F52}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{40EB62DC-6FC5-4D46-B363-154AE2B96F52}.Debug|x64.Build.0 = Debug|Any CPU
+		{40EB62DC-6FC5-4D46-B363-154AE2B96F52}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{40EB62DC-6FC5-4D46-B363-154AE2B96F52}.Debug|x86.Build.0 = Debug|Any CPU
+		{40EB62DC-6FC5-4D46-B363-154AE2B96F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40EB62DC-6FC5-4D46-B363-154AE2B96F52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40EB62DC-6FC5-4D46-B363-154AE2B96F52}.Release|x64.ActiveCfg = Release|Any CPU
+		{40EB62DC-6FC5-4D46-B363-154AE2B96F52}.Release|x64.Build.0 = Release|Any CPU
+		{40EB62DC-6FC5-4D46-B363-154AE2B96F52}.Release|x86.ActiveCfg = Release|Any CPU
+		{40EB62DC-6FC5-4D46-B363-154AE2B96F52}.Release|x86.Build.0 = Release|Any CPU
+		{D80A278F-CC64-4E21-A64F-3A8ABDF3A4F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D80A278F-CC64-4E21-A64F-3A8ABDF3A4F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D80A278F-CC64-4E21-A64F-3A8ABDF3A4F0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D80A278F-CC64-4E21-A64F-3A8ABDF3A4F0}.Debug|x64.Build.0 = Debug|Any CPU
+		{D80A278F-CC64-4E21-A64F-3A8ABDF3A4F0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D80A278F-CC64-4E21-A64F-3A8ABDF3A4F0}.Debug|x86.Build.0 = Debug|Any CPU
+		{D80A278F-CC64-4E21-A64F-3A8ABDF3A4F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D80A278F-CC64-4E21-A64F-3A8ABDF3A4F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D80A278F-CC64-4E21-A64F-3A8ABDF3A4F0}.Release|x64.ActiveCfg = Release|Any CPU
+		{D80A278F-CC64-4E21-A64F-3A8ABDF3A4F0}.Release|x64.Build.0 = Release|Any CPU
+		{D80A278F-CC64-4E21-A64F-3A8ABDF3A4F0}.Release|x86.ActiveCfg = Release|Any CPU
+		{D80A278F-CC64-4E21-A64F-3A8ABDF3A4F0}.Release|x86.Build.0 = Release|Any CPU
+		{911D291E-304B-42BC-B16C-8DB02862606A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{911D291E-304B-42BC-B16C-8DB02862606A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{911D291E-304B-42BC-B16C-8DB02862606A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{911D291E-304B-42BC-B16C-8DB02862606A}.Debug|x64.Build.0 = Debug|Any CPU
+		{911D291E-304B-42BC-B16C-8DB02862606A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{911D291E-304B-42BC-B16C-8DB02862606A}.Debug|x86.Build.0 = Debug|Any CPU
+		{911D291E-304B-42BC-B16C-8DB02862606A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{911D291E-304B-42BC-B16C-8DB02862606A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{911D291E-304B-42BC-B16C-8DB02862606A}.Release|x64.ActiveCfg = Release|Any CPU
+		{911D291E-304B-42BC-B16C-8DB02862606A}.Release|x64.Build.0 = Release|Any CPU
+		{911D291E-304B-42BC-B16C-8DB02862606A}.Release|x86.ActiveCfg = Release|Any CPU
+		{911D291E-304B-42BC-B16C-8DB02862606A}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
 
-Листинг исходного кода программы
 
-Файл CaForecast.Core/CaForecaster.cs
---------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Linq;
+===== CaForecast.slnx =====
+<Solution>
+</Solution>
+
+
+===== CaForecast.BatchExport\CaForecast.BatchExport.csproj =====
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\CaForecast.Data\CaForecast.Data.csproj" />
+    <ProjectReference Include="..\CaForecast.Core\CaForecast.Core.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
+
+
+===== CaForecast.BatchExport\Program.cs =====
+using System.Globalization;
+using System.Text;
+using CaForecast.Core;
+using CaForecast.Data;
+
+var root = Directory.GetCurrentDirectory();
+var inputDir = Path.Combine(root, "RealData");
+var outputDir = Path.Combine(root, "Result");
+
+if (!Directory.Exists(inputDir))
+{
+    Console.Error.WriteLine($"Папка не найдена: {inputDir}");
+    return 1;
+}
+
+Directory.CreateDirectory(outputDir);
+
+var csvImport = new CsvImportService();
+var csvExport = new CsvExportService();
+var returnCalculator = new ReturnCalculator();
+var encoder = new ThreeColorEncoder();
+var trainer = new CaRuleTrainer();
+var forecaster = new CaForecaster();
+var metricsService = new MetricsService();
+
+const double trainPercent = 70.0;
+const double k = 0.002;
+const double alpha = 1.0;
+const int maxMemoryM = 8;
+const char delimiter = ';';
+
+var summaries = new List<SummaryRow>();
+var files = Directory.GetFiles(inputDir, "*.csv", SearchOption.TopDirectoryOnly)
+    .OrderBy(path => path, StringComparer.OrdinalIgnoreCase)
+    .ToArray();
+
+foreach (var file in files)
+{
+    var imported = csvImport.Import(file, new CsvSettings { Delimiter = ';', HasHeader = true });
+    var prices = imported.ClosePrices;
+    var dates = imported.Dates;
+    var fileBase = Path.GetFileNameWithoutExtension(file);
+
+    if (fileBase.Equals("GMKN", StringComparison.OrdinalIgnoreCase))
+    {
+        var cutIndex = FindPreSplitCutIndex(prices);
+        if (cutIndex > 1 && cutIndex < prices.Count - 1)
+        {
+            prices = prices.Take(cutIndex + 1).ToList();
+            dates = dates.Take(cutIndex + 1).ToList();
+            Console.WriteLine($"GMKN pre-split mode: using data up to {dates[^1]:yyyy-MM-dd} (rows={prices.Count}).");
+        }
+    }
+
+    var returns = returnCalculator.CalculateLogReturns(prices);
+    var encodedStates = encoder.Encode(returns, k);
+
+    var trainReturnsCount = (int)Math.Round(returns.Count * (trainPercent / 100.0), MidpointRounding.AwayFromZero);
+    trainReturnsCount = Math.Max(2, Math.Min(trainReturnsCount, returns.Count - 1));
+
+    var metricRows = new List<MemoryMetricCsvRow>();
+    ForecastResult? bestResult = null;
+
+    for (var m = 1; m <= maxMemoryM; m++)
+    {
+        if (m >= trainReturnsCount)
+        {
+            break;
+        }
+
+        var result = forecaster.Forecast(
+            prices,
+            returns,
+            encodedStates,
+            trainReturnsCount,
+            m,
+            alpha,
+            trainer,
+            metricsService);
+
+        metricRows.Add(new MemoryMetricCsvRow
+        {
+            Memory = result.Memory,
+            Mae = result.Mae,
+            Mse = result.Mse,
+            Rmse = result.Rmse,
+            Mape = result.MapePercent / 100.0
+        });
+
+        if (bestResult is null || result.Rmse < bestResult.Rmse)
+        {
+            bestResult = result;
+        }
+    }
+
+    if (bestResult is null)
+    {
+        throw new InvalidOperationException($"Не удалось получить прогноз для файла {Path.GetFileName(file)}.");
+    }
+
+    var bestDates = BuildBestDates(dates, bestResult.TrainReturnsCount, bestResult.ActualPrices.Count);
+    var forecastRows = bestResult.ActualPrices.Select((actual, i) => new ForecastPointCsvRow
+    {
+        Date = i < bestDates.Count ? bestDates[i] : null,
+        ActualPrice = actual,
+        PredictedPrice = bestResult.PredictedPrices[i]
+    }).ToArray();
+
+    var exportPath = Path.Combine(outputDir, $"{fileBase}_export.csv");
+    csvExport.ExportCombined(exportPath, metricRows, forecastRows, bestResult.Memory, delimiter);
+
+    var maePercent = CalculateRelativePercent(bestResult.Mae, bestResult.ActualPrices);
+    var msePercent = CalculateRelativeSquaredPercent(bestResult.Mse, bestResult.ActualPrices);
+    var rmsePercent = CalculateRelativePercent(bestResult.Rmse, bestResult.ActualPrices);
+
+    summaries.Add(new SummaryRow(
+        fileBase,
+        bestResult.Memory,
+        bestResult.Mae,
+        bestResult.Mse,
+        bestResult.Rmse,
+        maePercent,
+        msePercent,
+        rmsePercent,
+        bestResult.MapePercent));
+
+    Console.WriteLine($"OK: {Path.GetFileName(exportPath)}");
+}
+
+var summaryPath = Path.Combine(outputDir, "summary_comparison.csv");
+WriteSummary(summaryPath, summaries, delimiter);
+Console.WriteLine($"OK: {Path.GetFileName(summaryPath)}");
+return 0;
+
+static int FindPreSplitCutIndex(IReadOnlyList<double> prices)
+{
+    
+    var maxAbsRet = 0.0;
+    var jumpIndex = -1;
+    for (var i = 1; i < prices.Count; i++)
+    {
+        var prev = prices[i - 1];
+        var curr = prices[i];
+        if (prev <= 0 || curr <= 0)
+        {
+            continue;
+        }
+
+        var absRet = Math.Abs(Math.Log(curr / prev));
+        if (absRet > maxAbsRet)
+        {
+            maxAbsRet = absRet;
+            jumpIndex = i;
+        }
+    }
+
+    return jumpIndex > 1 ? jumpIndex - 1 : prices.Count - 1;
+}
+
+static List<DateTime?> BuildBestDates(IReadOnlyList<DateTime?> allDates, int trainReturnsCount, int forecastCount)
+{
+    var result = new List<DateTime?>(forecastCount);
+    for (var i = 0; i < forecastCount; i++)
+    {
+        var dateIndex = trainReturnsCount + 1 + i;
+        result.Add(dateIndex >= 0 && dateIndex < allDates.Count ? allDates[dateIndex] : null);
+    }
+
+    return result;
+}
+
+static double CalculateRelativePercent(double metricValue, IReadOnlyList<double> actualPrices)
+{
+    if (actualPrices.Count == 0)
+    {
+        return double.NaN;
+    }
+
+    var meanAbsActual = actualPrices.Select(Math.Abs).Average();
+    if (meanAbsActual < 1e-12)
+    {
+        return double.NaN;
+    }
+
+    return (metricValue / meanAbsActual) * 100.0;
+}
+
+static double CalculateRelativeSquaredPercent(double metricValue, IReadOnlyList<double> actualPrices)
+{
+    if (actualPrices.Count == 0)
+    {
+        return double.NaN;
+    }
+
+    var meanSquareActual = actualPrices.Select(v => v * v).Average();
+    if (meanSquareActual < 1e-12)
+    {
+        return double.NaN;
+    }
+
+    return (metricValue / meanSquareActual) * 100.0;
+}
+
+static void WriteSummary(string path, IEnumerable<SummaryRow> rows, char delimiter)
+{
+    var culture = CultureInfo.CurrentCulture;
+    var sb = new StringBuilder();
+    sb.AppendLine(string.Join(delimiter,
+        "Ряд",
+        "ЛучшаяПамять_m",
+        "MAE",
+        "MSE",
+        "RMSE",
+        "MAE_%",
+        "MSE_%",
+        "RMSE_%",
+        "MAPE_%"));
+
+    foreach (var row in rows)
+    {
+        sb.AppendLine(string.Join(delimiter,
+            row.Series,
+            row.BestMemory.ToString(culture),
+            row.Mae.ToString(culture),
+            row.Mse.ToString(culture),
+            row.Rmse.ToString(culture),
+            row.MaePercent.ToString(culture),
+            row.MsePercent.ToString(culture),
+            row.RmsePercent.ToString(culture),
+            row.MapePercent.ToString(culture)));
+    }
+
+    File.WriteAllText(path, sb.ToString(), Encoding.UTF8);
+}
+
+internal sealed record SummaryRow(
+    string Series,
+    int BestMemory,
+    double Mae,
+    double Mse,
+    double Rmse,
+    double MaePercent,
+    double MsePercent,
+    double RmsePercent,
+    double MapePercent);
+
+
+===== CaForecast.Core\CaForecast.Core.csproj =====
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
+
+
+===== CaForecast.Core\CellularAutomatonModel.cs =====
+namespace CaForecast.Core;
+
+public sealed class CellularAutomatonModel
+{
+    public required int MemoryDepthM { get; init; }
+
+    public required IReadOnlyDictionary<string, double[]> TransitionProbabilities { get; init; }
+
+    public required IReadOnlyDictionary<int, double> MeanReturnsByState { get; init; }
+
+    public required double[] GlobalDistribution { get; init; }
+}
+
+
+===== CaForecast.Core\CellularAutomatonTrainer.cs =====
+using System.Globalization;
 
 namespace CaForecast.Core;
 
-public class CaForecaster
+public sealed class CellularAutomatonTrainer
 {
-    public ForecastResult Forecast(
-        IReadOnlyList<double> prices,
+    private static readonly int[] SupportedStates = [-1, 0, 1];
+
+    public CellularAutomatonModel Train(
+        IReadOnlyList<int> states,
         IReadOnlyList<double> returns,
-        IReadOnlyList<int> encodedStates,
-        int trainReturnsCount,
-        int memory,
-        double alpha,
-        CaRuleTrainer trainer,
-        MetricsService metricsService)
+        int memoryDepthM,
+        double smoothingAlpha)
     {
-        if (prices is null)
-        {
-            throw new ArgumentNullException(nameof(prices));
-        }
-
-        if (returns is null)
-        {
-            throw new ArgumentNullException(nameof(returns));
-        }
-
-        if (encodedStates is null)
-        {
-            throw new ArgumentNullException(nameof(encodedStates));
-        }
-
-        if (trainer is null)
-        {
-            throw new ArgumentNullException(nameof(trainer));
-        }
-
-        if (metricsService is null)
-        {
-            throw new ArgumentNullException(nameof(metricsService));
-        }
-
-        if (returns.Count != encodedStates.Count)
-        {
-            throw new ArgumentException("Длины массивов доходностей и закодированных состояний должны совпадать.");
-        }
-
-        if (trainReturnsCount <= memory || trainReturnsCount >= returns.Count)
-        {
-            throw new ArgumentOutOfRangeException(nameof(trainReturnsCount), "Размер обучающей выборки должен быть больше памяти и меньше общего числа доходностей.");
-        }
-
-        var trainStates = encodedStates.Take(trainReturnsCount).ToArray();
-        var trainReturns = returns.Take(trainReturnsCount).ToArray();
-        var model = trainer.Train(trainStates, trainReturns, memory, alpha);
-
-        var actualReturns = new List<double>();
-        var predictedReturns = new List<double>();
-        var actualPrices = new List<double>();
-        var predictedPrices = new List<double>();
-
-        var currentPredictedPrice = prices[trainReturnsCount];
-
-        for (var t = trainReturnsCount; t < returns.Count; t++)
-        {
-            var pattern = BuildPattern(encodedStates, t - memory, memory);
-            var probabilities = model.TransitionProbabilities.TryGetValue(pattern, out var p)
-                ? p
-                : model.GlobalDistribution;
-
-            var predictedState = ArgMaxState(probabilities);
-            var predictedReturn = model.MeanReturnsByState[predictedState];
-
-            actualReturns.Add(returns[t]);
-            predictedReturns.Add(predictedReturn);
-
-            var actualPrice = prices[t + 1];
-            actualPrices.Add(actualPrice);
-
-            currentPredictedPrice *= Math.Exp(predictedReturn);
-            predictedPrices.Add(currentPredictedPrice);
-        }
-
-        var mae = metricsService.CalculateMae(actualPrices, predictedPrices);
-        var mse = metricsService.CalculateMse(actualPrices, predictedPrices);
-        var rmse = metricsService.CalculateRmse(actualPrices, predictedPrices);
-        var mapePercent = metricsService.CalculateMapePercent(actualPrices, predictedPrices);
-
-        return new ForecastResult
-        {
-            Memory = memory,
-            TrainReturnsCount = trainReturnsCount,
-            ActualReturns = actualReturns,
-            PredictedReturns = predictedReturns,
-            ActualPrices = actualPrices,
-            PredictedPrices = predictedPrices,
-            Mae = mae,
-            Mse = mse,
-            Rmse = rmse,
-            MapePercent = mapePercent
-        };
-    }
-
-    private static string BuildPattern(IReadOnlyList<int> states, int start, int memory)
-    {
-        return string.Join('|', states.Skip(start).Take(memory));
-    }
-
-    private static int ArgMaxState(IReadOnlyList<double> probs)
-    {
-        var index = 0;
-        var max = probs[0];
-        for (var i = 1; i < probs.Count; i++)
-        {
-            if (probs[i] > max)
-            {
-                max = probs[i];
-                index = i;
-            }
-        }
-
-        return index switch
-        {
-            0 => -1,
-            1 => 0,
-            2 => 1,
-            _ => 0
-        };
-    }
-}
-
-================================================================================
-
-Файл CaForecast.Core/CaRuleModel.cs
---------------------------------------------------------------------------------
-namespace CaForecast.Core;
-
-public sealed class CaRuleModel
-{
-    public CaRuleModel(int memory, Dictionary<string, double[]> transitionProbabilities, Dictionary<int, double> meanReturnsByState)
-    {
-        Memory = memory;
-        TransitionProbabilities = transitionProbabilities;
-        MeanReturnsByState = meanReturnsByState;
-    }
-
-    public int Memory { get; }
-
-    public IReadOnlyDictionary<string, double[]> TransitionProbabilities { get; }
-
-    public IReadOnlyDictionary<int, double> MeanReturnsByState { get; }
-
-    public double[] GlobalDistribution { get; init; } = { 1.0 / 3.0, 1.0 / 3.0, 1.0 / 3.0 };
-}
-
-================================================================================
-
-Файл CaForecast.Core/CaRuleTrainer.cs
---------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace CaForecast.Core;
-
-public class CaRuleTrainer
-{
-    private static readonly int[] StateValues = { -1, 0, 1 };
-
-    public CaRuleModel Train(IReadOnlyList<int> states, IReadOnlyList<double> returns, int memory, double alpha)
-    {
-        if (states is null)
-        {
-            throw new ArgumentNullException(nameof(states));
-        }
-
-        if (returns is null)
-        {
-            throw new ArgumentNullException(nameof(returns));
-        }
+        ArgumentNullException.ThrowIfNull(states);
+        ArgumentNullException.ThrowIfNull(returns);
 
         if (states.Count != returns.Count)
         {
-            throw new ArgumentException("Массивы состояний и доходностей должны иметь одинаковую длину.");
+            throw new ArgumentException("Количество состояний должно совпадать с количеством доходностей.");
         }
 
-        if (states.Count <= memory)
+        if (memoryDepthM < 1)
         {
-            throw new ArgumentException("Обучающая выборка слишком короткая для выбранной памяти.");
+            throw new ArgumentOutOfRangeException(nameof(memoryDepthM), "Глубина памяти должна быть не меньше 1.");
         }
 
-        if (memory < 1)
+        if (states.Count <= memoryDepthM)
         {
-            throw new ArgumentOutOfRangeException(nameof(memory), "Память должна быть >= 1.");
+            throw new ArgumentException("Обучающая выборка недостаточна для заданной глубины памяти.", nameof(states));
         }
 
-        if (alpha < 0)
+        if (smoothingAlpha < 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(alpha), "alpha должен быть неотрицательным.");
+            throw new ArgumentOutOfRangeException(nameof(smoothingAlpha), "Параметр alpha не может быть отрицательным.");
         }
 
         var countsByPattern = new Dictionary<string, double[]>(StringComparer.Ordinal);
         var globalCounts = new double[3];
 
-        for (var t = memory; t < states.Count; t++)
+        for (var index = memoryDepthM; index < states.Count; index++)
         {
-            var pattern = BuildPattern(states, t - memory, memory);
-            var nextStateIndex = ToIndex(states[t]);
+            var pattern = BuildPattern(states, index - memoryDepthM, memoryDepthM);
+            var stateIndex = ToProbabilityIndex(states[index]);
 
             if (!countsByPattern.TryGetValue(pattern, out var counts))
             {
@@ -222,1293 +413,1537 @@ public class CaRuleTrainer
                 countsByPattern[pattern] = counts;
             }
 
-            counts[nextStateIndex]++;
-            globalCounts[nextStateIndex]++;
+            counts[stateIndex]++;
+            globalCounts[stateIndex]++;
         }
 
-        var transitionProbabilities = new Dictionary<string, double[]>(countsByPattern.Count, StringComparer.Ordinal);
+        var probabilities = new Dictionary<string, double[]>(countsByPattern.Count, StringComparer.Ordinal);
         foreach (var pair in countsByPattern)
         {
-            transitionProbabilities[pair.Key] = ApplyLaplace(pair.Value, alpha);
+            probabilities[pair.Key] = ApplyLaplace(pair.Value, smoothingAlpha);
         }
 
-        var globalDistribution = ApplyLaplace(globalCounts, alpha);
-        var meanReturnsByState = BuildMeanReturnsByState(states, returns);
-
-        return new CaRuleModel(memory, transitionProbabilities, meanReturnsByState)
+        return new CellularAutomatonModel
         {
-            GlobalDistribution = globalDistribution
+            MemoryDepthM = memoryDepthM,
+            TransitionProbabilities = probabilities,
+            MeanReturnsByState = BuildMeanReturnsByState(states, returns),
+            GlobalDistribution = ApplyLaplace(globalCounts, smoothingAlpha)
         };
+    }
+
+    public static string BuildPattern(IReadOnlyList<int> states, int startIndex, int memoryDepthM)
+    {
+        var buffer = new string[memoryDepthM];
+        for (var offset = 0; offset < memoryDepthM; offset++)
+        {
+            buffer[offset] = states[startIndex + offset].ToString(CultureInfo.InvariantCulture);
+        }
+
+        return string.Join('|', buffer);
     }
 
     private static Dictionary<int, double> BuildMeanReturnsByState(IReadOnlyList<int> states, IReadOnlyList<double> returns)
     {
-        var sums = new Dictionary<int, double>
-        {
-            [-1] = 0.0,
-            [0] = 0.0,
-            [1] = 0.0
-        };
+        var sums = new Dictionary<int, double> { [-1] = 0.0, [0] = 0.0, [1] = 0.0 };
+        var counts = new Dictionary<int, int> { [-1] = 0, [0] = 0, [1] = 0 };
 
-        var counts = new Dictionary<int, int>
+        for (var index = 0; index < states.Count; index++)
         {
-            [-1] = 0,
-            [0] = 0,
-            [1] = 0
-        };
-
-        for (var i = 0; i < states.Count; i++)
-        {
-            var state = states[i];
-            sums[state] += returns[i];
-            counts[state]++;
+            sums[states[index]] += returns[index];
+            counts[states[index]]++;
         }
 
-        var result = new Dictionary<int, double>(3);
-        foreach (var state in StateValues)
+        var meanReturns = new Dictionary<int, double>(3);
+        foreach (var state in SupportedStates)
         {
-            result[state] = counts[state] == 0 ? 0.0 : sums[state] / counts[state];
+            meanReturns[state] = counts[state] == 0 ? 0.0 : sums[state] / counts[state];
         }
 
-        return result;
+        return meanReturns;
     }
 
-    private static string BuildPattern(IReadOnlyList<int> states, int start, int memory)
-    {
-        return string.Join('|', states.Skip(start).Take(memory));
-    }
-
-    private static int ToIndex(int state)
+    private static int ToProbabilityIndex(int state)
     {
         return state switch
         {
             -1 => 0,
             0 => 1,
             1 => 2,
-            _ => throw new ArgumentOutOfRangeException(nameof(state), "Состояние должно быть -1, 0 или 1.")
+            _ => throw new ArgumentOutOfRangeException(nameof(state), "Допустимые состояния: -1, 0, 1.")
         };
     }
 
-    private static double[] ApplyLaplace(IReadOnlyList<double> counts, double alpha)
+    private static double[] ApplyLaplace(IReadOnlyList<double> counts, double smoothingAlpha)
     {
-        var adjusted = counts.Select(x => x + alpha).ToArray();
-        var total = adjusted.Sum();
-
-        if (total <= 0)
+        var denominator = counts.Sum() + (3.0 * smoothingAlpha);
+        if (denominator <= 0)
         {
-            return new[] { 1.0 / 3.0, 1.0 / 3.0, 1.0 / 3.0 };
+            return [1.0 / 3.0, 1.0 / 3.0, 1.0 / 3.0];
         }
 
-        return adjusted.Select(x => x / total).ToArray();
+        return
+        [
+            (counts[0] + smoothingAlpha) / denominator,
+            (counts[1] + smoothingAlpha) / denominator,
+            (counts[2] + smoothingAlpha) / denominator
+        ];
     }
 }
 
-================================================================================
 
-Файл CaForecast.Core/ForecastResult.cs
---------------------------------------------------------------------------------
-using System.Collections.Generic;
-
+===== CaForecast.Core\ForecastErrorMetrics.cs =====
 namespace CaForecast.Core;
 
-public class ForecastResult
+public sealed class ForecastErrorMetrics
 {
-    public int Memory { get; init; }
-
-    public int TrainReturnsCount { get; init; }
-
-    public IReadOnlyList<double> ActualReturns { get; init; } = new List<double>();
-
-    public IReadOnlyList<double> PredictedReturns { get; init; } = new List<double>();
-
-    public IReadOnlyList<double> ActualPrices { get; init; } = new List<double>();
-
-    public IReadOnlyList<double> PredictedPrices { get; init; } = new List<double>();
-
     public double Mae { get; init; }
 
     public double Mse { get; init; }
 
     public double Rmse { get; init; }
 
-    public double MapePercent { get; init; }
+    public double Mape { get; init; }
 }
 
-================================================================================
 
-Файл CaForecast.Core/MetricsService.cs
---------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-
+===== CaForecast.Core\ForecastingParameters.cs =====
 namespace CaForecast.Core;
 
-public class MetricsService
+public sealed class ForecastingParameters
 {
-    public double CalculateMae(IReadOnlyList<double> actual, IReadOnlyList<double> predicted)
-    {
-        Validate(actual, predicted);
+    public int MemoryDepthM { get; init; }
 
-        var sum = 0.0;
-        for (var i = 0; i < actual.Count; i++)
+    public double ThresholdK { get; init; }
+
+    public double SmoothingAlpha { get; init; }
+
+    
+    
+    
+    public double TrainRatio { get; init; } = 0.8;
+}
+
+
+===== CaForecast.Core\ForecastMetricsService.cs =====
+namespace CaForecast.Core;
+
+public sealed class ForecastMetricsService
+{
+    public ForecastErrorMetrics Calculate(IReadOnlyList<double> actualValues, IReadOnlyList<double> predictedValues)
+    {
+        Validate(actualValues, predictedValues);
+
+        var absoluteErrorSum = 0.0;
+        var squaredErrorSum = 0.0;
+        var mapeSum = 0.0;
+        var mapeCount = 0;
+
+        for (var index = 0; index < actualValues.Count; index++)
         {
-            sum += Math.Abs(actual[i] - predicted[i]);
-        }
+            var error = actualValues[index] - predictedValues[index];
+            absoluteErrorSum += Math.Abs(error);
+            squaredErrorSum += error * error;
 
-        return sum / actual.Count;
-    }
-
-    public double CalculateMse(IReadOnlyList<double> actual, IReadOnlyList<double> predicted)
-    {
-        Validate(actual, predicted);
-
-        var sum = 0.0;
-        for (var i = 0; i < actual.Count; i++)
-        {
-            var diff = actual[i] - predicted[i];
-            sum += diff * diff;
-        }
-
-        return sum / actual.Count;
-    }
-
-    public double CalculateRmse(IReadOnlyList<double> actual, IReadOnlyList<double> predicted)
-    {
-        return Math.Sqrt(CalculateMse(actual, predicted));
-    }
-
-    public double CalculateMapePercent(IReadOnlyList<double> actual, IReadOnlyList<double> predicted)
-    {
-        Validate(actual, predicted);
-
-        var sum = 0.0;
-        var count = 0;
-        for (var i = 0; i < actual.Count; i++)
-        {
-            var absActual = Math.Abs(actual[i]);
-            if (absActual < 1e-12)
+            var actual = actualValues[index];
+            if (Math.Abs(actual) > 1e-12)
             {
-                continue;
+                mapeSum += Math.Abs(error / actual);
+                mapeCount++;
             }
-
-            sum += Math.Abs((actual[i] - predicted[i]) / absActual);
-            count++;
         }
 
-        if (count == 0)
+        var mse = squaredErrorSum / actualValues.Count;
+        return new ForecastErrorMetrics
         {
-            throw new ArgumentException("MAPE нельзя рассчитать, когда все фактические значения равны нулю.");
-        }
-
-        return 100.0 * (sum / count);
+            Mae = absoluteErrorSum / actualValues.Count,
+            Mse = mse,
+            Rmse = Math.Sqrt(mse),
+            Mape = mapeCount == 0 ? 0.0 : (mapeSum / mapeCount) * 100.0
+        };
     }
 
-    private static void Validate(IReadOnlyList<double> actual, IReadOnlyList<double> predicted)
+    private static void Validate(IReadOnlyList<double> actualValues, IReadOnlyList<double> predictedValues)
     {
-        if (actual is null)
+        ArgumentNullException.ThrowIfNull(actualValues);
+        ArgumentNullException.ThrowIfNull(predictedValues);
+
+        if (actualValues.Count == 0 || predictedValues.Count == 0)
         {
-            throw new ArgumentNullException(nameof(actual));
+            throw new ArgumentException("Нельзя вычислить метрики на пустой выборке.");
         }
 
-        if (predicted is null)
+        if (actualValues.Count != predictedValues.Count)
         {
-            throw new ArgumentNullException(nameof(predicted));
-        }
-
-        if (actual.Count == 0 || predicted.Count == 0)
-        {
-            throw new ArgumentException("Входные коллекции не должны быть пустыми.");
-        }
-
-        if (actual.Count != predicted.Count)
-        {
-            throw new ArgumentException("Входные коллекции должны иметь одинаковую длину.");
+            throw new ArgumentException("Длины фактического и прогнозного рядов должны совпадать.");
         }
     }
 }
 
-================================================================================
 
-Файл CaForecast.Core/ReturnCalculator.cs
---------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
+===== CaForecast.Core\ForecastPoint.cs =====
+namespace CaForecast.Core;
+
+public sealed class ForecastPoint
+{
+    public DateOnly? Period { get; init; }
+
+    public double ActualValue { get; init; }
+
+    public double PredictedValue { get; init; }
+}
+
+
+===== CaForecast.Core\ForecastScenarioResult.cs =====
+namespace CaForecast.Core;
+
+public sealed class ForecastScenarioResult
+{
+    public ForecastingParameters Parameters { get; init; } = new();
+
+    public int TrainingObservationCount { get; init; }
+
+    public int FallbackUsageCount { get; init; }
+
+    public ForecastErrorMetrics Metrics { get; init; } = new();
+
+    public IReadOnlyList<double> ActualValues { get; init; } = Array.Empty<double>();
+
+    public IReadOnlyList<double> PredictedValues { get; init; } = Array.Empty<double>();
+
+    public IReadOnlyList<double> ActualReturns { get; init; } = Array.Empty<double>();
+
+    public IReadOnlyList<double> PredictedReturns { get; init; } = Array.Empty<double>();
+
+    public IReadOnlyList<ForecastPoint> ForecastPoints { get; init; } = Array.Empty<ForecastPoint>();
+}
+
+
+===== CaForecast.Core\LogarithmicGrowthCalculator.cs =====
+using System.Globalization;
 
 namespace CaForecast.Core;
 
-public class ReturnCalculator
+public sealed class LogarithmicGrowthCalculator
 {
-    public IReadOnlyList<double> CalculateLogReturns(IReadOnlyList<double> prices)
+    
+    
+    
+    
+    public IReadOnlyList<double> Calculate(IReadOnlyList<double> values)
     {
-        if (prices is null)
+        ArgumentNullException.ThrowIfNull(values);
+
+        if (values.Count < 2)
         {
-            throw new ArgumentNullException(nameof(prices));
+            throw new ArgumentException("Для расчета требуется минимум два наблюдения.", nameof(values));
         }
 
-        if (prices.Count < 2)
+        var returns = new double[values.Count - 1];
+        for (var index = 1; index < values.Count; index++)
         {
-            throw new ArgumentException("Требуется минимум две цены.", nameof(prices));
-        }
-
-        var returns = new List<double>(prices.Count - 1);
-        for (var i = 1; i < prices.Count; i++)
-        {
-            var previous = prices[i - 1];
-            var current = prices[i];
+            var previous = values[index - 1];
+            var current = values[index];
 
             if (previous <= 0 || current <= 0)
             {
-                throw new ArgumentException("Цены должны быть положительными для расчета лог-доходности.", nameof(prices));
+                throw new ArgumentException(
+                    $"Все значения ряда должны быть положительными. Ошибка на позиции {index.ToString(CultureInfo.InvariantCulture)}.",
+                    nameof(values));
             }
 
-            returns.Add(Math.Log(current / previous));
+            returns[index - 1] = Math.Log(current / previous);
         }
 
         return returns;
     }
 }
 
-================================================================================
 
-Файл CaForecast.Core/ThreeColorEncoder.cs
---------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-
+===== CaForecast.Core\MemoryOptimizationCandidate.cs =====
 namespace CaForecast.Core;
 
-public class ThreeColorEncoder
+public sealed class MemoryOptimizationCandidate
 {
-    public IReadOnlyList<int> Encode(IReadOnlyList<double> returns, double k)
+    public int MemoryDepthM { get; init; }
+
+    public ForecastErrorMetrics Metrics { get; init; } = new();
+}
+
+
+===== CaForecast.Core\MemoryOptimizationResult.cs =====
+namespace CaForecast.Core;
+
+public sealed class MemoryOptimizationResult
+{
+    public int BestMemoryDepthM { get; init; }
+
+    public ForecastScenarioResult BestScenario { get; init; } = new();
+
+    public IReadOnlyList<MemoryOptimizationCandidate> Candidates { get; init; } = Array.Empty<MemoryOptimizationCandidate>();
+}
+
+
+===== CaForecast.Core\SalesForecastService.cs =====
+namespace CaForecast.Core;
+
+public sealed class SalesForecastService
+{
+    private static readonly int[] ProbabilityStateOrder = [-1, 0, 1];
+
+    private readonly LogarithmicGrowthCalculator _growthCalculator = new();
+    private readonly ThreeStateDiscretizer _discretizer = new();
+    private readonly CellularAutomatonTrainer _trainer = new();
+    private readonly ForecastMetricsService _metricsService = new();
+
+    public ForecastScenarioResult BuildForecast(
+        IReadOnlyList<double> seriesValues,
+        IReadOnlyList<DateOnly?> periods,
+        ForecastingParameters parameters,
+        CancellationToken cancellationToken = default)
     {
-        if (returns is null)
+        ArgumentNullException.ThrowIfNull(seriesValues);
+        ArgumentNullException.ThrowIfNull(periods);
+        ArgumentNullException.ThrowIfNull(parameters);
+
+        ValidateArguments(seriesValues, periods, parameters);
+
+        var returns = _growthCalculator.Calculate(seriesValues);
+        var states = _discretizer.Discretize(returns, parameters.ThresholdK);
+        var trainingReturnCount = CalculateTrainingReturnCount(returns.Count, parameters.TrainRatio, parameters.MemoryDepthM);
+
+        var trainStates = states.Take(trainingReturnCount).ToArray();
+        var trainReturns = returns.Take(trainingReturnCount).ToArray();
+        var model = _trainer.Train(trainStates, trainReturns, parameters.MemoryDepthM, parameters.SmoothingAlpha);
+
+        var forecastReturnCount = returns.Count - trainingReturnCount;
+        var predictedReturns = new List<double>(forecastReturnCount);
+        var predictedValues = new List<double>(forecastReturnCount);
+        var actualReturns = new List<double>(forecastReturnCount);
+        var actualValues = new List<double>(forecastReturnCount);
+        var forecastPoints = new List<ForecastPoint>(forecastReturnCount);
+        var recursiveStateHistory = trainStates.ToList();
+        var currentPredictedValue = seriesValues[trainingReturnCount];
+        var fallbackUsageCount = 0;
+
+        for (var index = trainingReturnCount; index < returns.Count; index++)
         {
-            throw new ArgumentNullException(nameof(returns));
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var pattern = CellularAutomatonTrainer.BuildPattern(
+                recursiveStateHistory,
+                recursiveStateHistory.Count - parameters.MemoryDepthM,
+                parameters.MemoryDepthM);
+
+            var isFallback = !model.TransitionProbabilities.TryGetValue(pattern, out var probabilities);
+            probabilities ??= model.GlobalDistribution;
+
+            if (isFallback)
+            {
+                fallbackUsageCount++;
+            }
+
+            var predictedReturn = CalculateExpectedReturn(probabilities, model.MeanReturnsByState);
+            var predictedState = _discretizer.DiscretizeSingle(predictedReturn, parameters.ThresholdK);
+
+            currentPredictedValue *= Math.Exp(predictedReturn);
+            recursiveStateHistory.Add(predictedState);
+
+            predictedReturns.Add(predictedReturn);
+            predictedValues.Add(currentPredictedValue);
+            actualReturns.Add(returns[index]);
+            actualValues.Add(seriesValues[index + 1]);
+            forecastPoints.Add(new ForecastPoint
+            {
+                Period = periods[index + 1],
+                ActualValue = seriesValues[index + 1],
+                PredictedValue = currentPredictedValue
+            });
         }
 
-        if (k < 0)
+        return new ForecastScenarioResult
         {
-            throw new ArgumentOutOfRangeException(nameof(k), "k должен быть неотрицательным.");
+            Parameters = parameters,
+            TrainingObservationCount = trainingReturnCount + 1,
+            FallbackUsageCount = fallbackUsageCount,
+            ActualReturns = actualReturns,
+            PredictedReturns = predictedReturns,
+            ActualValues = actualValues,
+            PredictedValues = predictedValues,
+            ForecastPoints = forecastPoints,
+            Metrics = _metricsService.Calculate(actualValues, predictedValues)
+        };
+    }
+
+    public MemoryOptimizationResult FindBestMemoryDepth(
+        IReadOnlyList<double> seriesValues,
+        IReadOnlyList<DateOnly?> periods,
+        double thresholdK,
+        double smoothingAlpha,
+        double trainRatio,
+        int minMemoryDepthM,
+        int maxMemoryDepthM,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(seriesValues);
+        ArgumentNullException.ThrowIfNull(periods);
+
+        if (minMemoryDepthM < 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(minMemoryDepthM), "Минимальная глубина памяти должна быть >= 1.");
         }
 
-        var states = new List<int>(returns.Count);
-        foreach (var value in returns)
+        if (maxMemoryDepthM < minMemoryDepthM)
         {
-            if (value > k)
+            throw new ArgumentOutOfRangeException(nameof(maxMemoryDepthM), "Максимальная глубина памяти должна быть не меньше минимальной.");
+        }
+
+        var candidates = new List<MemoryOptimizationCandidate>();
+        ForecastScenarioResult? bestScenario = null;
+
+        for (var memoryDepth = minMemoryDepthM; memoryDepth <= maxMemoryDepthM; memoryDepth++)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            ForecastScenarioResult scenario;
+            try
             {
-                states.Add(1);
+                scenario = BuildForecast(
+                    seriesValues,
+                    periods,
+                    new ForecastingParameters
+                    {
+                        MemoryDepthM = memoryDepth,
+                        ThresholdK = thresholdK,
+                        SmoothingAlpha = smoothingAlpha,
+                        TrainRatio = trainRatio
+                    },
+                    cancellationToken);
             }
-            else if (value < -k)
+            catch (ArgumentException)
             {
-                states.Add(-1);
+                break;
             }
-            else
+
+            candidates.Add(new MemoryOptimizationCandidate
             {
-                states.Add(0);
+                MemoryDepthM = memoryDepth,
+                Metrics = scenario.Metrics
+            });
+
+            if (bestScenario is null || scenario.Metrics.Rmse < bestScenario.Metrics.Rmse)
+            {
+                bestScenario = scenario;
             }
+        }
+
+        if (bestScenario is null)
+        {
+            throw new InvalidOperationException("Не удалось подобрать допустимую конфигурацию памяти для заданного ряда.");
+        }
+
+        return new MemoryOptimizationResult
+        {
+            BestMemoryDepthM = bestScenario.Parameters.MemoryDepthM,
+            BestScenario = bestScenario,
+            Candidates = candidates
+        };
+    }
+
+    private static void ValidateArguments(
+        IReadOnlyList<double> seriesValues,
+        IReadOnlyList<DateOnly?> periods,
+        ForecastingParameters parameters)
+    {
+        if (seriesValues.Count < 6)
+        {
+            throw new ArgumentException("Для прогнозирования требуется минимум 6 наблюдений.", nameof(seriesValues));
+        }
+
+        if (seriesValues.Count != periods.Count)
+        {
+            throw new ArgumentException("Количество периодов должно совпадать с количеством наблюдений.");
+        }
+
+        if (parameters.MemoryDepthM < 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(parameters.MemoryDepthM), "Глубина памяти должна быть не меньше 1.");
+        }
+
+        if (parameters.ThresholdK < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(parameters.ThresholdK), "Порог k не может быть отрицательным.");
+        }
+
+        if (parameters.SmoothingAlpha < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(parameters.SmoothingAlpha), "Параметр alpha не может быть отрицательным.");
+        }
+
+        if (parameters.TrainRatio <= 0 || parameters.TrainRatio >= 1)
+        {
+            throw new ArgumentOutOfRangeException(nameof(parameters.TrainRatio), "TrainRatio должен находиться в диапазоне (0; 1).");
+        }
+    }
+
+    private static int CalculateTrainingReturnCount(int totalReturnCount, double trainRatio, int memoryDepthM)
+    {
+        var trainingReturnCount = (int)Math.Round(totalReturnCount * trainRatio, MidpointRounding.AwayFromZero);
+        trainingReturnCount = Math.Max(memoryDepthM + 1, trainingReturnCount);
+        trainingReturnCount = Math.Min(trainingReturnCount, totalReturnCount - 1);
+
+        if (trainingReturnCount <= memoryDepthM)
+        {
+            throw new ArgumentException("Обучающая часть ряда слишком короткая для выбранной глубины памяти.");
+        }
+
+        return trainingReturnCount;
+    }
+
+    private static double CalculateExpectedReturn(
+        IReadOnlyList<double> probabilities,
+        IReadOnlyDictionary<int, double> meanReturnsByState)
+    {
+        var expectedReturn = 0.0;
+        for (var index = 0; index < ProbabilityStateOrder.Length; index++)
+        {
+            var state = ProbabilityStateOrder[index];
+            expectedReturn += probabilities[index] * meanReturnsByState[state];
+        }
+
+        return expectedReturn;
+    }
+}
+
+
+===== CaForecast.Core\ThreeStateDiscretizer.cs =====
+namespace CaForecast.Core;
+
+public sealed class ThreeStateDiscretizer
+{
+    public IReadOnlyList<int> Discretize(IReadOnlyList<double> returns, double thresholdK)
+    {
+        ArgumentNullException.ThrowIfNull(returns);
+
+        if (thresholdK < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(thresholdK), "Порог k не может быть отрицательным.");
+        }
+
+        var states = new int[returns.Count];
+        for (var index = 0; index < returns.Count; index++)
+        {
+            states[index] = DiscretizeSingle(returns[index], thresholdK);
         }
 
         return states;
     }
+
+    public int DiscretizeSingle(double value, double thresholdK)
+    {
+        if (value > thresholdK)
+        {
+            return 1;
+        }
+
+        if (value < -thresholdK)
+        {
+            return -1;
+        }
+
+        return 0;
+    }
 }
 
-================================================================================
 
-Файл CaForecast.Data/CsvExportService.cs
---------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
+===== CaForecast.Data\AcademyTopDbContext.cs =====
+using CaForecast.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace CaForecast.Data;
 
-public class CsvExportService
+public sealed class AcademyTopDbContext(DbContextOptions<AcademyTopDbContext> options) : DbContext(options)
 {
-    private static readonly CultureInfo ExportCulture = CultureInfo.CurrentCulture;
+    public DbSet<CourseDirection> CourseDirections => Set<CourseDirection>();
 
-    public void ExportMetrics(string filePath, IEnumerable<MemoryMetricCsvRow> rows, char delimiter = ';')
+    public DbSet<HistoricalMetric> HistoricalMetrics => Set<HistoricalMetric>();
+
+    public DbSet<ModelSetting> ModelSettings => Set<ModelSetting>();
+
+    public DbSet<PredictionResult> PredictionResults => Set<PredictionResult>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        if (string.IsNullOrWhiteSpace(filePath))
+        modelBuilder.Entity<CourseDirection>(entity =>
         {
-            throw new ArgumentException("Требуется путь к файлу.", nameof(filePath));
-        }
+            entity.ToTable("course_directions");
+            entity.HasKey(x => x.Id);
+            entity.Property(x => x.Name).HasMaxLength(200).IsRequired();
+            entity.Property(x => x.CreatedAt).HasColumnName("created_at");
+            entity.HasIndex(x => x.Name).IsUnique();
+        });
 
-        var sb = new StringBuilder();
-        sb.AppendLine(string.Join(delimiter, "Память", "MAE", "MSE", "RMSE", "MAPE"));
-
-        foreach (var row in rows)
+        modelBuilder.Entity<HistoricalMetric>(entity =>
         {
-            sb.AppendLine(string.Join(
-                delimiter,
-                row.Memory.ToString(ExportCulture),
-                row.Mae.ToString(ExportCulture),
-                row.Mse.ToString(ExportCulture),
-                row.Rmse.ToString(ExportCulture),
-                row.Mape.ToString(ExportCulture)));
-        }
+            entity.ToTable("historical_metrics");
+            entity.HasKey(x => x.Id);
+            entity.Property(x => x.DirectionId).HasColumnName("direction_id");
+            entity.Property(x => x.MetricDate).HasColumnName("metric_date");
+            entity.Property(x => x.MetricValue).HasColumnName("metric_value");
+            entity.HasIndex(x => new { x.DirectionId, x.MetricDate }).IsUnique();
+            entity.HasOne(x => x.Direction)
+                .WithMany(x => x.HistoricalMetrics)
+                .HasForeignKey(x => x.DirectionId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
 
-        File.WriteAllText(filePath, sb.ToString(), Encoding.UTF8);
+        modelBuilder.Entity<ModelSetting>(entity =>
+        {
+            entity.ToTable("model_settings");
+            entity.HasKey(x => x.Id);
+            entity.Property(x => x.MemoryDepthM).HasColumnName("memory_depth_m");
+            entity.Property(x => x.ThresholdK).HasColumnName("threshold_k");
+            entity.Property(x => x.SmoothingAlpha).HasColumnName("smoothing_alpha");
+        });
+
+        modelBuilder.Entity<PredictionResult>(entity =>
+        {
+            entity.ToTable("prediction_results");
+            entity.HasKey(x => x.Id);
+            entity.Property(x => x.SettingId).HasColumnName("setting_id");
+            entity.Property(x => x.DirectionId).HasColumnName("direction_id");
+            entity.Property(x => x.CalculatedAt).HasColumnName("calculated_at");
+            entity.Property(x => x.Mae).HasColumnName("mae");
+            entity.Property(x => x.Rmse).HasColumnName("rmse");
+            entity.Property(x => x.Mape).HasColumnName("mape");
+            entity.Property(x => x.PredictedValuesJson).HasColumnName("predicted_values_json");
+            entity.HasOne(x => x.Direction)
+                .WithMany(x => x.PredictionResults)
+                .HasForeignKey(x => x.DirectionId)
+                .OnDelete(DeleteBehavior.Cascade);
+            entity.HasOne(x => x.Setting)
+                .WithMany(x => x.PredictionResults)
+                .HasForeignKey(x => x.SettingId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+    }
+}
+
+
+===== CaForecast.Data\AcademyTopDbContextFactory.cs =====
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+
+namespace CaForecast.Data;
+
+public sealed class AcademyTopDbContextFactory : IDesignTimeDbContextFactory<AcademyTopDbContext>
+{
+    public AcademyTopDbContext CreateDbContext(string[] args)
+    {
+        var connectionString =
+            Environment.GetEnvironmentVariable("CAFORECAST_CONNECTION")
+            ?? "Data Source=ca_forecast.db";
+
+        var optionsBuilder = new DbContextOptionsBuilder<AcademyTopDbContext>();
+        optionsBuilder.UseSqlite(connectionString);
+        return new AcademyTopDbContext(optionsBuilder.Options);
+    }
+}
+
+
+===== CaForecast.Data\CaForecast.Data.csproj =====
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.4" />
+  </ItemGroup>
+
+</Project>
+
+
+===== CaForecast.Data\Entities\CourseDirection.cs =====
+namespace CaForecast.Data.Entities;
+
+public sealed class CourseDirection
+{
+    public int Id { get; set; }
+
+    public string Name { get; set; } = string.Empty;
+
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    public ICollection<HistoricalMetric> HistoricalMetrics { get; set; } = new List<HistoricalMetric>();
+
+    public ICollection<PredictionResult> PredictionResults { get; set; } = new List<PredictionResult>();
+}
+
+
+===== CaForecast.Data\Entities\HistoricalMetric.cs =====
+namespace CaForecast.Data.Entities;
+
+public sealed class HistoricalMetric
+{
+    public int Id { get; set; }
+
+    public int DirectionId { get; set; }
+
+    public DateOnly MetricDate { get; set; }
+
+    public double MetricValue { get; set; }
+
+    public CourseDirection? Direction { get; set; }
+}
+
+
+===== CaForecast.Data\Entities\ModelSetting.cs =====
+namespace CaForecast.Data.Entities;
+
+public sealed class ModelSetting
+{
+    public int Id { get; set; }
+
+    public int MemoryDepthM { get; set; }
+
+    public double ThresholdK { get; set; }
+
+    public double SmoothingAlpha { get; set; }
+
+    public ICollection<PredictionResult> PredictionResults { get; set; } = new List<PredictionResult>();
+}
+
+
+===== CaForecast.Data\Entities\PredictionResult.cs =====
+namespace CaForecast.Data.Entities;
+
+public sealed class PredictionResult
+{
+    public int Id { get; set; }
+
+    public int SettingId { get; set; }
+
+    public int DirectionId { get; set; }
+
+    public DateTime CalculatedAt { get; set; } = DateTime.UtcNow;
+
+    public double Mae { get; set; }
+
+    public double Rmse { get; set; }
+
+    public double Mape { get; set; }
+
+    public string PredictedValuesJson { get; set; } = "[]";
+
+    public ModelSetting? Setting { get; set; }
+
+    public CourseDirection? Direction { get; set; }
+}
+
+
+===== CaForecast.Data\Models\CsvImportOptions.cs =====
+namespace CaForecast.Data.Models;
+
+public sealed class CsvImportOptions
+{
+    public string? DirectionNameOverride { get; init; }
+
+    public bool ReplaceExistingSeries { get; init; }
+}
+
+
+===== CaForecast.Data\Models\CsvImportResult.cs =====
+namespace CaForecast.Data.Models;
+
+public sealed class CsvImportResult
+{
+    public int DirectionId { get; init; }
+
+    public string DirectionName { get; init; } = string.Empty;
+
+    public int ImportedRows { get; init; }
+
+    public int SkippedRows { get; init; }
+}
+
+
+===== CaForecast.Data\Models\ExperimentLogEntry.cs =====
+namespace CaForecast.Data.Models;
+
+public sealed class ExperimentLogEntry
+{
+    public int DirectionId { get; init; }
+
+    public int MemoryDepthM { get; init; }
+
+    public double ThresholdK { get; init; }
+
+    public double SmoothingAlpha { get; init; }
+
+    public double Mae { get; init; }
+
+    public double Rmse { get; init; }
+
+    public double Mape { get; init; }
+
+    public string PredictedValuesJson { get; init; } = "[]";
+}
+
+
+===== CaForecast.Data\Models\HistoricalMetricRecord.cs =====
+namespace CaForecast.Data.Models;
+
+public sealed class HistoricalMetricRecord
+{
+    public DateOnly MetricDate { get; init; }
+
+    public double MetricValue { get; init; }
+}
+
+
+===== CaForecast.Data\RuntimeDbContextFactory.cs =====
+using Microsoft.EntityFrameworkCore;
+
+namespace CaForecast.Data;
+
+public sealed class RuntimeDbContextFactory(DbContextOptions<AcademyTopDbContext> options)
+    : IDbContextFactory<AcademyTopDbContext>
+{
+    public AcademyTopDbContext CreateDbContext()
+    {
+        return new AcademyTopDbContext(options);
     }
 
-    public void ExportForecast(string filePath, IEnumerable<ForecastPointCsvRow> rows, char delimiter = ';')
+    public Task<AcademyTopDbContext> CreateDbContextAsync(CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrWhiteSpace(filePath))
-        {
-            throw new ArgumentException("Требуется путь к файлу.", nameof(filePath));
-        }
+        return Task.FromResult(new AcademyTopDbContext(options));
+    }
+}
 
-        var sb = new StringBuilder();
-        sb.AppendLine(string.Join(delimiter, "Дата", "Изначальная цена", "Прогнозная цена"));
 
-        foreach (var row in rows)
-        {
-            var dateText = row.Date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? string.Empty;
-            sb.AppendLine(string.Join(
-                delimiter,
-                dateText,
-                row.ActualPrice.ToString(ExportCulture),
-                row.PredictedPrice.ToString(ExportCulture)));
-        }
+===== CaForecast.Data\Services\DirectionQueryService.cs =====
+using CaForecast.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
-        File.WriteAllText(filePath, sb.ToString(), Encoding.UTF8);
+namespace CaForecast.Data.Services;
+
+public sealed class DirectionQueryService(IDbContextFactory<AcademyTopDbContext> dbContextFactory)
+{
+    public async Task<IReadOnlyList<CourseDirection>> GetDirectionsAsync(CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+        return await dbContext.CourseDirections
+            .AsNoTracking()
+            .OrderBy(x => x.Name)
+            .ToListAsync(cancellationToken);
     }
 
-    public void ExportCombined(
+    public async Task<IReadOnlyList<(DateOnly Date, double Value)>> GetSeriesAsync(int directionId, CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+        return await dbContext.HistoricalMetrics
+            .AsNoTracking()
+            .Where(x => x.DirectionId == directionId)
+            .OrderBy(x => x.MetricDate)
+            .Select(x => new ValueTuple<DateOnly, double>(x.MetricDate, x.MetricValue))
+            .ToListAsync(cancellationToken);
+    }
+}
+
+
+===== CaForecast.Data\Services\HistoricalMetricCsvImportService.cs =====
+using System.Globalization;
+using CaForecast.Data.Entities;
+using CaForecast.Data.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace CaForecast.Data.Services;
+
+public sealed class HistoricalMetricCsvImportService(IDbContextFactory<AcademyTopDbContext> dbContextFactory)
+{
+    public async Task<CsvImportResult> ImportAsync(
         string filePath,
-        IEnumerable<MemoryMetricCsvRow> metricRows,
-        IEnumerable<ForecastPointCsvRow> forecastRows,
-        int bestMemory,
-        char delimiter = ';')
+        CsvImportOptions options,
+        CancellationToken cancellationToken = default)
     {
-        if (string.IsNullOrWhiteSpace(filePath))
-        {
-            throw new ArgumentException("Требуется путь к файлу.", nameof(filePath));
-        }
-
-        var sb = new StringBuilder();
-        sb.AppendLine($"ЛучшаяПамять{delimiter}{bestMemory}");
-        sb.AppendLine();
-        sb.AppendLine("Метрики");
-        sb.AppendLine(string.Join(delimiter, "Память", "MAE", "MSE", "RMSE", "MAPE"));
-
-        foreach (var row in metricRows)
-        {
-            sb.AppendLine(string.Join(
-                delimiter,
-                row.Memory.ToString(ExportCulture),
-                row.Mae.ToString(ExportCulture),
-                row.Mse.ToString(ExportCulture),
-                row.Rmse.ToString(ExportCulture),
-                row.Mape.ToString(ExportCulture)));
-        }
-
-        sb.AppendLine();
-        sb.AppendLine("Прогнозная цена");
-        sb.AppendLine(string.Join(delimiter, "Дата", "Изначальная цена", "Прогнозная цена"));
-
-        foreach (var row in forecastRows)
-        {
-            var dateText = row.Date?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? string.Empty;
-            sb.AppendLine(string.Join(
-                delimiter,
-                dateText,
-                row.ActualPrice.ToString(ExportCulture),
-                row.PredictedPrice.ToString(ExportCulture)));
-        }
-
-        File.WriteAllText(filePath, sb.ToString(), Encoding.UTF8);
-    }
-}
-
-================================================================================
-
-Файл CaForecast.Data/CsvImportedData.cs
---------------------------------------------------------------------------------
-namespace CaForecast.Data;
-
-public sealed class CsvImportedData
-{
-    public required IReadOnlyList<double> ClosePrices { get; init; }
-
-    public required IReadOnlyList<DateTime?> Dates { get; init; }
-}
-
-================================================================================
-
-Файл CaForecast.Data/CsvImportService.cs
---------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-
-namespace CaForecast.Data;
-
-public class CsvImportService
-{
-    public CsvImportedData Import(string filePath, CsvSettings? settings = null)
-    {
-        if (string.IsNullOrWhiteSpace(filePath))
-        {
-            throw new ArgumentException("Требуется путь к файлу.", nameof(filePath));
-        }
+        ArgumentException.ThrowIfNullOrWhiteSpace(filePath);
+        ArgumentNullException.ThrowIfNull(options);
 
         if (!File.Exists(filePath))
         {
             throw new FileNotFoundException("CSV-файл не найден.", filePath);
         }
 
-        settings ??= new CsvSettings();
-
-        using var reader = new StreamReader(filePath);
-        var sampledLines = new List<(int Number, string Text)>(10);
-        var lineNumber = 0;
-
-        while (sampledLines.Count < 10)
-        {
-            var line = reader.ReadLine();
-            if (line is null)
-            {
-                break;
-            }
-
-            lineNumber++;
-            if (string.IsNullOrWhiteSpace(line))
-            {
-                continue;
-            }
-
-            sampledLines.Add((lineNumber, line));
-        }
-
-        if (sampledLines.Count == 0)
+        var lines = await File.ReadAllLinesAsync(filePath, cancellationToken);
+        if (lines.Length == 0)
         {
             throw new InvalidOperationException("CSV-файл пуст.");
         }
 
-        var delimiter = settings.Delimiter ?? DetectDelimiter(sampledLines.Select(l => l.Text).ToArray());
-
-        var closeIndex = 0;
-        var dateIndex = -1;
-        var sampledDataStartIndex = 0;
-
-        if (settings.HasHeader)
+        var delimiter = DetectDelimiter(lines[0]);
+        var firstColumns = SplitLine(lines[0], delimiter);
+        var hasHeader = LooksLikeHeader(firstColumns);
+        var directionName = options.DirectionNameOverride?.Trim();
+        if (string.IsNullOrWhiteSpace(directionName))
         {
-            var headerColumns = SplitLine(sampledLines[0].Text, delimiter);
-            var parsed = ParseHeader(headerColumns);
+            directionName = Path.GetFileNameWithoutExtension(filePath)?.Trim();
+        }
 
-            if (parsed.HasExplicitClose)
-            {
-                closeIndex = parsed.CloseIndex;
-                dateIndex = parsed.DateIndex;
-            }
-            else
-            {
-                string[] firstDataColumns;
-                if (sampledLines.Count > 1)
-                {
-                    firstDataColumns = SplitLine(sampledLines[1].Text, delimiter);
-                }
-                else
-                {
-                    firstDataColumns = ReadNextNonEmptyColumns(reader, delimiter, sampledLines, ref lineNumber);
-                }
+        var dataRows = new List<HistoricalMetricRecord>();
+        var skippedRows = 0;
 
-                if (firstDataColumns.Length >= 2 &&
-                    TryParseDouble(GetColumn(firstDataColumns, 1), out _))
-                {
-                    dateIndex = 0;
-                    closeIndex = 1;
-                }
-                else
-                {
-                    dateIndex = -1;
-                    closeIndex = 0;
-                }
-            }
+        int directionIndex;
+        int dateIndex;
+        int valueIndex;
 
-            sampledDataStartIndex = 1;
+        if (hasHeader)
+        {
+            directionIndex = FindHeaderIndex(firstColumns, ["direction", "course_direction", "name", "metric_name"]);
+            dateIndex = FindHeaderIndex(firstColumns, ["metric_date", "date", "period"]);
+            valueIndex = FindHeaderIndex(firstColumns, ["metric_value", "value", "sales", "amount"]);
         }
         else
         {
-            var firstDataCols = SplitLine(sampledLines[0].Text, delimiter);
-            if (firstDataCols.Length > 1)
-            {
-                dateIndex = 0;
-                closeIndex = 1;
-            }
+            directionIndex = -1;
+            dateIndex = 0;
+            valueIndex = 1;
         }
 
-        var prices = new List<double>();
-        var dates = new List<DateTime?>();
-
-        for (var i = sampledDataStartIndex; i < sampledLines.Count; i++)
+        if (dateIndex < 0 || valueIndex < 0)
         {
-            if (IsEndOfDataMarker(sampledLines[i].Text))
-            {
-                break;
-            }
-
-            ParseDataLine(sampledLines[i].Text, sampledLines[i].Number, delimiter, closeIndex, dateIndex, prices, dates);
+            throw new InvalidOperationException("CSV должен содержать столбцы даты и значения метрики.");
         }
 
-        while (true)
+        var startIndex = hasHeader ? 1 : 0;
+        for (var rowIndex = startIndex; rowIndex < lines.Length; rowIndex++)
         {
-            var line = reader.ReadLine();
-            if (line is null)
-            {
-                break;
-            }
+            cancellationToken.ThrowIfCancellationRequested();
 
-            lineNumber++;
-            if (string.IsNullOrWhiteSpace(line))
+            var rawLine = lines[rowIndex];
+            if (string.IsNullOrWhiteSpace(rawLine))
             {
+                skippedRows++;
                 continue;
             }
 
-            if (IsEndOfDataMarker(line))
+            var columns = SplitLine(rawLine, delimiter);
+            if (columns.Length <= Math.Max(directionIndex, Math.Max(dateIndex, valueIndex)))
             {
-                break;
-            }
-
-            ParseDataLine(line, lineNumber, delimiter, closeIndex, dateIndex, prices, dates);
-        }
-
-        if (prices.Count < 2)
-        {
-            throw new InvalidOperationException("Требуется минимум две цены закрытия.");
-        }
-
-        return new CsvImportedData
-        {
-            ClosePrices = prices,
-            Dates = dates
-        };
-    }
-
-    private static void ParseDataLine(
-        string line,
-        int lineNumber,
-        char delimiter,
-        int closeIndex,
-        int dateIndex,
-        ICollection<double> prices,
-        ICollection<DateTime?> dates)
-    {
-        var columns = SplitLine(line, delimiter);
-        if (columns.Length == 0)
-        {
-            return;
-        }
-
-        var closeValue = GetColumn(columns, closeIndex);
-        if (!TryParseDouble(closeValue, out var close))
-        {
-            if (IsIgnorableNonDataLine(line, columns, closeIndex, closeValue))
-            {
-                return;
-            }
-
-            throw new FormatException($"Не удалось разобрать значение Close в строке {lineNumber}: '{closeValue}'.");
-        }
-
-        prices.Add(close);
-        dates.Add(dateIndex >= 0 ? ParseDateSafe(GetColumn(columns, dateIndex)) : null);
-    }
-
-    private static string[] ReadNextNonEmptyColumns(
-        TextReader reader,
-        char delimiter,
-        ICollection<(int Number, string Text)> sampledLines,
-        ref int lineNumber)
-    {
-        while (true)
-        {
-            var line = reader.ReadLine();
-            if (line is null)
-            {
-                return Array.Empty<string>();
-            }
-
-            lineNumber++;
-            if (string.IsNullOrWhiteSpace(line))
-            {
+                skippedRows++;
                 continue;
             }
 
-            if (IsEndOfDataMarker(line))
+            if (string.IsNullOrWhiteSpace(directionName) && directionIndex >= 0)
             {
-                return Array.Empty<string>();
+                directionName = columns[directionIndex].Trim();
             }
 
-            sampledLines.Add((lineNumber, line));
-            return SplitLine(line, delimiter);
-        }
-    }
-
-    private static bool IsEndOfDataMarker(string line)
-    {
-        return line.Trim().StartsWith("history.cursor", StringComparison.OrdinalIgnoreCase);
-    }
-
-    private static (int CloseIndex, int DateIndex, bool HasExplicitClose) ParseHeader(IReadOnlyList<string> headerColumns)
-    {
-        var closeIndex = -1;
-        var dateIndex = -1;
-
-        for (var i = 0; i < headerColumns.Count; i++)
-        {
-            var name = headerColumns[i].Trim();
-            if (name.Equals("Close", StringComparison.OrdinalIgnoreCase))
+            if (!TryParseDate(columns[dateIndex], out var metricDate) ||
+                !TryParseDouble(columns[valueIndex], out var metricValue) ||
+                metricValue <= 0)
             {
-                closeIndex = i;
+                skippedRows++;
+                continue;
             }
-            else if (name.Equals("Date", StringComparison.OrdinalIgnoreCase))
+
+            dataRows.Add(new HistoricalMetricRecord
             {
-                dateIndex = i;
-            }
+                MetricDate = metricDate,
+                MetricValue = metricValue
+            });
         }
 
-        if (closeIndex < 0)
+        if (dataRows.Count == 0)
         {
-            if (headerColumns.Count == 1)
+            throw new InvalidOperationException("В CSV не найдено валидных строк для импорта.");
+        }
+
+        await using var dbContext = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+        var direction = await dbContext.CourseDirections
+            .FirstOrDefaultAsync(x => x.Name == directionName, cancellationToken);
+
+        if (direction is null)
+        {
+            direction = new CourseDirection
             {
-                closeIndex = 0;
-            }
-            else if (headerColumns.Count >= 2)
+                Name = directionName,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            dbContext.CourseDirections.Add(direction);
+            await dbContext.SaveChangesAsync(cancellationToken);
+        }
+
+        if (options.ReplaceExistingSeries)
+        {
+            var existingRows = dbContext.HistoricalMetrics.Where(x => x.DirectionId == direction.Id);
+            dbContext.HistoricalMetrics.RemoveRange(existingRows);
+            await dbContext.SaveChangesAsync(cancellationToken);
+        }
+
+        var importedRows = 0;
+        foreach (var record in dataRows
+                     .GroupBy(x => x.MetricDate)
+                     .Select(group => group.OrderByDescending(x => x.MetricValue).First())
+                     .OrderBy(x => x.MetricDate))
+        {
+            var existing = await dbContext.HistoricalMetrics
+                .FirstOrDefaultAsync(
+                    x => x.DirectionId == direction.Id && x.MetricDate == record.MetricDate,
+                    cancellationToken);
+
+            if (existing is null)
             {
-                closeIndex = 1;
-                dateIndex = 0;
+                dbContext.HistoricalMetrics.Add(new HistoricalMetric
+                {
+                    DirectionId = direction.Id,
+                    MetricDate = record.MetricDate,
+                    MetricValue = record.MetricValue
+                });
             }
             else
             {
-                throw new InvalidOperationException("Заголовок CSV не содержит столбец Close.");
+                existing.MetricValue = record.MetricValue;
             }
+
+            importedRows++;
         }
 
-        return (closeIndex, dateIndex, closeIndex >= 0 && headerColumns.Any(h => h.Trim().Equals("Close", StringComparison.OrdinalIgnoreCase)));
+        await dbContext.SaveChangesAsync(cancellationToken);
+
+        return new CsvImportResult
+        {
+            DirectionId = direction.Id,
+            DirectionName = direction.Name,
+            ImportedRows = importedRows,
+            SkippedRows = skippedRows
+        };
     }
 
-    private static char DetectDelimiter(IReadOnlyList<string> lines)
+    private static char DetectDelimiter(string line)
     {
-        var commaCount = 0;
-        var semicolonCount = 0;
-
-        foreach (var line in lines.Take(10))
-        {
-            commaCount += line.Count(c => c == ',');
-            semicolonCount += line.Count(c => c == ';');
-        }
-
-        return semicolonCount > commaCount ? ';' : ',';
+        return line.Count(x => x == ';') >= line.Count(x => x == ',') ? ';' : ',';
     }
 
     private static string[] SplitLine(string line, char delimiter)
     {
-        return line.Split(delimiter);
+        return line.Split(delimiter).Select(x => x.Trim().Trim('"')).ToArray();
     }
 
-    private static bool IsIgnorableNonDataLine(string rawLine, IReadOnlyList<string> columns, int closeIndex, string closeValue)
+    private static bool LooksLikeHeader(IReadOnlyList<string> columns)
     {
-        var text = rawLine.Trim();
-        if (string.IsNullOrEmpty(text))
+        return columns.Any(column => column.Contains("date", StringComparison.OrdinalIgnoreCase) ||
+                                     column.Contains("direction", StringComparison.OrdinalIgnoreCase) ||
+                                     column.Contains("value", StringComparison.OrdinalIgnoreCase));
+    }
+
+    private static int FindHeaderIndex(IReadOnlyList<string> headers, IReadOnlyList<string> candidates)
+    {
+        for (var index = 0; index < headers.Count; index++)
+        {
+            var normalized = headers[index].Trim().ToLowerInvariant();
+            if (candidates.Contains(normalized))
+            {
+                return index;
+            }
+        }
+
+        return -1;
+    }
+
+    private static bool TryParseDate(string value, out DateOnly date)
+    {
+        if (DateOnly.TryParseExact(value, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
         {
             return true;
         }
 
-        if (text.StartsWith('#'))
+        if (DateOnly.TryParseExact(value, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
         {
             return true;
         }
 
-        if (columns.Count <= closeIndex || string.IsNullOrWhiteSpace(closeValue))
-        {
-            return !text.Any(char.IsDigit);
-        }
-
-        return false;
+        return DateOnly.TryParse(value, CultureInfo.CurrentCulture, DateTimeStyles.None, out date);
     }
 
-    private static string GetColumn(IReadOnlyList<string> columns, int index)
+    private static bool TryParseDouble(string value, out double result)
     {
-        if (index < 0 || index >= columns.Count)
-        {
-            return string.Empty;
-        }
-
-        return columns[index].Trim();
-    }
-
-    private static bool TryParseDouble(string input, out double value)
-    {
-        if (double.TryParse(input, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+        if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out result))
         {
             return true;
         }
 
-        return double.TryParse(input, NumberStyles.Float, CultureInfo.CurrentCulture, out value);
-    }
-
-    private static DateTime? ParseDateSafe(string input)
-    {
-        if (string.IsNullOrWhiteSpace(input))
-        {
-            return null;
-        }
-
-        if (DateTime.TryParse(input, CultureInfo.InvariantCulture, DateTimeStyles.None, out var invariant))
-        {
-            return invariant;
-        }
-
-        if (DateTime.TryParse(input, CultureInfo.CurrentCulture, DateTimeStyles.None, out var current))
-        {
-            return current;
-        }
-
-        return null;
+        return double.TryParse(value, NumberStyles.Float, CultureInfo.CurrentCulture, out result);
     }
 }
 
-================================================================================
 
-Файл CaForecast.Data/CsvSettings.cs
---------------------------------------------------------------------------------
-namespace CaForecast.Data;
+===== CaForecast.Data\Services\PredictionResultService.cs =====
+using CaForecast.Data.Entities;
+using CaForecast.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
-public class CsvSettings
+namespace CaForecast.Data.Services;
+
+public sealed class PredictionResultService(IDbContextFactory<AcademyTopDbContext> dbContextFactory)
 {
-    public char? Delimiter { get; set; }
-
-    public bool HasHeader { get; set; } = true;
-}
-
-================================================================================
-
-Файл CaForecast.Data/ForecastPointCsvRow.cs
---------------------------------------------------------------------------------
-namespace CaForecast.Data;
-
-public sealed class ForecastPointCsvRow
-{
-    public required DateTime? Date { get; init; }
-
-    public required double ActualPrice { get; init; }
-
-    public required double PredictedPrice { get; init; }
-}
-
-================================================================================
-
-Файл CaForecast.Data/MemoryMetricCsvRow.cs
---------------------------------------------------------------------------------
-namespace CaForecast.Data;
-
-public sealed class MemoryMetricCsvRow
-{
-    public required int Memory { get; init; }
-
-    public required double Mae { get; init; }
-
-    public required double Mse { get; init; }
-
-    public required double Rmse { get; init; }
-
-    public required double Mape { get; init; }
-}
-
-================================================================================
-
-Файл CaForecast.Data/MoexIssService.cs
---------------------------------------------------------------------------------
-using System.Globalization;
-using System.Net;
-using System.Net.Http;
-using System.Text.Json;
-
-namespace CaForecast.Data;
-
-public class MoexIssService
-{
-    private const int MaxRangeDays = 365 * 30;
-
-    private static readonly HttpClient HttpClient = new()
+    public async Task SaveAsync(ExperimentLogEntry entry, CancellationToken cancellationToken = default)
     {
-        Timeout = TimeSpan.FromSeconds(20)
-    };
+        ArgumentNullException.ThrowIfNull(entry);
 
-    public CsvImportedData ImportDailyHistory(string secId, DateTime from, DateTime till, string boardId = "TQBR")
-    {
-        if (string.IsNullOrWhiteSpace(secId))
+        await using var dbContext = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+
+        var setting = new ModelSetting
         {
-            throw new ArgumentException("Требуется тикер бумаги.", nameof(secId));
-        }
-
-        if (string.IsNullOrWhiteSpace(boardId))
-        {
-            throw new ArgumentException("Требуется код режима торгов.", nameof(boardId));
-        }
-
-        if (till < from)
-        {
-            throw new ArgumentException("Дата окончания периода должна быть не раньше даты начала.");
-        }
-
-        var rangeDays = (till.Date - from.Date).TotalDays;
-        if (rangeDays > MaxRangeDays)
-        {
-            throw new ArgumentException("Слишком большой диапазон дат. Выберите период не более 30 лет.");
-        }
-
-        var prices = new List<double>();
-        var dates = new List<DateTime?>();
-        var start = 0;
-
-        while (true)
-        {
-            var url = BuildHistoryUrl(secId, boardId, from, till, start);
-
-            HttpResponseMessage response;
-            try
-            {
-                response = HttpClient.GetAsync(url).GetAwaiter().GetResult();
-            }
-            catch (TaskCanceledException ex)
-            {
-                throw new TimeoutException(
-                    "MOEX ISS не ответил вовремя. Попробуйте сузить диапазон дат или повторить позже.",
-                    ex);
-            }
-            catch (HttpRequestException ex)
-            {
-                throw new InvalidOperationException(
-                    "Не удалось подключиться к MOEX ISS. Проверьте подключение к интернету.",
-                    ex);
-            }
-
-            using (response)
-            {
-                if (response.StatusCode is HttpStatusCode.NotFound or HttpStatusCode.BadRequest)
-                {
-                    throw new InvalidOperationException(
-                        $"MOEX ISS не нашел данные для тикера '{secId}' и режима торгов '{boardId}'. Проверьте параметры.");
-                }
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new InvalidOperationException(
-                        $"MOEX ISS вернул ошибку HTTP {(int)response.StatusCode} ({response.StatusCode}).");
-                }
-
-                using var stream = response.Content.ReadAsStream();
-                using var document = JsonDocument.Parse(stream);
-
-                if (!document.RootElement.TryGetProperty("history", out var historyElement))
-                {
-                    throw new InvalidOperationException("Ответ MOEX ISS не содержит секцию history.");
-                }
-
-                var dateIndex = -1;
-                var closeIndex = -1;
-                if (historyElement.TryGetProperty("columns", out var columnsElement))
-                {
-                    var index = 0;
-                    foreach (var column in columnsElement.EnumerateArray())
-                    {
-                        var name = column.GetString() ?? string.Empty;
-                        if (name.Equals("TRADEDATE", StringComparison.OrdinalIgnoreCase))
-                        {
-                            dateIndex = index;
-                        }
-                        else if (name.Equals("CLOSE", StringComparison.OrdinalIgnoreCase))
-                        {
-                            closeIndex = index;
-                        }
-
-                        index++;
-                    }
-                }
-
-                if (dateIndex < 0 || closeIndex < 0)
-                {
-                    throw new InvalidOperationException("В ответе MOEX ISS не найдены поля TRADEDATE/CLOSE.");
-                }
-
-                if (!historyElement.TryGetProperty("data", out var dataElement))
-                {
-                    throw new InvalidOperationException("Ответ MOEX ISS не содержит данные history.data.");
-                }
-
-                var pageRows = 0;
-                foreach (var row in dataElement.EnumerateArray())
-                {
-                    pageRows++;
-                    if (row.ValueKind != JsonValueKind.Array)
-                    {
-                        continue;
-                    }
-
-                    var rowValues = row.EnumerateArray().ToArray();
-                    if (rowValues.Length <= Math.Max(dateIndex, closeIndex))
-                    {
-                        continue;
-                    }
-
-                    var closeValue = rowValues[closeIndex];
-                    var dateValue = rowValues[dateIndex];
-
-                    if (!TryParseDouble(closeValue, out var close))
-                    {
-                        continue;
-                    }
-
-                    if (!TryParseDate(dateValue, out var tradeDate))
-                    {
-                        continue;
-                    }
-
-                    prices.Add(close);
-                    dates.Add(tradeDate);
-                }
-
-                if (pageRows == 0)
-                {
-                    break;
-                }
-
-                start += pageRows;
-            }
-        }
-
-        if (prices.Count < 2)
-        {
-            throw new InvalidOperationException(
-                $"По выбранным параметрам найдено недостаточно данных (меньше двух цен). Проверьте тикер '{secId}', режим торгов '{boardId}' и диапазон дат.");
-        }
-
-        return new CsvImportedData
-        {
-            ClosePrices = prices,
-            Dates = dates
+            MemoryDepthM = entry.MemoryDepthM,
+            ThresholdK = entry.ThresholdK,
+            SmoothingAlpha = entry.SmoothingAlpha
         };
-    }
 
-    private static string BuildHistoryUrl(string secId, string boardId, DateTime from, DateTime till, int start)
-    {
-        return
-            $"https://iss.moex.com/iss/history/engines/stock/markets/shares/boards/{Uri.EscapeDataString(boardId)}/securities/{Uri.EscapeDataString(secId)}.json" +
-            $"?from={from:yyyy-MM-dd}&till={till:yyyy-MM-dd}&start={start}&iss.meta=off";
-    }
+        dbContext.ModelSettings.Add(setting);
+        await dbContext.SaveChangesAsync(cancellationToken);
 
-    private static bool TryParseDate(JsonElement element, out DateTime value)
-    {
-        if (element.ValueKind == JsonValueKind.String)
+        dbContext.PredictionResults.Add(new PredictionResult
         {
-            var raw = element.GetString();
-            if (!string.IsNullOrWhiteSpace(raw))
-            {
-                if (DateTime.TryParseExact(raw, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out value))
-                {
-                    return true;
-                }
+            SettingId = setting.Id,
+            DirectionId = entry.DirectionId,
+            CalculatedAt = DateTime.UtcNow,
+            Mae = entry.Mae,
+            Rmse = entry.Rmse,
+            Mape = entry.Mape,
+            PredictedValuesJson = entry.PredictedValuesJson
+        });
 
-                if (DateTime.TryParse(raw, CultureInfo.InvariantCulture, DateTimeStyles.None, out value))
-                {
-                    return true;
-                }
-            }
-        }
-
-        value = default;
-        return false;
-    }
-
-    private static bool TryParseDouble(JsonElement element, out double value)
-    {
-        if (element.ValueKind == JsonValueKind.Number && element.TryGetDouble(out value))
-        {
-            return true;
-        }
-
-        if (element.ValueKind == JsonValueKind.String)
-        {
-            var raw = element.GetString();
-            if (!string.IsNullOrWhiteSpace(raw))
-            {
-                if (double.TryParse(raw, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
-                {
-                    return true;
-                }
-
-                if (double.TryParse(raw, NumberStyles.Float, CultureInfo.CurrentCulture, out value))
-                {
-                    return true;
-                }
-            }
-        }
-
-        value = default;
-        return false;
+        await dbContext.SaveChangesAsync(cancellationToken);
     }
 }
 
-================================================================================
 
-Файл CaForecast.WpfApp/App.xaml
---------------------------------------------------------------------------------
+===== CaForecast.Data\Services\StoredSeriesManagementService.cs =====
+using Microsoft.EntityFrameworkCore;
+
+namespace CaForecast.Data.Services;
+
+public sealed class StoredSeriesManagementService(IDbContextFactory<AcademyTopDbContext> dbContextFactory)
+{
+    public async Task DeleteDirectionAsync(int directionId, CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+
+        var direction = await dbContext.CourseDirections
+            .FirstOrDefaultAsync(x => x.Id == directionId, cancellationToken);
+
+        if (direction is null)
+        {
+            return;
+        }
+
+        dbContext.CourseDirections.Remove(direction);
+        await dbContext.SaveChangesAsync(cancellationToken);
+        await RemoveOrphanedModelSettingsAsync(dbContext, cancellationToken);
+    }
+
+    public async Task DeleteAllDirectionsAsync(CancellationToken cancellationToken = default)
+    {
+        await using var dbContext = await dbContextFactory.CreateDbContextAsync(cancellationToken);
+
+        var directions = await dbContext.CourseDirections.ToListAsync(cancellationToken);
+        if (directions.Count == 0)
+        {
+            return;
+        }
+
+        dbContext.CourseDirections.RemoveRange(directions);
+        await dbContext.SaveChangesAsync(cancellationToken);
+        await RemoveOrphanedModelSettingsAsync(dbContext, cancellationToken);
+    }
+
+    private static async Task RemoveOrphanedModelSettingsAsync(
+        AcademyTopDbContext dbContext,
+        CancellationToken cancellationToken)
+    {
+        var orphanedSettings = await dbContext.ModelSettings
+            .Where(x => !x.PredictionResults.Any())
+            .ToListAsync(cancellationToken);
+
+        if (orphanedSettings.Count == 0)
+        {
+            return;
+        }
+
+        dbContext.ModelSettings.RemoveRange(orphanedSettings);
+        await dbContext.SaveChangesAsync(cancellationToken);
+    }
+}
+
+
+===== CaForecast.WpfApp\App.xaml =====
 <Application x:Class="CaForecast.WpfApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:CaForecast.WpfApp"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:CaForecast.WpfApp">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>
 
-================================================================================
 
-Файл CaForecast.WpfApp/App.xaml.cs
---------------------------------------------------------------------------------
-using System.Configuration;
-using System.Data;
+===== CaForecast.WpfApp\App.xaml.cs =====
+using System.IO;
 using System.Windows;
+using CaForecast.Data;
+using CaForecast.Data.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace CaForecast.WpfApp;
 
-/// <summary>
-/// Interaction logic for App.xaml
-/// </summary>
 public partial class App : Application
 {
+    protected override async void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
+
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
+            .Build();
+
+        var connectionString =
+            configuration.GetConnectionString("AcademyTop")
+            ?? $"Data Source={Path.Combine(AppContext.BaseDirectory, "ca_forecast.db")}";
+
+        var optionsBuilder = new DbContextOptionsBuilder<AcademyTopDbContext>();
+        optionsBuilder.UseSqlite(connectionString);
+        var dbContextFactory = new RuntimeDbContextFactory(optionsBuilder.Options);
+
+        await using (var dbContext = await dbContextFactory.CreateDbContextAsync())
+        {
+            await dbContext.Database.EnsureCreatedAsync();
+        }
+
+        var viewModel = new MainViewModel(
+            new HistoricalMetricCsvImportService(dbContextFactory),
+            new DirectionQueryService(dbContextFactory),
+            new PredictionResultService(dbContextFactory),
+            new StoredSeriesManagementService(dbContextFactory));
+
+        await viewModel.InitializeAsync();
+
+        var mainWindow = new MainWindow(viewModel);
+        MainWindow = mainWindow;
+        mainWindow.Show();
+    }
 }
 
-================================================================================
 
-Файл CaForecast.WpfApp/AssemblyInfo.cs
---------------------------------------------------------------------------------
+===== CaForecast.WpfApp\appsettings.json =====
+{
+  "ConnectionStrings": {
+    "AcademyTop": "Data Source=ca_forecast.db"
+  }
+}
+
+
+===== CaForecast.WpfApp\AssemblyInfo.cs =====
 using System.Windows;
 
 [assembly:ThemeInfo(
-    ResourceDictionaryLocation.None,            //where theme specific resource dictionaries are located
-                                                //(used if a resource is not found in the page,
-                                                // or application resource dictionaries)
-    ResourceDictionaryLocation.SourceAssembly   //where the generic resource dictionary is located
-                                                //(used if a resource is not found in the page,
-                                                // app, or any theme specific resource dictionaries)
+    ResourceDictionaryLocation.None,            
+                                                
+                                                
+    ResourceDictionaryLocation.SourceAssembly   
+                                                
+                                                
 )]
 
-================================================================================
 
-Файл CaForecast.WpfApp/BestMemoryErrorRow.cs
---------------------------------------------------------------------------------
+===== CaForecast.WpfApp\AsyncRelayCommand.cs =====
+using System.Windows.Input;
+
 namespace CaForecast.WpfApp;
 
-public class BestMemoryErrorRow
+public sealed class AsyncRelayCommand : ICommand
 {
-    public int Memory { get; init; }
+    private readonly Func<Task> _execute;
+    private readonly Func<bool>? _canExecute;
 
-    public double MaePercent { get; init; }
+    public AsyncRelayCommand(Func<Task> execute, Func<bool>? canExecute = null)
+    {
+        _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+        _canExecute = canExecute;
+    }
 
-    public double MsePercent { get; init; }
+    public event EventHandler? CanExecuteChanged;
 
-    public double RmsePercent { get; init; }
+    public bool CanExecute(object? parameter)
+    {
+        return _canExecute?.Invoke() ?? true;
+    }
 
-    public double MapePercent { get; init; }
+    public async void Execute(object? parameter)
+    {
+        await _execute();
+    }
+
+    public void RaiseCanExecuteChanged()
+    {
+        CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+    }
 }
 
-================================================================================
 
-Файл CaForecast.WpfApp/MainViewModel.cs
---------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
+===== CaForecast.WpfApp\CaForecast.WpfApp.csproj =====
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\CaForecast.Core\CaForecast.Core.csproj" />
+    <ProjectReference Include="..\CaForecast.Data\CaForecast.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="OxyPlot.Wpf" Version="2.2.0" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
+
+
+===== CaForecast.WpfApp\MainViewModel.cs =====
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
+using System.IO;
+using System.Text;
+using System.Text.Json;
+using System.Windows;
 using CaForecast.Core;
-using CaForecast.Data;
+using CaForecast.Data.Models;
+using CaForecast.Data.Services;
+using CaForecast.WpfApp.ViewModels;
 using Microsoft.Win32;
 using OxyPlot;
 using OxyPlot.Axes;
-using OxyPlot.Legends;
 using OxyPlot.Series;
 
 namespace CaForecast.WpfApp;
 
-public class MainViewModel : INotifyPropertyChanged
+public sealed class MainViewModel : ViewModelBase
 {
-    private readonly CsvImportService _csvImportService = new();
-    private readonly MoexIssService _moexIssService = new();
-    private readonly CsvExportService _csvExportService = new();
-    private readonly ReturnCalculator _returnCalculator = new();
-    private readonly ThreeColorEncoder _encoder = new();
-    private readonly CaRuleTrainer _trainer = new();
-    private readonly CaForecaster _forecaster = new();
-    private readonly MetricsService _metricsService = new();
+    private readonly HistoricalMetricCsvImportService _csvImportService;
+    private readonly DirectionQueryService _directionQueryService;
+    private readonly PredictionResultService _predictionResultService;
+    private readonly StoredSeriesManagementService _storedSeriesManagementService;
+    private readonly SalesForecastService _forecastService = new();
 
-    private CsvImportedData? _sourceData;
-    private CsvImportedData? _loadedData;
-    private ForecastResult? _bestResult;
-    private List<DateTime?> _bestDates = new();
-
-    private string _selectedFilePath = "Данные не загружены";
-    private bool _isApiInputsVisible;
-    private string _secIdText = "SBER";
-    private string _boardIdText = "TQBR";
-    private string _fromDateText = DateTime.Today.AddYears(-1).ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-    private string _tillDateText = DateTime.Today.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-    private string _trainPercentText = "70";
-    private string _kText = "0.002";
-    private string _alphaText = "1.0";
-    private string _maxMemoryMText = "8";
-    private string _maxPlotPointsText = "3000";
-    private string _statusMessage = "Загрузите CSV или MOEX ISS.";
-    private PlotModel _plotModel = BuildEmptyPlotModel();
-    private bool _isInternalUpdate;
+    private readonly SemaphoreSlim _calculationGate = new(1, 1);
+    private CancellationTokenSource? _recalculationCts;
+    private bool _suppressAutoRefresh;
     private bool _isBusy;
-    private readonly CancellationTokenSource _shutdownCts = new();
+    private string _selectedFilePath = "Файл не выбран";
+    private string _statusMessage = "Загрузите CSV с историей продаж, лидов или договоров.";
+    private DirectionItemViewModel? _selectedDirection;
+    private string _directionNameOverride = string.Empty;
+    private int _memoryDepthM = 4;
+    private double _thresholdK = 0.015;
+    private double _smoothingAlpha = 1.0;
+    private double _trainRatioPercent = 80;
+    private int _maxMemoryDepthForSearch = 12;
+    private ForecastScenarioResult? _lastScenario;
+    private PlotModel _plotModel = BuildEmptyPlotModel("Полный ряд");
+    private PlotModel _forecastFocusPlotModel = BuildEmptyPlotModel("Фокус на прогнозе");
+    private string _selectedPlotMode = "Полный ряд";
+    private string _maeText = "-";
+    private string _mseText = "-";
+    private string _rmseText = "-";
+    private string _mapeText = "-";
+    private string _fallbackText = "-";
+    private DateTime? _periodFrom;
+    private DateTime? _periodTo;
+    private DateTime? _availablePeriodFrom;
+    private DateTime? _availablePeriodTo;
 
-    public MainViewModel()
+    public MainViewModel(
+        HistoricalMetricCsvImportService csvImportService,
+        DirectionQueryService directionQueryService,
+        PredictionResultService predictionResultService,
+        StoredSeriesManagementService storedSeriesManagementService)
     {
-        LoadCsvCommand = new RelayCommand(LoadCsv, () => !_isBusy);
-        ShowMoexInputsCommand = new RelayCommand(() => IsApiInputsVisible = true);
-        HideMoexInputsCommand = new RelayCommand(() => IsApiInputsVisible = false);
-        LoadMoexCommand = new RelayCommand(() => _ = LoadMoexAsync(), () => !_isBusy);
-        RunCommand = new RelayCommand(() => _ = RunAsync(showErrors: true), () => _loadedData is not null && !_isBusy);
-        ExportResultsCommand = new RelayCommand(ExportResults, () => _bestResult is not null && !_isBusy);
+        _csvImportService = csvImportService;
+        _directionQueryService = directionQueryService;
+        _predictionResultService = predictionResultService;
+        _storedSeriesManagementService = storedSeriesManagementService;
+
+        ImportCsvCommand = new AsyncRelayCommand(ImportCsvAsync, () => !IsBusy);
+        FindBestMemoryCommand = new AsyncRelayCommand(FindBestMemoryAsync, () => !IsBusy && SelectedDirection is not null);
+        DeleteSelectedDirectionCommand = new AsyncRelayCommand(DeleteSelectedDirectionAsync, () => !IsBusy && SelectedDirection is not null);
+        DeleteAllDirectionsCommand = new AsyncRelayCommand(DeleteAllDirectionsAsync, () => !IsBusy && Directions.Count > 0);
+        ExportForecastCommand = new RelayCommand(ExportForecast, () => _lastScenario is not null && !IsBusy);
     }
 
-    public event PropertyChangedEventHandler? PropertyChanged;
+    public AsyncRelayCommand ImportCsvCommand { get; }
 
-    public RelayCommand LoadCsvCommand { get; }
+    public AsyncRelayCommand FindBestMemoryCommand { get; }
 
-    public RelayCommand ShowMoexInputsCommand { get; }
+    public AsyncRelayCommand DeleteSelectedDirectionCommand { get; }
 
-    public RelayCommand HideMoexInputsCommand { get; }
+    public AsyncRelayCommand DeleteAllDirectionsCommand { get; }
 
-    public RelayCommand LoadMoexCommand { get; }
+    public RelayCommand ExportForecastCommand { get; }
 
-    public RelayCommand RunCommand { get; }
+    public ObservableCollection<DirectionItemViewModel> Directions { get; } = [];
 
-    public RelayCommand ExportResultsCommand { get; }
+    public ObservableCollection<MemoryCandidateRowViewModel> MemoryCandidates { get; } = [];
 
-    public ObservableCollection<MemoryErrorRow> ErrorRows { get; } = new();
+    public ObservableCollection<ForecastPointRowViewModel> ForecastRows { get; } = [];
 
-    public ObservableCollection<BestMemoryErrorRow> BestRows { get; } = new();
+    public IReadOnlyList<string> PlotModes { get; } = ["Полный ряд", "Фокус на прогнозе"];
 
     public string SelectedFilePath
     {
         get => _selectedFilePath;
-        set => SetField(ref _selectedFilePath, value);
+        set => SetProperty(ref _selectedFilePath, value);
     }
 
-    public bool IsApiInputsVisible
+    public string DirectionNameOverride
     {
-        get => _isApiInputsVisible;
-        set => SetField(ref _isApiInputsVisible, value);
+        get => _directionNameOverride;
+        set => SetProperty(ref _directionNameOverride, value);
     }
 
-    public string SecIdText
+    public DirectionItemViewModel? SelectedDirection
     {
-        get => _secIdText;
-        set => SetField(ref _secIdText, value);
-    }
-
-    public string BoardIdText
-    {
-        get => _boardIdText;
-        set => SetField(ref _boardIdText, value);
-    }
-
-    public string FromDateText
-    {
-        get => _fromDateText;
+        get => _selectedDirection;
         set
         {
-            if (SetField(ref _fromDateText, value))
+            if (SetProperty(ref _selectedDirection, value))
             {
-                AutoRefresh();
+                RaiseCommandStates();
+                _ = LoadSelectedDirectionRangeAsync();
             }
         }
     }
 
-    public string TillDateText
+    public int MemoryDepthM
     {
-        get => _tillDateText;
+        get => _memoryDepthM;
         set
         {
-            if (SetField(ref _tillDateText, value))
+            if (SetProperty(ref _memoryDepthM, value))
             {
-                AutoRefresh();
+                ScheduleRecalculation();
             }
         }
     }
 
-    public string TrainPercentText
+    public double ThresholdK
     {
-        get => _trainPercentText;
+        get => _thresholdK;
         set
         {
-            if (SetField(ref _trainPercentText, value))
+            if (SetProperty(ref _thresholdK, value))
             {
-                AutoRefresh();
+                ScheduleRecalculation();
             }
         }
     }
 
-    public string KText
+    public double SmoothingAlpha
     {
-        get => _kText;
+        get => _smoothingAlpha;
         set
         {
-            if (SetField(ref _kText, value))
+            if (SetProperty(ref _smoothingAlpha, value))
             {
-                AutoRefresh();
+                ScheduleRecalculation();
             }
         }
     }
 
-    public string AlphaText
+    public double TrainRatioPercent
     {
-        get => _alphaText;
+        get => _trainRatioPercent;
         set
         {
-            if (SetField(ref _alphaText, value))
+            if (SetProperty(ref _trainRatioPercent, value))
             {
-                AutoRefresh();
+                ScheduleRecalculation();
             }
         }
     }
 
-    public string MaxMemoryMText
+    public int MaxMemoryDepthForSearch
     {
-        get => _maxMemoryMText;
+        get => _maxMemoryDepthForSearch;
+        set => SetProperty(ref _maxMemoryDepthForSearch, value);
+    }
+
+    public DateTime? AvailablePeriodFrom
+    {
+        get => _availablePeriodFrom;
+        private set => SetProperty(ref _availablePeriodFrom, value);
+    }
+
+    public DateTime? AvailablePeriodTo
+    {
+        get => _availablePeriodTo;
+        private set => SetProperty(ref _availablePeriodTo, value);
+    }
+
+    public DateTime? PeriodFrom
+    {
+        get => _periodFrom;
         set
         {
-            if (SetField(ref _maxMemoryMText, value))
+            if (SetProperty(ref _periodFrom, value))
             {
-                AutoRefresh();
+                ScheduleRecalculation();
             }
         }
     }
 
-    public string MaxPlotPointsText
+    public DateTime? PeriodTo
     {
-        get => _maxPlotPointsText;
+        get => _periodTo;
         set
         {
-            if (SetField(ref _maxPlotPointsText, value))
+            if (SetProperty(ref _periodTo, value))
             {
-                AutoRefresh();
+                ScheduleRecalculation();
+            }
+        }
+    }
+
+    public string SelectedPlotMode
+    {
+        get => _selectedPlotMode;
+        set
+        {
+            if (SetProperty(ref _selectedPlotMode, value))
+            {
+                RaisePropertyChanged(nameof(CurrentPlotModel));
             }
         }
     }
@@ -1516,29 +1951,97 @@ public class MainViewModel : INotifyPropertyChanged
     public string StatusMessage
     {
         get => _statusMessage;
-        set => SetField(ref _statusMessage, value);
+        set => SetProperty(ref _statusMessage, value);
     }
 
     public bool IsBusy
     {
         get => _isBusy;
-        private set => SetField(ref _isBusy, value);
+        private set
+        {
+            if (SetProperty(ref _isBusy, value))
+            {
+                RaiseCommandStates();
+            }
+        }
     }
 
     public PlotModel PlotModel
     {
         get => _plotModel;
-        set => SetField(ref _plotModel, value);
+        private set
+        {
+            if (SetProperty(ref _plotModel, value))
+            {
+                RaisePropertyChanged(nameof(CurrentPlotModel));
+            }
+        }
     }
 
-    public IPlotController LockedPlotController { get; } = BuildLockedPlotController();
-
-    public void CancelBackgroundOperations()
+    public PlotModel ForecastFocusPlotModel
     {
-        _shutdownCts.Cancel();
+        get => _forecastFocusPlotModel;
+        private set
+        {
+            if (SetProperty(ref _forecastFocusPlotModel, value))
+            {
+                RaisePropertyChanged(nameof(CurrentPlotModel));
+            }
+        }
     }
 
-    private void LoadCsv()
+    public PlotModel CurrentPlotModel => SelectedPlotMode == "Фокус на прогнозе"
+        ? ForecastFocusPlotModel
+        : PlotModel;
+
+    public string MaeText
+    {
+        get => _maeText;
+        private set => SetProperty(ref _maeText, value);
+    }
+
+    public string MseText
+    {
+        get => _mseText;
+        private set => SetProperty(ref _mseText, value);
+    }
+
+    public string RmseText
+    {
+        get => _rmseText;
+        private set => SetProperty(ref _rmseText, value);
+    }
+
+    public string MapeText
+    {
+        get => _mapeText;
+        private set => SetProperty(ref _mapeText, value);
+    }
+
+    public string FallbackText
+    {
+        get => _fallbackText;
+        private set => SetProperty(ref _fallbackText, value);
+    }
+
+    public async Task InitializeAsync(CancellationToken cancellationToken = default)
+    {
+        await LoadDirectionsAsync(cancellationToken, selectFirstIfMissing: true);
+        if (Directions.Count == 0)
+        {
+            ResetViewState();
+            return;
+        }
+
+        StatusMessage = $"Загружено сохраненных наборов: {Directions.Count}.";
+    }
+
+    public void CancelPendingWork()
+    {
+        _recalculationCts?.Cancel();
+    }
+
+    private async Task ImportCsvAsync()
     {
         var dialog = new OpenFileDialog
         {
@@ -1552,431 +2055,387 @@ public class MainViewModel : INotifyPropertyChanged
 
         try
         {
-            _sourceData = _csvImportService.Import(dialog.FileName, new CsvSettings());
+            IsBusy = true;
+            StatusMessage = "Импорт CSV в SQLite...";
+
+            var importResult = await _csvImportService.ImportAsync(
+                dialog.FileName,
+                new CsvImportOptions
+                {
+                    DirectionNameOverride = string.IsNullOrWhiteSpace(DirectionNameOverride) ? null : DirectionNameOverride,
+                    ReplaceExistingSeries = false
+                });
+
             SelectedFilePath = dialog.FileName;
-            IsApiInputsVisible = false;
-            InitializeDateRangeFromData(_sourceData);
-            if (!TryApplyDateFilter(showErrors: true))
-            {
-                return;
-            }
-
-            _ = RunAsync(showErrors: true);
+            await LoadDirectionsAsync(CancellationToken.None, selectFirstIfMissing: false);
+            SelectedDirection = Directions.FirstOrDefault(x => x.Id == importResult.DirectionId);
+            StatusMessage = $"Импорт завершен: {importResult.DirectionName}. Загружено {importResult.ImportedRows}, пропущено {importResult.SkippedRows}.";
         }
-        catch (Exception ex)
+        catch (Exception exception)
         {
-            StatusMessage = $"Ошибка загрузки CSV: {ex.Message}";
+            StatusMessage = $"Ошибка импорта CSV: {exception.Message}";
+        }
+        finally
+        {
+            IsBusy = false;
         }
     }
 
-    private async Task LoadMoexAsync()
+    private async Task LoadDirectionsAsync(CancellationToken cancellationToken, bool selectFirstIfMissing)
     {
-        if (_isBusy)
+        var directions = await _directionQueryService.GetDirectionsAsync(cancellationToken);
+
+        _suppressAutoRefresh = true;
+        try
+        {
+            Directions.Clear();
+            foreach (var direction in directions)
+            {
+                Directions.Add(new DirectionItemViewModel
+                {
+                    Id = direction.Id,
+                    Name = direction.Name
+                });
+            }
+
+            if (SelectedDirection is null && Directions.Count > 0 && selectFirstIfMissing)
+            {
+                SelectedDirection = Directions[0];
+            }
+            else if (SelectedDirection is not null)
+            {
+                SelectedDirection = Directions.FirstOrDefault(x => x.Id == SelectedDirection.Id);
+
+                if (SelectedDirection is null)
+                {
+                    ResetViewState();
+                }
+            }
+        }
+        finally
+        {
+            _suppressAutoRefresh = false;
+            RaiseCommandStates();
+        }
+    }
+
+    private async Task DeleteSelectedDirectionAsync()
+    {
+        if (SelectedDirection is null)
         {
             return;
         }
 
-        SetBusy(true);
+        var direction = SelectedDirection;
+        var confirmation = MessageBox.Show(
+            $"Удалить сохраненный набор «{direction.Name}» вместе с историей и сохраненными результатами прогноза?",
+            "Удаление набора",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+
+        if (confirmation != MessageBoxResult.Yes)
+        {
+            return;
+        }
+
         try
         {
-            if (!TryParseDate(FromDateText, out var fromDate))
-            {
-                throw new InvalidOperationException("Дата \"С\" должна быть в формате yyyy-MM-dd.");
-            }
+            IsBusy = true;
+            StatusMessage = $"Удаление набора «{direction.Name}»...";
 
-            if (!TryParseDate(TillDateText, out var tillDate))
-            {
-                throw new InvalidOperationException("Дата \"По\" должна быть в формате yyyy-MM-dd.");
-            }
+            CancelPendingWork();
+            await _storedSeriesManagementService.DeleteDirectionAsync(direction.Id, CancellationToken.None);
 
-            var secId = (SecIdText ?? string.Empty).Trim().ToUpperInvariant();
-            var boardId = (BoardIdText ?? string.Empty).Trim().ToUpperInvariant();
-            if (string.IsNullOrWhiteSpace(secId))
-            {
-                throw new InvalidOperationException("Укажите тикер бумаги (например, SBER).");
-            }
+            ResetViewState();
+            await LoadDirectionsAsync(CancellationToken.None, selectFirstIfMissing: true);
 
-            if (string.IsNullOrWhiteSpace(boardId))
-            {
-                throw new InvalidOperationException("Укажите режим торгов (например, TQBR).");
-            }
+            StatusMessage = Directions.Count == 0
+                ? "Сохраненный набор удален. База сохраненных рядов пуста."
+                : $"Сохраненный набор «{direction.Name}» удален. Осталось наборов: {Directions.Count}.";
+        }
+        catch (Exception exception)
+        {
+            StatusMessage = $"Ошибка удаления набора: {exception.Message}";
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
 
-            StatusMessage = "Загрузка MOEX ISS...";
-            var importedData = await Task.Run(
-                () => _moexIssService.ImportDailyHistory(secId, fromDate, tillDate, boardId),
-                _shutdownCts.Token);
+    private async Task DeleteAllDirectionsAsync()
+    {
+        if (Directions.Count == 0)
+        {
+            return;
+        }
 
-            if (_shutdownCts.IsCancellationRequested)
+        var confirmation = MessageBox.Show(
+            "Удалить все сохраненные наборы, историю метрик и сохраненные результаты прогнозов?",
+            "Полная очистка",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+
+        if (confirmation != MessageBoxResult.Yes)
+        {
+            return;
+        }
+
+        try
+        {
+            IsBusy = true;
+            StatusMessage = "Удаление всех сохраненных наборов...";
+
+            CancelPendingWork();
+            await _storedSeriesManagementService.DeleteAllDirectionsAsync(CancellationToken.None);
+
+            ResetViewState();
+            await LoadDirectionsAsync(CancellationToken.None, selectFirstIfMissing: false);
+            StatusMessage = "Все сохраненные наборы удалены.";
+        }
+        catch (Exception exception)
+        {
+            StatusMessage = $"Ошибка полной очистки: {exception.Message}";
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    private async Task LoadSelectedDirectionRangeAsync()
+    {
+        if (SelectedDirection is null)
+        {
+            ResetViewState();
+            return;
+        }
+
+        try
+        {
+            _suppressAutoRefresh = true;
+            var series = await _directionQueryService.GetSeriesAsync(SelectedDirection.Id, CancellationToken.None);
+            if (series.Count == 0)
             {
+                AvailablePeriodFrom = null;
+                AvailablePeriodTo = null;
+                PeriodFrom = null;
+                PeriodTo = null;
                 return;
             }
 
-            _sourceData = importedData;
-            SelectedFilePath = $"MOEX ISS: {boardId}/{secId}";
-            IsApiInputsVisible = false;
-            if (!TryApplyDateFilter(showErrors: true))
+            var minDate = series[0].Date.ToDateTime(TimeOnly.MinValue);
+            var maxDate = series[^1].Date.ToDateTime(TimeOnly.MinValue);
+
+            AvailablePeriodFrom = minDate;
+            AvailablePeriodTo = maxDate;
+
+            if (PeriodFrom is null || PeriodFrom < minDate || PeriodFrom > maxDate)
             {
-                return;
+                PeriodFrom = minDate;
             }
 
-            await RunAsync(showErrors: true, manageBusy: false);
+            if (PeriodTo is null || PeriodTo < minDate || PeriodTo > maxDate)
+            {
+                PeriodTo = maxDate;
+            }
+
+            if (PeriodFrom > PeriodTo)
+            {
+                PeriodFrom = minDate;
+                PeriodTo = maxDate;
+            }
+        }
+        catch (Exception exception)
+        {
+            StatusMessage = $"Ошибка чтения диапазона дат: {exception.Message}";
+        }
+        finally
+        {
+            _suppressAutoRefresh = false;
+        }
+
+        ScheduleRecalculation();
+    }
+
+    private void ScheduleRecalculation()
+    {
+        if (_suppressAutoRefresh || SelectedDirection is null)
+        {
+            return;
+        }
+
+        _recalculationCts?.Cancel();
+        _recalculationCts?.Dispose();
+        _recalculationCts = new CancellationTokenSource();
+        var token = _recalculationCts.Token;
+
+        _ = ScheduleRecalculationAsync(token);
+    }
+
+    private async Task ScheduleRecalculationAsync(CancellationToken cancellationToken)
+    {
+        try
+        {
+            await Task.Delay(350, cancellationToken);
+            await RecalculateAsync(cancellationToken);
         }
         catch (OperationCanceledException)
         {
-            StatusMessage = "Операция отменена.";
-        }
-        catch (Exception ex)
-        {
-            StatusMessage = $"Ошибка загрузки MOEX ISS: {ex.Message}";
-        }
-        finally
-        {
-            SetBusy(false);
         }
     }
 
-    private async Task RunAsync(bool showErrors, bool manageBusy = true)
+    private async Task RecalculateAsync(CancellationToken cancellationToken)
     {
-        if (_isBusy && manageBusy)
+        if (SelectedDirection is null)
         {
             return;
         }
 
-        if (manageBusy)
-        {
-            SetBusy(true);
-        }
-
-        if (!TryApplyDateFilter(showErrors: true))
-        {
-            if (manageBusy)
-            {
-                SetBusy(false);
-            }
-
-            return;
-        }
-
-        if (_loadedData is null)
-        {
-            if (showErrors)
-            {
-                StatusMessage = "Сначала загрузите данные.";
-            }
-
-            if (manageBusy)
-            {
-                SetBusy(false);
-            }
-
-            return;
-        }
-
+        await _calculationGate.WaitAsync(cancellationToken);
         try
         {
-            if (!TryParseDouble(TrainPercentText, out var trainPercent) || trainPercent <= 0 || trainPercent >= 100)
+            IsBusy = true;
+            StatusMessage = "Пересчет модели...";
+
+            var series = await _directionQueryService.GetSeriesAsync(SelectedDirection.Id, cancellationToken);
+            var filteredSeries = series;
+            if (filteredSeries.Count < 6)
             {
-                throw new InvalidOperationException("Параметр \"Доля выборки, %\" должен быть в диапазоне (0, 100).");
+                throw new InvalidOperationException("На выбранном временном промежутке недостаточно исторических данных.");
             }
 
-            if (!TryParseDouble(KText, out var k) || k < 0)
+            var maxAllowedMemoryDepth = GetMaxAllowedMemoryDepth(filteredSeries.Count);
+            if (MemoryDepthM > maxAllowedMemoryDepth)
             {
-                throw new InvalidOperationException("k должен быть неотрицательным.");
-            }
-
-            if (!TryParseDouble(AlphaText, out var alpha) || alpha < 0)
-            {
-                throw new InvalidOperationException("alpha должен быть неотрицательным.");
-            }
-
-            if (!int.TryParse(MaxMemoryMText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var maxMemoryM) ||
-                maxMemoryM < 1)
-            {
-                throw new InvalidOperationException("MaxMemoryM должен быть целым числом >= 1.");
-            }
-
-            if (!int.TryParse(MaxPlotPointsText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var maxPlotPoints) ||
-                maxPlotPoints < 100)
-            {
-                throw new InvalidOperationException("MaxPlotPoints должен быть целым числом >= 100.");
-            }
-
-            var loadedData = _loadedData;
-            var computed = await Task.Run(
-                () => ComputeForecast(loadedData, trainPercent, k, alpha, maxMemoryM, maxPlotPoints, _shutdownCts.Token),
-                _shutdownCts.Token);
-
-            if (_shutdownCts.IsCancellationRequested)
-            {
+                StatusMessage = $"Для выбранного периода глубина памяти m должна быть не больше {maxAllowedMemoryDepth}. Уменьшите m или расширьте диапазон дат.";
                 return;
             }
 
-            _bestResult = computed.BestResult;
-            ErrorRows.Clear();
-            foreach (var row in computed.ErrorRows)
+            var values = filteredSeries.Select(x => x.Value).ToArray();
+            var periods = filteredSeries.Select(x => (DateOnly?)x.Date).ToArray();
+            var parameters = new ForecastingParameters
             {
-                ErrorRows.Add(row);
-            }
+                MemoryDepthM = MemoryDepthM,
+                ThresholdK = ThresholdK,
+                SmoothingAlpha = SmoothingAlpha,
+                TrainRatio = TrainRatioPercent / 100.0
+            };
 
-            BestRows.Clear();
-            BestRows.Add(computed.BestRow);
-            _bestDates = computed.BestDates;
-            PlotModel = computed.PlotModel;
+            var scenario = await Task.Run(() => _forecastService.BuildForecast(values, periods, parameters, cancellationToken), cancellationToken);
+            _lastScenario = scenario;
 
-            StatusMessage =
-                $"Расчет обновлен. Лучшее m = {computed.BestResult.Memory}, MAE = {FormatPercent(computed.BestMaePercent)}, MSE = {FormatPercent(computed.BestMsePercent)}, RMSE = {FormatPercent(computed.BestRmsePercent)}, MAPE = {computed.BestResult.MapePercent:F2}%.";
-            ExportResultsCommand.RaiseCanExecuteChanged();
+            UpdateMetrics(scenario);
+            UpdateForecastRows(scenario);
+            PlotModel = BuildFullPlotModel(SelectedDirection.Name, periods, values, scenario);
+            ForecastFocusPlotModel = BuildForecastFocusPlotModel(SelectedDirection.Name, periods, values, scenario);
+
+            await _predictionResultService.SaveAsync(
+                new ExperimentLogEntry
+                {
+                    DirectionId = SelectedDirection.Id,
+                    MemoryDepthM = scenario.Parameters.MemoryDepthM,
+                    ThresholdK = scenario.Parameters.ThresholdK,
+                    SmoothingAlpha = scenario.Parameters.SmoothingAlpha,
+                    Mae = scenario.Metrics.Mae,
+                    Rmse = scenario.Metrics.Rmse,
+                    Mape = scenario.Metrics.Mape,
+                    PredictedValuesJson = JsonSerializer.Serialize(scenario.PredictedValues)
+                },
+                cancellationToken);
+
+            StatusMessage = $"Расчет завершен для направления «{SelectedDirection.Name}» на периоде {periods[0]:yyyy-MM-dd} - {periods[^1]:yyyy-MM-dd}.";
+            var completionMessage = $"Расчет завершен для направления «{SelectedDirection.Name}» на периоде {periods[0]:yyyy-MM-dd} - {periods[^1]:yyyy-MM-dd}.";
+            StatusMessage = scenario.ForecastPoints.Count <= 1
+                ? $"{completionMessage} Предупреждение: прогнозная часть содержит только 1 точку, поэтому линия прогноза может быть почти не видна. Расширьте диапазон дат или уменьшите обучающую выборку."
+                : completionMessage;
+            ExportForecastCommand.RaiseCanExecuteChanged();
         }
         catch (OperationCanceledException)
         {
-            StatusMessage = "Операция отменена.";
         }
-        catch (Exception ex)
+        catch (Exception exception)
         {
-            if (showErrors)
-            {
-                StatusMessage = $"Ошибка расчета: {ex.Message}";
-            }
+            StatusMessage = $"Ошибка расчета: {exception.Message}";
         }
         finally
         {
-            if (manageBusy)
-            {
-                SetBusy(false);
-            }
+            IsBusy = false;
+            _calculationGate.Release();
         }
     }
 
-    private void AutoRefresh()
+    private async Task FindBestMemoryAsync()
     {
-        if (_isInternalUpdate || _sourceData is null || _isBusy)
+        if (SelectedDirection is null)
         {
             return;
         }
 
-        _ = RunAsync(showErrors: false);
-    }
-
-    private bool TryApplyDateFilter(bool showErrors)
-    {
-        if (_sourceData is null)
-        {
-            return false;
-        }
-
-        var sourcePrices = _sourceData.ClosePrices;
-        var sourceDates = _sourceData.Dates;
-        if (sourcePrices.Count != sourceDates.Count)
-        {
-            if (showErrors)
-            {
-                StatusMessage = "Ошибка данных: количество дат не совпадает с количеством цен.";
-            }
-
-            return false;
-        }
-
-        if (!TryParseDate(FromDateText, out var fromDate) || !TryParseDate(TillDateText, out var tillDate))
-        {
-            if (showErrors)
-            {
-                StatusMessage = "Укажите диапазон дат в формате yyyy-MM-dd.";
-            }
-
-            return false;
-        }
-
-        if (tillDate < fromDate)
-        {
-            if (showErrors)
-            {
-                StatusMessage = "Дата \"По\" должна быть не раньше даты \"С\".";
-            }
-
-            return false;
-        }
-
-        var filteredPrices = new List<double>(sourcePrices.Count);
-        var filteredDates = new List<DateTime?>(sourceDates.Count);
-        var hasDateValues = sourceDates.Any(d => d.HasValue);
-
-        if (hasDateValues)
-        {
-            for (var i = 0; i < sourcePrices.Count; i++)
-            {
-                var date = sourceDates[i];
-                if (!date.HasValue)
-                {
-                    continue;
-                }
-
-                if (date.Value.Date < fromDate.Date || date.Value.Date > tillDate.Date)
-                {
-                    continue;
-                }
-
-                filteredPrices.Add(sourcePrices[i]);
-                filteredDates.Add(date.Value.Date);
-            }
-        }
-        else
-        {
-            filteredPrices.AddRange(sourcePrices);
-            filteredDates.AddRange(sourceDates);
-        }
-
-        if (filteredPrices.Count < 2)
-        {
-            ResetCalculatedState();
-            if (showErrors)
-            {
-                StatusMessage = "После фильтрации по датам осталось меньше двух цен.";
-            }
-
-            return false;
-        }
-
-        _loadedData = new CsvImportedData
-        {
-            ClosePrices = filteredPrices,
-            Dates = filteredDates
-        };
-
-        RunCommand.RaiseCanExecuteChanged();
-        return true;
-    }
-
-    private RunComputationResult ComputeForecast(
-        CsvImportedData loadedData,
-        double trainPercent,
-        double k,
-        double alpha,
-        int maxMemoryM,
-        int maxPlotPoints,
-        CancellationToken cancellationToken)
-    {
-        var prices = loadedData.ClosePrices;
-        var returns = _returnCalculator.CalculateLogReturns(prices);
-        var encodedStates = _encoder.Encode(returns, k);
-
-        var trainReturnsCount = (int)Math.Round(returns.Count * (trainPercent / 100.0), MidpointRounding.AwayFromZero);
-        trainReturnsCount = Math.Max(2, Math.Min(trainReturnsCount, returns.Count - 1));
-
-        var errorRows = new List<MemoryErrorRow>();
-        ForecastResult? bestResult = null;
-        for (var m = 1; m <= maxMemoryM; m++)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            if (m >= trainReturnsCount)
-            {
-                break;
-            }
-
-            var result = _forecaster.Forecast(
-                prices,
-                returns,
-                encodedStates,
-                trainReturnsCount,
-                m,
-                alpha,
-                _trainer,
-                _metricsService);
-
-            errorRows.Add(new MemoryErrorRow
-            {
-                Memory = result.Memory,
-                Mae = result.Mae,
-                Mse = result.Mse,
-                Rmse = result.Rmse,
-                Mape = result.MapePercent / 100.0
-            });
-
-            if (bestResult is null || result.Rmse < bestResult.Rmse)
-            {
-                bestResult = result;
-            }
-        }
-
-        if (bestResult is null)
-        {
-            throw new InvalidOperationException("Не удалось построить модель. Проверьте параметры \"Доля выборки, %\" и \"max(m)\".");
-        }
-
-        var bestMaePercent = CalculateRelativePercent(bestResult.Mae, bestResult.ActualPrices);
-        var bestMsePercent = CalculateRelativeSquaredPercent(bestResult.Mse, bestResult.ActualPrices);
-        var bestRmsePercent = CalculateRelativePercent(bestResult.Rmse, bestResult.ActualPrices);
-        var bestRow = new BestMemoryErrorRow
-        {
-            Memory = bestResult.Memory,
-            MaePercent = bestMaePercent,
-            MsePercent = bestMsePercent,
-            RmsePercent = bestRmsePercent,
-            MapePercent = bestResult.MapePercent
-        };
-
-        var bestDates = BuildBestDates(loadedData.Dates, bestResult.TrainReturnsCount, bestResult.ActualPrices.Count);
-        var plotModel = BuildPlot(bestResult, loadedData.ClosePrices, loadedData.Dates, maxPlotPoints);
-
-        return new RunComputationResult
-        {
-            BestResult = bestResult,
-            ErrorRows = errorRows,
-            BestRow = bestRow,
-            BestDates = bestDates,
-            PlotModel = plotModel,
-            BestMaePercent = bestMaePercent,
-            BestMsePercent = bestMsePercent,
-            BestRmsePercent = bestRmsePercent
-        };
-    }
-
-    private void ResetCalculatedState()
-    {
-        _bestResult = null;
-        _bestDates = new List<DateTime?>();
-        ErrorRows.Clear();
-        BestRows.Clear();
-        PlotModel = BuildEmptyPlotModel();
-        ExportResultsCommand.RaiseCanExecuteChanged();
-    }
-
-    private void InitializeDateRangeFromData(CsvImportedData data)
-    {
-        var dateBounds = data.Dates
-            .Where(d => d.HasValue)
-            .Select(d => d!.Value.Date)
-            .OrderBy(d => d)
-            .ToArray();
-
-        if (dateBounds.Length == 0)
-        {
-            return;
-        }
-
-        _isInternalUpdate = true;
         try
         {
-            FromDateText = dateBounds.First().ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
-            TillDateText = dateBounds.Last().ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+            IsBusy = true;
+            StatusMessage = "Подбор оптимальной глубины памяти...";
+
+            var series = await _directionQueryService.GetSeriesAsync(SelectedDirection.Id, CancellationToken.None);
+            var filteredSeries = series;
+            if (filteredSeries.Count < 6)
+            {
+                throw new InvalidOperationException("На выбранном временном промежутке недостаточно наблюдений.");
+            }
+
+            var values = filteredSeries.Select(x => x.Value).ToArray();
+            var periods = filteredSeries.Select(x => (DateOnly?)x.Date).ToArray();
+            var maxAllowedMemoryDepth = GetMaxAllowedMemoryDepth(filteredSeries.Count);
+            var maxMemoryDepthForSearch = Math.Min(MaxMemoryDepthForSearch, maxAllowedMemoryDepth);
+            var optimization = await Task.Run(
+                () => _forecastService.FindBestMemoryDepth(
+                    values,
+                    periods,
+                    ThresholdK,
+                    SmoothingAlpha,
+                    TrainRatioPercent / 100.0,
+                    1,
+                    maxMemoryDepthForSearch,
+                    CancellationToken.None));
+
+            MemoryCandidates.Clear();
+            foreach (var candidate in optimization.Candidates)
+            {
+                MemoryCandidates.Add(new MemoryCandidateRowViewModel
+                {
+                    MemoryDepthM = candidate.MemoryDepthM,
+                    Mae = candidate.Metrics.Mae,
+                    Mse = candidate.Metrics.Mse,
+                    Rmse = candidate.Metrics.Rmse,
+                    Mape = candidate.Metrics.Mape
+                });
+            }
+
+            MemoryDepthM = optimization.BestMemoryDepthM;
+            StatusMessage = $"Подбор завершен. Лучшее m = {optimization.BestMemoryDepthM}, RMSE = {optimization.BestScenario.Metrics.Rmse:F4}.";
+        }
+        catch (Exception exception)
+        {
+            StatusMessage = $"Ошибка подбора m: {exception.Message}";
         }
         finally
         {
-            _isInternalUpdate = false;
+            IsBusy = false;
         }
     }
 
-    private void ExportResults()
+    private void ExportForecast()
     {
-        if (_bestResult is null)
+        if (_lastScenario is null || SelectedDirection is null)
         {
-            StatusMessage = "Нет результатов для экспорта.";
             return;
         }
 
         var dialog = new SaveFileDialog
         {
             Filter = "CSV-файлы (*.csv)|*.csv",
-            FileName = "результаты_прогноза.csv"
+            FileName = $"forecast_{SanitizeFileName(SelectedDirection.Name)}.csv"
         };
 
         if (dialog.ShowDialog() != true)
@@ -1984,387 +2443,280 @@ public class MainViewModel : INotifyPropertyChanged
             return;
         }
 
+        var builder = new StringBuilder();
+        builder.AppendLine("direction;memory_depth_m;threshold_k;smoothing_alpha;mae;mse;rmse;mape;fallback_usage_count");
+        builder.AppendLine(string.Join(
+            ';',
+            EscapeCsv(SelectedDirection.Name),
+            _lastScenario.Parameters.MemoryDepthM.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.Parameters.ThresholdK.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.Parameters.SmoothingAlpha.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.Metrics.Mae.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.Metrics.Mse.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.Metrics.Rmse.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.Metrics.Mape.ToString(CultureInfo.InvariantCulture),
+            _lastScenario.FallbackUsageCount.ToString(CultureInfo.InvariantCulture)));
+
+        builder.AppendLine();
+        builder.AppendLine("period;actual_value;predicted_value");
+        foreach (var point in _lastScenario.ForecastPoints)
+        {
+            builder.AppendLine(string.Join(
+                ';',
+                point.Period?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? string.Empty,
+                point.ActualValue.ToString(CultureInfo.InvariantCulture),
+                point.PredictedValue.ToString(CultureInfo.InvariantCulture)));
+        }
+
+        File.WriteAllText(dialog.FileName, builder.ToString(), Encoding.UTF8);
+        StatusMessage = $"Результаты выгружены в {dialog.FileName}.";
+    }
+
+    private void UpdateMetrics(ForecastScenarioResult scenario)
+    {
+        MaeText = scenario.Metrics.Mae.ToString("F4", CultureInfo.InvariantCulture);
+        MseText = scenario.Metrics.Mse.ToString("F4", CultureInfo.InvariantCulture);
+        RmseText = scenario.Metrics.Rmse.ToString("F4", CultureInfo.InvariantCulture);
+        MapeText = $"{scenario.Metrics.Mape:F2}%";
+        FallbackText = scenario.FallbackUsageCount.ToString(CultureInfo.InvariantCulture);
+    }
+
+    private void UpdateForecastRows(ForecastScenarioResult scenario)
+    {
+        ForecastRows.Clear();
+        foreach (var point in scenario.ForecastPoints)
+        {
+            ForecastRows.Add(new ForecastPointRowViewModel
+            {
+                Period = point.Period?.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture) ?? "-",
+                ActualValue = point.ActualValue,
+                PredictedValue = point.PredictedValue
+            });
+        }
+    }
+
+    private List<(DateOnly Date, double Value)> ApplyPeriodFilter(IReadOnlyList<(DateOnly Date, double Value)> series)
+    {
+        var fromDate = PeriodFrom?.Date;
+        var toDate = PeriodTo?.Date;
+
+        if (fromDate.HasValue && toDate.HasValue && fromDate > toDate)
+        {
+            throw new InvalidOperationException("Начало периода не может быть позже конца периода.");
+        }
+
+        return series
+            .Where(item =>
+                (!fromDate.HasValue || item.Date.ToDateTime(TimeOnly.MinValue).Date >= fromDate.Value) &&
+                (!toDate.HasValue || item.Date.ToDateTime(TimeOnly.MinValue).Date <= toDate.Value))
+            .ToList();
+    }
+
+    private static int GetMaxAllowedMemoryDepth(int observationCount)
+    {
+        return Math.Max(1, observationCount - 3);
+    }
+
+    private void ResetViewState()
+    {
+        _suppressAutoRefresh = true;
         try
         {
-            var metricRows = ErrorRows.Select(row => new MemoryMetricCsvRow
-            {
-                Memory = row.Memory,
-                Mae = row.Mae,
-                Mse = row.Mse,
-                Rmse = row.Rmse,
-                Mape = row.Mape
-            }).ToArray();
-
-            var forecastRows = _bestResult.ActualPrices
-                .Select((actualPrice, i) => new ForecastPointCsvRow
-                {
-                    Date = i < _bestDates.Count ? _bestDates[i] : null,
-                    ActualPrice = actualPrice,
-                    PredictedPrice = _bestResult.PredictedPrices[i]
-                })
-                .ToArray();
-
-            _csvExportService.ExportCombined(dialog.FileName, metricRows, forecastRows, _bestResult.Memory);
-            StatusMessage = $"Результаты экспортированы: {dialog.FileName}";
+            AvailablePeriodFrom = null;
+            AvailablePeriodTo = null;
+            PeriodFrom = null;
+            PeriodTo = null;
+            _lastScenario = null;
+            MemoryCandidates.Clear();
+            ForecastRows.Clear();
+            PlotModel = BuildEmptyPlotModel("Полный ряд");
+            ForecastFocusPlotModel = BuildEmptyPlotModel("Фокус на прогнозе");
+            MaeText = "-";
+            MseText = "-";
+            RmseText = "-";
+            MapeText = "-";
+            FallbackText = "-";
         }
-        catch (Exception ex)
+        finally
         {
-            StatusMessage = $"Ошибка экспорта: {ex.Message}";
+            _suppressAutoRefresh = false;
+            ExportForecastCommand.RaiseCanExecuteChanged();
         }
     }
 
-    private static bool TryParseDouble(string text, out double value)
+    private static PlotModel BuildEmptyPlotModel(string title)
     {
-        if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out value))
+        var model = new PlotModel { Title = title };
+        model.Axes.Add(new DateTimeAxis { Position = AxisPosition.Bottom, Title = "Период", IsZoomEnabled = true, IsPanEnabled = true });
+        model.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "Значение", IsZoomEnabled = true, IsPanEnabled = true });
+        foreach (var axis in model.Axes)
         {
-            return true;
+            axis.IsZoomEnabled = false;
+            axis.IsPanEnabled = false;
         }
 
-        return double.TryParse(text, NumberStyles.Float, CultureInfo.CurrentCulture, out value);
-    }
-
-    private static bool TryParseDate(string text, out DateTime value)
-    {
-        if (DateTime.TryParseExact(text, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out value))
-        {
-            return true;
-        }
-
-        return DateTime.TryParse(text, CultureInfo.CurrentCulture, DateTimeStyles.None, out value);
-    }
-
-    private static double CalculateRelativePercent(double metricValue, IReadOnlyList<double> actualPrices)
-    {
-        if (actualPrices.Count == 0)
-        {
-            return double.NaN;
-        }
-
-        var meanAbsActual = actualPrices.Select(Math.Abs).Average();
-        if (meanAbsActual < 1e-12)
-        {
-            return double.NaN;
-        }
-
-        return (metricValue / meanAbsActual) * 100.0;
-    }
-
-    private static double CalculateRelativeSquaredPercent(double metricValue, IReadOnlyList<double> actualPrices)
-    {
-        if (actualPrices.Count == 0)
-        {
-            return double.NaN;
-        }
-
-        var meanSquareActual = actualPrices.Select(v => v * v).Average();
-        if (meanSquareActual < 1e-12)
-        {
-            return double.NaN;
-        }
-
-        return (metricValue / meanSquareActual) * 100.0;
-    }
-
-    private static string FormatPercent(double value)
-    {
-        return double.IsNaN(value) || double.IsInfinity(value) ? "н/д" : $"{value:F2}%";
-    }
-
-    private void SetBusy(bool value)
-    {
-        if (IsBusy == value)
-        {
-            return;
-        }
-
-        IsBusy = value;
-        LoadCsvCommand.RaiseCanExecuteChanged();
-        LoadMoexCommand.RaiseCanExecuteChanged();
-        RunCommand.RaiseCanExecuteChanged();
-        ExportResultsCommand.RaiseCanExecuteChanged();
-    }
-
-    private static List<DateTime?> BuildBestDates(IReadOnlyList<DateTime?> allDates, int trainReturnsCount, int forecastCount)
-    {
-        var result = new List<DateTime?>(forecastCount);
-        for (var i = 0; i < forecastCount; i++)
-        {
-            var dateIndex = trainReturnsCount + 1 + i;
-            result.Add(dateIndex >= 0 && dateIndex < allDates.Count ? allDates[dateIndex] : null);
-        }
-
-        return result;
-    }
-
-    private static PlotModel BuildEmptyPlotModel()
-    {
-        var model = new PlotModel { Title = "Прогноз цены" };
-        model.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom, Title = "Дата" });
-        model.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Title = "Цена" });
         return model;
     }
 
-    private static PlotModel BuildPlot(
-        ForecastResult bestResult,
-        IReadOnlyList<double> allPrices,
-        IReadOnlyList<DateTime?> allCsvDates,
-        int maxPlotPoints)
+    private static PlotModel BuildFullPlotModel(
+        string directionName,
+        IReadOnlyList<DateOnly?> periods,
+        IReadOnlyList<double> actualSeries,
+        ForecastScenarioResult scenario)
     {
-        var model = new PlotModel
+        return BuildPlotModel(
+            $"Полный ряд: {directionName}",
+            periods,
+            actualSeries,
+            scenario.ForecastPoints.Select(x => (x.Period, x.PredictedValue)).ToList());
+    }
+
+    private static PlotModel BuildForecastFocusPlotModel(
+        string directionName,
+        IReadOnlyList<DateOnly?> periods,
+        IReadOnlyList<double> actualSeries,
+        ForecastScenarioResult scenario)
+    {
+        var forecastStartIndex = Math.Max(0, scenario.TrainingObservationCount - 1);
+        var actualTailStartIndex = Math.Max(0, forecastStartIndex - 1);
+
+        var focusPeriods = periods.Skip(actualTailStartIndex).ToArray();
+        var focusActualSeries = actualSeries.Skip(actualTailStartIndex).ToArray();
+        var predictedPoints = scenario.ForecastPoints.Select(x => (x.Period, x.PredictedValue)).ToList();
+
+        var model = BuildPlotModel(
+            $"Фокус на прогнозе: {directionName}",
+            focusPeriods,
+            focusActualSeries,
+            predictedPoints);
+
+        var forecastStart = predictedPoints.FirstOrDefault(x => x.Period is not null).Period;
+        var forecastEnd = predictedPoints.LastOrDefault(x => x.Period is not null).Period;
+
+        if (forecastStart is not null && forecastEnd is not null)
         {
-            Title = $"Прогноз цены (лучшее m = {bestResult.Memory})",
-            IsLegendVisible = true
-        };
-        model.Legends.Add(new Legend
-        {
-            LegendPosition = LegendPosition.RightTop,
-            LegendPlacement = LegendPlacement.Outside
-        });
-
-        var csvDateBounds = allCsvDates
-            .Where(d => d.HasValue)
-            .Select(d => d!.Value)
-            .OrderBy(d => d)
-            .ToArray();
-
-        var hasCsvDates = csvDateBounds.Length > 0;
-        var useDateAxis = hasCsvDates;
-
-        var yValues = allPrices
-            .Concat(bestResult.PredictedPrices)
-            .Where(v => !double.IsNaN(v) && !double.IsInfinity(v))
-            .ToArray();
-
-        if (yValues.Length == 0)
-        {
-            return BuildEmptyPlotModel();
-        }
-
-        var minY = yValues.Min();
-        var maxY = yValues.Max();
-        if (Math.Abs(maxY - minY) < 1e-12)
-        {
-            var delta = Math.Abs(minY) > 1e-12 ? Math.Abs(minY) * 0.01 : 1.0;
-            minY -= delta;
-            maxY += delta;
-        }
-
-        if (useDateAxis)
-        {
-            var minDate = csvDateBounds.First();
-            var maxDate = csvDateBounds.Last();
-            if (maxDate <= minDate)
+            var dateAxis = model.Axes.OfType<DateTimeAxis>().FirstOrDefault();
+            if (dateAxis is not null)
             {
-                maxDate = minDate.AddDays(1);
+                var min = ToAxisValue(forecastStart.Value);
+                var max = ToAxisValue(forecastEnd.Value);
+                if (max <= min)
+                {
+                    max = min + 1;
+                }
+
+                dateAxis.Minimum = min;
+                dateAxis.Maximum = max;
             }
-
-            var totalDays = Math.Max(1.0, (maxDate - minDate).TotalDays);
-            var majorStepDays = Math.Max(1.0, Math.Ceiling(totalDays / 8.0));
-
-            model.Axes.Add(new DateTimeAxis
-            {
-                Position = AxisPosition.Bottom,
-                Title = "Дата",
-                StringFormat = "yyyy-MM-dd",
-                IntervalType = DateTimeIntervalType.Days,
-                MinorIntervalType = DateTimeIntervalType.Days,
-                MajorStep = majorStepDays,
-                MinorStep = Math.Max(1.0, Math.Floor(majorStepDays / 2.0)),
-                Angle = 45,
-                MinimumPadding = 0,
-                MaximumPadding = 0,
-                Minimum = DateTimeAxis.ToDouble(minDate),
-                Maximum = DateTimeAxis.ToDouble(maxDate),
-                AbsoluteMinimum = DateTimeAxis.ToDouble(minDate),
-                AbsoluteMaximum = DateTimeAxis.ToDouble(maxDate),
-                IsPanEnabled = false,
-                IsZoomEnabled = false
-            });
         }
-        else
+
+        return model;
+    }
+
+    private static PlotModel BuildPlotModel(
+        string title,
+        IReadOnlyList<DateOnly?> periods,
+        IReadOnlyList<double> actualSeries,
+        IReadOnlyList<(DateOnly? Period, double PredictedValue)> predictedPoints)
+    {
+        var plotModel = new PlotModel
         {
-            var maxX = Math.Max(1, bestResult.ActualPrices.Count - 1);
-            model.Axes.Add(new LinearAxis
-            {
-                Position = AxisPosition.Bottom,
-                Title = "Дата",
-                MinimumPadding = 0,
-                MaximumPadding = 0,
-                Minimum = 0,
-                Maximum = maxX,
-                AbsoluteMinimum = 0,
-                AbsoluteMaximum = maxX,
-                IsPanEnabled = false,
-                IsZoomEnabled = false
-            });
-        }
+            Title = title
+        };
 
-        model.Axes.Add(new LinearAxis
+        plotModel.Axes.Add(new DateTimeAxis
+        {
+            Position = AxisPosition.Bottom,
+            Title = "Период",
+            StringFormat = "dd.MM.yyyy",
+            Angle = 35,
+            IsZoomEnabled = true,
+            IsPanEnabled = true
+        });
+        plotModel.Axes.Add(new LinearAxis
         {
             Position = AxisPosition.Left,
-            Title = "Цена",
-            MinimumPadding = 0,
-            MaximumPadding = 0,
-            Minimum = minY,
-            Maximum = maxY,
-            AbsoluteMinimum = minY,
-            AbsoluteMaximum = maxY,
-            IsPanEnabled = false,
-            IsZoomEnabled = false
+            Title = "Значение метрики",
+            IsZoomEnabled = true,
+            IsPanEnabled = true
         });
 
-        var actualSeries = new LineSeries { Title = "Изначальная цена", StrokeThickness = 2 };
-        var predictedSeries = new LineSeries { Title = "Прогнозная цена", StrokeThickness = 2 };
-        var actualPlotIndices = BuildPlotIndices(allPrices.Count, maxPlotPoints);
-        var forecastStartIndex = bestResult.TrainReturnsCount + 1;
-        var predictedPlotIndices = BuildPlotIndices(bestResult.PredictedPrices.Count, maxPlotPoints);
-
-        foreach (var i in actualPlotIndices)
+        foreach (var axis in plotModel.Axes)
         {
-            if (i < 0 || i >= allPrices.Count)
-            {
-                continue;
-            }
-
-            if (double.IsNaN(allPrices[i]) || double.IsInfinity(allPrices[i]))
-            {
-                continue;
-            }
-
-            var x = (double)i;
-            if (useDateAxis)
-            {
-                DateTime pointDate;
-                if (i < allCsvDates.Count && allCsvDates[i].HasValue)
-                {
-                    pointDate = allCsvDates[i]!.Value;
-                }
-                else
-                {
-                    var minDate = csvDateBounds.First();
-                    var maxDate = csvDateBounds.Last();
-                    var totalDays = Math.Max(1.0, (maxDate - minDate).TotalDays);
-                    var ratio = allPrices.Count > 1
-                        ? (double)i / (allPrices.Count - 1)
-                        : 0.0;
-                    pointDate = minDate.AddDays(totalDays * ratio);
-                }
-
-                x = DateTimeAxis.ToDouble(pointDate);
-            }
-
-            actualSeries.Points.Add(new DataPoint(x, allPrices[i]));
+            axis.IsZoomEnabled = false;
+            axis.IsPanEnabled = false;
         }
 
-        foreach (var localIndex in predictedPlotIndices)
+        var actualSeriesLine = new LineSeries
         {
-            if (localIndex < 0 || localIndex >= bestResult.PredictedPrices.Count)
+            Title = "Фактические значения",
+            StrokeThickness = 2
+        };
+
+        for (var index = 0; index < actualSeries.Count; index++)
+        {
+            if (index >= periods.Count || periods[index] is null)
             {
                 continue;
             }
 
-            var predictedPrice = bestResult.PredictedPrices[localIndex];
-            if (double.IsNaN(predictedPrice) || double.IsInfinity(predictedPrice))
-            {
-                continue;
-            }
-
-            var globalIndex = forecastStartIndex + localIndex;
-            var x = (double)globalIndex;
-            if (useDateAxis)
-            {
-                DateTime pointDate;
-                if (globalIndex < allCsvDates.Count && allCsvDates[globalIndex].HasValue)
-                {
-                    pointDate = allCsvDates[globalIndex]!.Value;
-                }
-                else
-                {
-                    var minDate = csvDateBounds.First();
-                    var maxDate = csvDateBounds.Last();
-                    var totalDays = Math.Max(1.0, (maxDate - minDate).TotalDays);
-                    var ratio = allPrices.Count > 1
-                        ? (double)Math.Min(globalIndex, allPrices.Count - 1) / (allPrices.Count - 1)
-                        : 0.0;
-                    pointDate = minDate.AddDays(totalDays * ratio);
-                }
-
-                x = DateTimeAxis.ToDouble(pointDate);
-            }
-
-            predictedSeries.Points.Add(new DataPoint(x, predictedPrice));
+            actualSeriesLine.Points.Add(new DataPoint(ToAxisValue(periods[index]!.Value), actualSeries[index]));
         }
 
-        model.Series.Add(actualSeries);
-        model.Series.Add(predictedSeries);
-        return model;
+        var forecastSeriesLine = new LineSeries
+        {
+            Title = "Прогнозные значения",
+            StrokeThickness = 2,
+            Color = OxyColors.IndianRed
+        };
+
+        foreach (var point in predictedPoints)
+        {
+            if (point.Period is null)
+            {
+                continue;
+            }
+
+            forecastSeriesLine.Points.Add(new DataPoint(ToAxisValue(point.Period.Value), point.PredictedValue));
+        }
+
+        plotModel.Series.Add(actualSeriesLine);
+        plotModel.Series.Add(forecastSeriesLine);
+        return plotModel;
     }
 
-    private static IPlotController BuildLockedPlotController()
+    private void RaiseCommandStates()
     {
-        var controller = new PlotController();
-        controller.UnbindAll();
-        return controller;
+        ImportCsvCommand.RaiseCanExecuteChanged();
+        FindBestMemoryCommand.RaiseCanExecuteChanged();
+        DeleteSelectedDirectionCommand.RaiseCanExecuteChanged();
+        DeleteAllDirectionsCommand.RaiseCanExecuteChanged();
+        ExportForecastCommand.RaiseCanExecuteChanged();
     }
 
-    private static IReadOnlyList<int> BuildPlotIndices(int totalCount, int maxPoints)
+    private static double ToAxisValue(DateOnly date)
     {
-        if (totalCount <= 0)
-        {
-            return Array.Empty<int>();
-        }
-
-        if (totalCount <= maxPoints || maxPoints < 2)
-        {
-            return Enumerable.Range(0, totalCount).ToArray();
-        }
-
-        var result = new List<int>(maxPoints);
-        var step = (double)(totalCount - 1) / (maxPoints - 1);
-        var previous = -1;
-
-        for (var i = 0; i < maxPoints; i++)
-        {
-            var index = (int)Math.Round(i * step, MidpointRounding.AwayFromZero);
-            if (index >= totalCount)
-            {
-                index = totalCount - 1;
-            }
-
-            if (index == previous)
-            {
-                continue;
-            }
-
-            result.Add(index);
-            previous = index;
-        }
-
-        if (result[^1] != totalCount - 1)
-        {
-            result.Add(totalCount - 1);
-        }
-
-        return result;
+        return DateTimeAxis.ToDouble(date.ToDateTime(TimeOnly.MinValue));
     }
 
-    private bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    private static string EscapeCsv(string value)
     {
-        if (EqualityComparer<T>.Default.Equals(field, value))
+        return value.Contains(';') ? $"\"{value}\"" : value;
+    }
+
+    private static string SanitizeFileName(string value)
+    {
+        foreach (var invalidChar in Path.GetInvalidFileNameChars())
         {
-            return false;
+            value = value.Replace(invalidChar, '_');
         }
 
-        field = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        return true;
+        return value;
     }
 }
 
-================================================================================
 
-Файл CaForecast.WpfApp/MainWindow.xaml
---------------------------------------------------------------------------------
+===== CaForecast.WpfApp\MainWindow.xaml =====
 <Window x:Class="CaForecast.WpfApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -2372,287 +2724,318 @@ public class MainViewModel : INotifyPropertyChanged
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="Прогноз на основе трехцветного КА"
-        Height="900"
-        Width="1280"
-        MinHeight="700"
-        MinWidth="1024">
+        Title="Академия ТОП Краснодар | Прогноз коммерческих метрик"
+        Height="980"
+        Width="1520"
+        MinHeight="820"
+        MinWidth="1240"
+        Background="#FFF8F4ED">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Window.Resources>
-    <Grid Margin="12">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <Grid Margin="18">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="360" />
+            <ColumnDefinition Width="18" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <Border Grid.Row="0"
-                Padding="12"
-                BorderBrush="#DDDDDD"
-                BorderThickness="1"
-                CornerRadius="8">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+        <Border Grid.Column="0"
+                Padding="20"
+                Background="#FFF0E7D8"
+                CornerRadius="18">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <TextBlock Text="Панель управления"
+                               FontSize="24"
+                               FontWeight="SemiBold"
+                               Foreground="#FF49301D" />
 
-                <DockPanel Grid.Row="0"
-                           LastChildFill="True">
-                    <Button Content="Загрузить CSV"
-                            Command="{Binding LoadCsvCommand}"
-                            Width="130"
-                            Margin="0,0,8,0"
-                            DockPanel.Dock="Left" />
-                    <Button Content="Новый API запрос"
-                            Command="{Binding ShowMoexInputsCommand}"
-                            Width="150"
-                            Margin="0,0,8,0"
-                            DockPanel.Dock="Left" />
-                    <TextBlock Text="{Binding SelectedFilePath}"
-                               VerticalAlignment="Center"
-                               TextTrimming="CharacterEllipsis"
-                               MinWidth="200" />
-                </DockPanel>
+                    <Button Height="40"
+                            Margin="0,18,0,0"
+                            Content="Импорт"
+                            Command="{Binding ImportCsvCommand}" />
+                    <TextBlock Margin="0,8,0,0"
+                               Text="{Binding SelectedFilePath}"
+                               TextWrapping="Wrap"
+                               Foreground="#FF7A624F" />
 
-                <WrapPanel Grid.Row="1"
-                           Margin="0,10,0,0"
-                           ItemHeight="28">
-                    <TextBlock Text="С:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="110"
-                             Margin="0,0,16,0"
-                             Text="{Binding FromDateText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <TextBlock Margin="0,18,0,6"
+                               Text="Направление/метрика"
+                               FontWeight="SemiBold" />
+                    <ComboBox ItemsSource="{Binding Directions}"
+                              SelectedItem="{Binding SelectedDirection}"
+                              DisplayMemberPath="Name"
+                              Height="34" />
+                    <UniformGrid Margin="0,10,0,0"
+                                 Columns="2">
+                        <Button Height="34"
+                                Margin="0,0,6,0"
+                                Content="Удалить выбранное"
+                                Command="{Binding DeleteSelectedDirectionCommand}" />
+                        <Button Height="34"
+                                Margin="6,0,0,0"
+                                Content="Очистить всё"
+                                Command="{Binding DeleteAllDirectionsCommand}" />
+                    </UniformGrid>
 
-                    <TextBlock Text="По:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="110"
-                             Margin="0,0,16,0"
-                             Text="{Binding TillDateText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <TextBlock Margin="0,18,0,6"
+                               Text="Режим графика"
+                               FontWeight="SemiBold" />
+                    <ComboBox ItemsSource="{Binding PlotModes}"
+                              SelectedItem="{Binding SelectedPlotMode}"
+                              Height="34" />
 
-                    <TextBlock Text="Доля выборки, %:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="90"
-                             Margin="0,0,16,0"
-                             Text="{Binding TrainPercentText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <TextBlock Margin="0,18,0,0"
+                               Text="Глубина памяти m"
+                               FontWeight="SemiBold" />
+                    <Slider Minimum="1"
+                            Maximum="20"
+                            TickFrequency="1"
+                            IsSnapToTickEnabled="True"
+                            Value="{Binding MemoryDepthM}"
+                            Margin="0,8,0,0" />
+                    <TextBlock Text="{Binding MemoryDepthM}" />
 
-                    <TextBlock Text="k:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="90"
-                             Margin="0,0,16,0"
-                             Text="{Binding KText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <TextBlock Margin="0,16,0,0"
+                               Text="Порог дискретизации k"
+                               FontWeight="SemiBold" />
+                    <Slider Minimum="0"
+                            Maximum="0.15"
+                            TickFrequency="0.005"
+                            Value="{Binding ThresholdK}"
+                            Margin="0,8,0,0" />
+                    <TextBlock Text="{Binding ThresholdK, StringFormat=F4}" />
 
-                    <TextBlock Text="max(m):"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="90"
-                             Margin="0,0,16,0"
-                             Text="{Binding MaxMemoryMText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <TextBlock Margin="0,16,0,0"
+                               Text="Лапласовское сглаживание alpha"
+                               FontWeight="SemiBold" />
+                    <Slider Minimum="0"
+                            Maximum="10"
+                            TickFrequency="0.25"
+                            Value="{Binding SmoothingAlpha}"
+                            Margin="0,8,0,0" />
+                    <TextBlock Text="{Binding SmoothingAlpha, StringFormat=F2}" />
 
-                    <TextBlock Text="Макс. точек графика:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="110"
-                             Text="{Binding MaxPlotPointsText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
-                </WrapPanel>
+                    <TextBlock Margin="0,16,0,0"
+                               Text="Обучающая выборка, %"
+                               FontWeight="SemiBold" />
+                    <Slider Minimum="55"
+                            Maximum="95"
+                            TickFrequency="1"
+                            IsSnapToTickEnabled="True"
+                            Value="{Binding TrainRatioPercent}"
+                            Margin="0,8,0,0" />
+                    <TextBlock Text="{Binding TrainRatioPercent, StringFormat=F0}" />
 
-                <WrapPanel Grid.Row="2"
-                           Margin="0,10,0,0"
-                           ItemHeight="28"
-                           Visibility="{Binding IsApiInputsVisible, Converter={StaticResource BoolToVisibilityConverter}}">
-                    <TextBlock Text="Тикер:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="90"
-                             Margin="0,0,16,0"
-                             Text="{Binding SecIdText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <TextBlock Margin="0,16,0,0"
+                               Text="Максимум m для автоподбора"
+                               FontWeight="SemiBold" />
+                    <Slider Minimum="2"
+                            Maximum="25"
+                            TickFrequency="1"
+                            IsSnapToTickEnabled="True"
+                            Value="{Binding MaxMemoryDepthForSearch}"
+                            Margin="0,8,0,0" />
+                    <TextBlock Text="{Binding MaxMemoryDepthForSearch}" />
 
-                    <TextBlock Text="Режим торгов:"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0" />
-                    <TextBox Width="90"
-                             Margin="0,0,16,0"
-                             Text="{Binding BoardIdText, UpdateSourceTrigger=PropertyChanged}"
-                             VerticalContentAlignment="Center" />
+                    <StackPanel Margin="0,22,0,0">
+                        <Button Margin="0,10,0,0"
+                                Height="38"
+                                HorizontalAlignment="Stretch"
+                                Content="Подобрать лучшее m"
+                                Command="{Binding FindBestMemoryCommand}" />
+                        <Button Margin="0,10,0,0"
+                                Height="38"
+                                HorizontalAlignment="Stretch"
+                                Content="Экспорт результата в CSV"
+                                Command="{Binding ExportForecastCommand}" />
+                    </StackPanel>
 
-                    <Button Content="Загрузить MOEX ISS"
-                            Command="{Binding LoadMoexCommand}"
-                            Width="150"
-                            Margin="0,0,8,0" />
-                    <Button Content="Скрыть"
-                            Command="{Binding HideMoexInputsCommand}"
-                            Width="90" />
-                </WrapPanel>
-            </Grid>
+                    <Border Margin="0,24,0,0"
+                            Padding="14"
+                            CornerRadius="14"
+                            Background="#FFF8F1E7">
+                        <StackPanel>
+                            <TextBlock Text="Метрики модели"
+                                       FontWeight="SemiBold"
+                                       FontSize="16" />
+                            <TextBlock Margin="0,12,0,0" Text="{Binding MaeText, StringFormat=MAE: {0}}" />
+                            <TextBlock Text="{Binding MseText, StringFormat=MSE: {0}}" />
+                            <TextBlock Text="{Binding RmseText, StringFormat=RMSE: {0}}" />
+                            <TextBlock Text="{Binding MapeText, StringFormat=MAPE: {0}}" />
+                            <TextBlock Text="{Binding FallbackText, StringFormat=Fallback: {0}}" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
         </Border>
 
-        <Grid Grid.Row="1"
-              Margin="0,12,0,12">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" MinWidth="420" />
-                <ColumnDefinition Width="12" />
-                <ColumnDefinition Width="3*" MinWidth="420" />
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Column="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="12" />
+                <RowDefinition Height="4.2*" />
+                <RowDefinition Height="18" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="18" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Border Grid.Column="0"
-                    Grid.Row="0"
-                    BorderBrush="#DDDDDD"
-                    BorderThickness="1"
-                    CornerRadius="8"
-                    Padding="8">
+            <Border Grid.Row="0"
+                    Padding="16"
+                    Background="White"
+                    CornerRadius="18">
                 <DockPanel>
-                    <TextBlock Text="Таблица ошибок по m"
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="{Binding SelectedPlotMode, StringFormat=График: {0}}"
+                               FontSize="22"
                                FontWeight="SemiBold"
-                               DockPanel.Dock="Top"
-                               Margin="0,0,0,8" />
-                    <DataGrid ItemsSource="{Binding ErrorRows}"
-                              AutoGenerateColumns="False"
-                              IsReadOnly="True"
-                              CanUserAddRows="False"
-                              ColumnWidth="Auto"
-                              HorizontalScrollBarVisibility="Auto"
-                              VerticalScrollBarVisibility="Auto">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="m" Binding="{Binding Memory}" />
-                            <DataGridTextColumn Header="MAE" Binding="{Binding Mae}" />
-                            <DataGridTextColumn Header="MSE" Binding="{Binding Mse}" />
-                            <DataGridTextColumn Header="RMSE" Binding="{Binding Rmse}" />
-                            <DataGridTextColumn Header="MAPE" Binding="{Binding Mape}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                               Foreground="#FF49301D"
+                               Margin="0,0,0,10" />
+                    <oxy:PlotView Model="{Binding CurrentPlotModel}" />
                 </DockPanel>
             </Border>
 
-            <Border Grid.Column="0"
-                    Grid.Row="2"
-                    BorderBrush="#DDDDDD"
-                    BorderThickness="1"
-                    CornerRadius="8"
-                    Padding="8">
-                <DockPanel>
-                    <TextBlock Text="Итоговая таблица (лучшее m)"
-                               FontWeight="SemiBold"
-                               DockPanel.Dock="Top"
-                               Margin="0,0,0,8" />
-                    <DataGrid ItemsSource="{Binding BestRows}"
-                              AutoGenerateColumns="False"
-                              IsReadOnly="True"
-                              CanUserAddRows="False"
-                              ColumnWidth="Auto"
-                              HorizontalScrollBarVisibility="Auto"
-                              VerticalScrollBarVisibility="Auto"
-                              Height="72">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="m*" Binding="{Binding Memory}" />
-                            <DataGridTextColumn Header="MAE, %" Binding="{Binding MaePercent}" />
-                            <DataGridTextColumn Header="MSE, %" Binding="{Binding MsePercent}" />
-                            <DataGridTextColumn Header="RMSE, %" Binding="{Binding RmsePercent}" />
-                            <DataGridTextColumn Header="MAPE, %" Binding="{Binding MapePercent}" />
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </DockPanel>
-            </Border>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="18" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="2"
-                    Grid.Row="0"
-                    Grid.RowSpan="3"
-                    BorderBrush="#DDDDDD"
-                    BorderThickness="1"
-                    CornerRadius="8"
-                    Padding="8">
+                <Border Grid.Column="0"
+                        Padding="14"
+                        Background="White"
+                        CornerRadius="18">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top"
+                                   Text="Факт / прогноз по периодам"
+                                   FontWeight="SemiBold"
+                                   FontSize="18"
+                                   Margin="0,0,0,10" />
+                        <DataGrid ItemsSource="{Binding ForecastRows}"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Период" Binding="{Binding Period}" />
+                                <DataGridTextColumn Header="Факт" Binding="{Binding ActualValue, StringFormat=F2}" />
+                                <DataGridTextColumn Header="Прогноз" Binding="{Binding PredictedValue, StringFormat=F2}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </Border>
+
+                <Border Grid.Column="2"
+                        Padding="14"
+                        Background="White"
+                        CornerRadius="18">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Top"
+                                   Text="Сравнение конфигураций по m"
+                                   FontWeight="SemiBold"
+                                   FontSize="18"
+                                   Margin="0,0,0,10" />
+                        <DataGrid ItemsSource="{Binding MemoryCandidates}"
+                                  AutoGenerateColumns="False"
+                                  IsReadOnly="True"
+                                  CanUserAddRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="m" Binding="{Binding MemoryDepthM}" />
+                                <DataGridTextColumn Header="MAE" Binding="{Binding Mae, StringFormat=F4}" />
+                                <DataGridTextColumn Header="MSE" Binding="{Binding Mse, StringFormat=F4}" />
+                                <DataGridTextColumn Header="RMSE" Binding="{Binding Rmse, StringFormat=F4}" />
+                                <DataGridTextColumn Header="MAPE, %" Binding="{Binding Mape, StringFormat=F2}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </Border>
+            </Grid>
+
+            <Border Grid.Row="4"
+                    Padding="14"
+                    Background="#FFEBDCC7"
+                    CornerRadius="18">
                 <DockPanel>
-                    <TextBlock Text="График: фактическая и прогнозная цена"
-                               FontWeight="SemiBold"
-                               DockPanel.Dock="Top"
-                               Margin="0,0,0,8" />
-                    <oxy:PlotView Model="{Binding PlotModel}"
-                                  Controller="{Binding LockedPlotController}" />
+                    <TextBlock Text="{Binding StatusMessage}"
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap"
+                               Foreground="#FF5D432E" />
+                    <ProgressBar Width="180"
+                                 Height="14"
+                                 Margin="14,0,0,0"
+                                 VerticalAlignment="Center"
+                                 IsIndeterminate="True"
+                                 Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" />
                 </DockPanel>
             </Border>
         </Grid>
-
-        <DockPanel Grid.Row="2">
-            <TextBlock Text="{Binding StatusMessage}"
-                       VerticalAlignment="Center"
-                       DockPanel.Dock="Left" />
-            <ProgressBar Width="220"
-                         Height="14"
-                         Margin="12,0,0,0"
-                         VerticalAlignment="Center"
-                         IsIndeterminate="True"
-                         Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}"
-                         DockPanel.Dock="Left" />
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Right"
-                        DockPanel.Dock="Right">
-                <Button Content="Экспорт результатов"
-                        Width="160"
-                        Command="{Binding ExportResultsCommand}" />
-            </StackPanel>
-        </DockPanel>
     </Grid>
 </Window>
 
-================================================================================
 
-Файл CaForecast.WpfApp/MainWindow.xaml.cs
---------------------------------------------------------------------------------
+===== CaForecast.WpfApp\MainWindow.xaml.cs =====
 using System.Windows;
+using System.Windows.Interop;
+using System.Runtime.InteropServices;
 
 namespace CaForecast.WpfApp;
 
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    private const int GwlExStyle = -20;
+    private const int WsExDlgModalFrame = 0x0001;
+    private const uint SwpNosize = 0x0001;
+    private const uint SwpNomove = 0x0002;
+    private const uint SwpNozorder = 0x0004;
+    private const uint SwpFrameChanged = 0x0020;
+
+    public MainWindow(MainViewModel viewModel)
     {
         InitializeComponent();
-        var viewModel = new MainViewModel();
         DataContext = viewModel;
-        Closing += (_, _) => viewModel.CancelBackgroundOperations();
+        Closing += (_, _) => viewModel.CancelPendingWork();
+        SourceInitialized += (_, _) => RemoveWindowIcon();
+    }
+
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+    [DllImport("user32.dll", SetLastError = true)]
+    private static extern bool SetWindowPos(
+        IntPtr hWnd,
+        IntPtr hWndInsertAfter,
+        int x,
+        int y,
+        int cx,
+        int cy,
+        uint uFlags);
+
+    [DllImport("user32.dll", CharSet = CharSet.Auto)]
+    private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+
+    private void RemoveWindowIcon()
+    {
+        var handle = new WindowInteropHelper(this).Handle;
+        if (handle == IntPtr.Zero)
+        {
+            return;
+        }
+
+        var extendedStyle = GetWindowLong(handle, GwlExStyle);
+        SetWindowLong(handle, GwlExStyle, extendedStyle | WsExDlgModalFrame);
+        SetWindowPos(handle, IntPtr.Zero, 0, 0, 0, 0, SwpNomove | SwpNosize | SwpNozorder | SwpFrameChanged);
+
+        const uint wmSetIcon = 0x0080;
+        SendMessage(handle, wmSetIcon, IntPtr.Zero, IntPtr.Zero);
+        SendMessage(handle, wmSetIcon, new IntPtr(1), IntPtr.Zero);
     }
 }
 
-================================================================================
 
-Файл CaForecast.WpfApp/MemoryErrorRow.cs
---------------------------------------------------------------------------------
-namespace CaForecast.WpfApp;
-
-public class MemoryErrorRow
-{
-    public int Memory { get; init; }
-
-    public double Mae { get; init; }
-
-    public double Mse { get; init; }
-
-    public double Rmse { get; init; }
-
-    public double Mape { get; init; }
-}
-
-================================================================================
-
-Файл CaForecast.WpfApp/RelayCommand.cs
---------------------------------------------------------------------------------
+===== CaForecast.WpfApp\RelayCommand.cs =====
 using System;
 using System.Windows.Input;
 
@@ -2687,33 +3070,74 @@ public class RelayCommand : ICommand
     }
 }
 
-================================================================================
 
-Файл CaForecast.WpfApp/RunComputationResult.cs
---------------------------------------------------------------------------------
-using CaForecast.Core;
-using OxyPlot;
+===== CaForecast.WpfApp\ViewModels\DirectionItemViewModel.cs =====
+namespace CaForecast.WpfApp.ViewModels;
 
-namespace CaForecast.WpfApp;
-
-internal sealed class RunComputationResult
+public sealed class DirectionItemViewModel
 {
-    public required ForecastResult BestResult { get; init; }
+    public int Id { get; init; }
 
-    public required List<MemoryErrorRow> ErrorRows { get; init; }
-
-    public required BestMemoryErrorRow BestRow { get; init; }
-
-    public required List<DateTime?> BestDates { get; init; }
-
-    public required PlotModel PlotModel { get; init; }
-
-    public required double BestMaePercent { get; init; }
-
-    public required double BestMsePercent { get; init; }
-
-    public required double BestRmsePercent { get; init; }
+    public string Name { get; init; } = string.Empty;
 }
 
-================================================================================
+
+===== CaForecast.WpfApp\ViewModels\ForecastPointRowViewModel.cs =====
+namespace CaForecast.WpfApp.ViewModels;
+
+public sealed class ForecastPointRowViewModel
+{
+    public string Period { get; init; } = string.Empty;
+
+    public double ActualValue { get; init; }
+
+    public double PredictedValue { get; init; }
+}
+
+
+===== CaForecast.WpfApp\ViewModels\MemoryCandidateRowViewModel.cs =====
+namespace CaForecast.WpfApp.ViewModels;
+
+public sealed class MemoryCandidateRowViewModel
+{
+    public int MemoryDepthM { get; init; }
+
+    public double Mae { get; init; }
+
+    public double Mse { get; init; }
+
+    public double Rmse { get; init; }
+
+    public double Mape { get; init; }
+}
+
+
+===== CaForecast.WpfApp\ViewModels\ViewModelBase.cs =====
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace CaForecast.WpfApp.ViewModels;
+
+public abstract class ViewModelBase : INotifyPropertyChanged
+{
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+    {
+        if (EqualityComparer<T>.Default.Equals(field, value))
+        {
+            return false;
+        }
+
+        field = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        return true;
+    }
+
+    protected void RaisePropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+}
+
 
